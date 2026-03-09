@@ -40,6 +40,7 @@
             label1 = new Label();
             textBox1 = new TextBox();
             groupBox2 = new GroupBox();
+            button2 = new Button();
             dataGridView1 = new DataGridView();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(32, 290);
+            button1.Location = new Point(32, 302);
             button1.Name = "button1";
             button1.Size = new Size(287, 29);
             button1.TabIndex = 9;
@@ -158,22 +159,33 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button2);
             groupBox2.Controls.Add(dataGridView1);
-            groupBox2.Location = new Point(404, 54);
+            groupBox2.Location = new Point(387, 54);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(295, 368);
+            groupBox2.Size = new Size(401, 368);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "List Buku";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(55, 302);
+            button2.Name = "button2";
+            button2.Size = new Size(287, 29);
+            button2.TabIndex = 10;
+            button2.Text = "Hapus Buku";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(16, 26);
+            dataGridView1.Location = new Point(6, 26);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(258, 272);
+            dataGridView1.Size = new Size(389, 261);
             dataGridView1.TabIndex = 11;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -186,6 +198,7 @@
             Controls.Add(groupBox1);
             Name = "FormListBuku";
             Text = "FormListBuku";
+            Load += FormListBuku_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -208,5 +221,6 @@
         private Button button1;
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
+        private Button button2;
     }
 }
