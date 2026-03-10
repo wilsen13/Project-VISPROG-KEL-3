@@ -14,5 +14,9 @@ namespace Project_VISPROG_KEL_3
         {
             InitializeComponent();
         }
+        private void KelolaAnggota_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

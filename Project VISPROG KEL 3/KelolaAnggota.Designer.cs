@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
             button1 = new Button();
+            textBox4 = new TextBox();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             groupBox2 = new GroupBox();
-            dataGridView1 = new DataGridView();
-            button3 = new Button();
             button4 = new Button();
+            button3 = new Button();
+            dataGridView1 = new DataGridView();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -65,32 +65,42 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Tambahkan Anggota";
             // 
-            // label1
+            // button1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(16, 71);
-            label1.Name = "label1";
-            label1.Size = new Size(86, 20);
-            label1.TabIndex = 1;
-            label1.Text = "ID Anggota";
+            button1.Location = new Point(16, 268);
+            button1.Name = "button1";
+            button1.Size = new Size(309, 43);
+            button1.TabIndex = 9;
+            button1.Text = "Tambahkan";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // textBox4
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(16, 116);
-            label2.Name = "label2";
-            label2.Size = new Size(109, 20);
-            label2.TabIndex = 2;
-            label2.Text = "Nama Lengkap";
+            textBox4.Location = new Point(141, 208);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(198, 27);
+            textBox4.TabIndex = 8;
             // 
-            // label3
+            // textBox3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(16, 162);
-            label3.Name = "label3";
-            label3.Size = new Size(46, 20);
-            label3.TabIndex = 3;
-            label3.Text = "Email";
+            textBox3.Location = new Point(141, 162);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(198, 27);
+            textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(141, 116);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(198, 27);
+            textBox2.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(141, 68);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(198, 27);
+            textBox1.TabIndex = 5;
             // 
             // label4
             // 
@@ -101,42 +111,32 @@
             label4.TabIndex = 4;
             label4.Text = "Nomor Telpon";
             // 
-            // textBox1
+            // label3
             // 
-            textBox1.Location = new Point(141, 68);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(198, 27);
-            textBox1.TabIndex = 5;
+            label3.AutoSize = true;
+            label3.Location = new Point(16, 162);
+            label3.Name = "label3";
+            label3.Size = new Size(46, 20);
+            label3.TabIndex = 3;
+            label3.Text = "Email";
             // 
-            // textBox2
+            // label2
             // 
-            textBox2.Location = new Point(141, 116);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(198, 27);
-            textBox2.TabIndex = 6;
+            label2.AutoSize = true;
+            label2.Location = new Point(16, 116);
+            label2.Name = "label2";
+            label2.Size = new Size(109, 20);
+            label2.TabIndex = 2;
+            label2.Text = "Nama Lengkap";
             // 
-            // textBox3
+            // label1
             // 
-            textBox3.Location = new Point(141, 162);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(198, 27);
-            textBox3.TabIndex = 7;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(141, 208);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(198, 27);
-            textBox4.TabIndex = 8;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(16, 268);
-            button1.Name = "button1";
-            button1.Size = new Size(309, 43);
-            button1.TabIndex = 9;
-            button1.Text = "Tambahkan";
-            button1.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Location = new Point(16, 71);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 20);
+            label1.TabIndex = 1;
+            label1.Text = "ID Anggota";
             // 
             // groupBox2
             // 
@@ -150,6 +150,24 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "List Anggota";
             // 
+            // button4
+            // 
+            button4.Location = new Point(198, 282);
+            button4.Name = "button4";
+            button4.Size = new Size(176, 29);
+            button4.TabIndex = 11;
+            button4.Text = "Edit";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(6, 282);
+            button3.Name = "button3";
+            button3.Size = new Size(186, 29);
+            button3.TabIndex = 11;
+            button3.Text = "Hapus";
+            button3.UseVisualStyleBackColor = true;
+            // 
             // dataGridView1
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -161,24 +179,6 @@
             dataGridView1.Size = new Size(368, 248);
             dataGridView1.TabIndex = 0;
             // 
-            // button3
-            // 
-            button3.Location = new Point(6, 282);
-            button3.Name = "button3";
-            button3.Size = new Size(186, 29);
-            button3.TabIndex = 11;
-            button3.Text = "Hapus";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(198, 282);
-            button4.Name = "button4";
-            button4.Size = new Size(176, 29);
-            button4.TabIndex = 11;
-            button4.Text = "Edit";
-            button4.UseVisualStyleBackColor = true;
-            // 
             // KelolaAnggota
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -188,6 +188,7 @@
             Controls.Add(groupBox1);
             Name = "KelolaAnggota";
             Text = "KelolaAnggota";
+            Load += KelolaAnggota_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

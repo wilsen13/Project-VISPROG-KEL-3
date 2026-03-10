@@ -40,7 +40,8 @@ namespace Project_VISPROG_KEL_3
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            FormPeminjaman halamanPeminjaman = new FormPeminjaman();// object dari form list buku 
+            halamanPeminjaman.ShowDialog();// menggunakan fungsi show dialog
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -49,6 +50,13 @@ namespace Project_VISPROG_KEL_3
 
             // menggunakan fungsi show dialog, agar halaman utama terkunci saat form list buku dibuka
             halamanBuku.ShowDialog();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            KelolaAnggota halamanAnggota = new KelolaAnggota();// object dari form list buku 
+
+            halamanAnggota.ShowDialog();
         }
     }
 }
