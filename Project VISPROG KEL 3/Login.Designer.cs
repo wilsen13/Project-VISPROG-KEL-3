@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             groupBox2 = new GroupBox();
+            button1 = new Button();
+            textBox2 = new TextBox();
+            label4 = new Label();
+            label3 = new Label();
+            textBox1 = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
-            label3 = new Label();
-            label4 = new Label();
-            textBox2 = new TextBox();
-            button1 = new Button();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,41 +53,21 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Login";
             // 
-            // label1
+            // button1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(320, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(190, 32);
-            label1.TabIndex = 2;
-            label1.Text = "Selamat Datang!";
+            button1.Location = new Point(69, 183);
+            button1.Name = "button1";
+            button1.Size = new Size(223, 29);
+            button1.TabIndex = 7;
+            button1.Text = "Login";
+            button1.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // textBox2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(286, 61);
-            label2.Name = "label2";
-            label2.Size = new Size(288, 20);
-            label2.TabIndex = 3;
-            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
-            label2.Click += label2_Click;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(149, 64);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(155, 27);
-            textBox1.TabIndex = 0;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(50, 64);
-            label3.Name = "label3";
-            label3.Size = new Size(75, 20);
-            label3.TabIndex = 4;
-            label3.Text = "Username";
+            textBox2.Location = new Point(149, 115);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(155, 27);
+            textBox2.TabIndex = 6;
             // 
             // label4
             // 
@@ -98,21 +78,41 @@
             label4.TabIndex = 5;
             label4.Text = "Password";
             // 
-            // textBox2
+            // label3
             // 
-            textBox2.Location = new Point(149, 115);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(155, 27);
-            textBox2.TabIndex = 6;
+            label3.AutoSize = true;
+            label3.Location = new Point(50, 64);
+            label3.Name = "label3";
+            label3.Size = new Size(75, 20);
+            label3.TabIndex = 4;
+            label3.Text = "Username";
             // 
-            // button1
+            // textBox1
             // 
-            button1.Location = new Point(69, 183);
-            button1.Name = "button1";
-            button1.Size = new Size(223, 29);
-            button1.TabIndex = 7;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
+            textBox1.Location = new Point(149, 64);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(155, 27);
+            textBox1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(326, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(190, 32);
+            label1.TabIndex = 2;
+            label1.Text = "Selamat Datang!";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(287, 67);
+            label2.Name = "label2";
+            label2.Size = new Size(288, 20);
+            label2.TabIndex = 3;
+            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
+            label2.Click += label2_Click;
             // 
             // Login
             // 
