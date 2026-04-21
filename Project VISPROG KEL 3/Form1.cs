@@ -40,11 +40,26 @@ namespace Project_VISPROG_KEL_3
 
         private void button1_Click(object sender, EventArgs e)
         {
+        
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void peninjamanBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             FormPeminjaman halamanPeminjaman = new FormPeminjaman();// object dari form list buku 
             halamanPeminjaman.ShowDialog();// menggunakan fungsi show dialog
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void kelolaBukuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormListBuku halamanBuku = new FormListBuku();// object dari form list buku 
 
@@ -52,7 +67,7 @@ namespace Project_VISPROG_KEL_3
             halamanBuku.ShowDialog();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void kelolaAnggotaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             KelolaAnggota halamanAnggota = new KelolaAnggota();// object dari form list buku 
 

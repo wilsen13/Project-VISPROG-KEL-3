@@ -30,10 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            menuStrip1 = new MenuStrip();
+            menuToolStripMenuItem = new ToolStripMenuItem();
+            peninjamanBukuToolStripMenuItem = new ToolStripMenuItem();
+            kelolaBukuToolStripMenuItem = new ToolStripMenuItem();
+            kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             label3 = new Label();
@@ -41,6 +42,7 @@
             panel2 = new Panel();
             label2 = new Label();
             groupBox1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -48,59 +50,51 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button4);
-            groupBox1.Controls.Add(button3);
-            groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Location = new Point(204, 141);
+            groupBox1.Controls.Add(menuStrip1);
+            groupBox1.Location = new Point(212, 144);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(402, 298);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Menu";
             // 
-            // button4
+            // menuStrip1
             // 
-            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button4.Location = new Point(36, 161);
-            button4.Name = "button4";
-            button4.Size = new Size(129, 68);
-            button4.TabIndex = 3;
-            button4.Text = "Kelola Buku";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem });
+            menuStrip1.Location = new Point(3, 23);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(396, 28);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
-            // button3
+            // menuToolStripMenuItem
             // 
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button3.Location = new Point(237, 48);
-            button3.Name = "button3";
-            button3.Size = new Size(118, 68);
-            button3.TabIndex = 2;
-            button3.Text = "Pengembalian Buku";
-            button3.UseVisualStyleBackColor = true;
+            menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { peninjamanBukuToolStripMenuItem, kelolaBukuToolStripMenuItem, kelolaAnggotaToolStripMenuItem });
+            menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            menuToolStripMenuItem.Size = new Size(60, 24);
+            menuToolStripMenuItem.Text = "Menu";
             // 
-            // button2
+            // peninjamanBukuToolStripMenuItem
             // 
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button2.Location = new Point(237, 161);
-            button2.Name = "button2";
-            button2.Size = new Size(118, 68);
-            button2.TabIndex = 1;
-            button2.Text = "Kelola Anggota";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click_1;
+            peninjamanBukuToolStripMenuItem.Name = "peninjamanBukuToolStripMenuItem";
+            peninjamanBukuToolStripMenuItem.Size = new Size(224, 26);
+            peninjamanBukuToolStripMenuItem.Text = "Peninjaman Buku";
+            peninjamanBukuToolStripMenuItem.Click += peninjamanBukuToolStripMenuItem_Click;
             // 
-            // button1
+            // kelolaBukuToolStripMenuItem
             // 
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.Location = new Point(36, 48);
-            button1.Name = "button1";
-            button1.Size = new Size(129, 68);
-            button1.TabIndex = 0;
-            button1.Text = "Peminjaman Buku";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            kelolaBukuToolStripMenuItem.Name = "kelolaBukuToolStripMenuItem";
+            kelolaBukuToolStripMenuItem.Size = new Size(224, 26);
+            kelolaBukuToolStripMenuItem.Text = "Kelola Buku";
+            kelolaBukuToolStripMenuItem.Click += kelolaBukuToolStripMenuItem_Click;
+            // 
+            // kelolaAnggotaToolStripMenuItem
+            // 
+            kelolaAnggotaToolStripMenuItem.Name = "kelolaAnggotaToolStripMenuItem";
+            kelolaAnggotaToolStripMenuItem.Size = new Size(224, 26);
+            kelolaAnggotaToolStripMenuItem.Text = "Kelola Anggota";
+            kelolaAnggotaToolStripMenuItem.Click += kelolaAnggotaToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -178,10 +172,14 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Aplikasi Perpustakaan";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -197,11 +195,12 @@
         private Label label1;
         private Label label3;
         private PictureBox pictureBox1;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
         private Panel panel2;
         private Label label2;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem menuToolStripMenuItem;
+        private ToolStripMenuItem peninjamanBukuToolStripMenuItem;
+        private ToolStripMenuItem kelolaBukuToolStripMenuItem;
+        private ToolStripMenuItem kelolaAnggotaToolStripMenuItem;
     }
 }
