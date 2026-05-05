@@ -57,10 +57,9 @@ namespace Project_VISPROG_KEL_3
             label1.FlatStyle = FlatStyle.System;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(288, 17);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(230, 14);
             label1.Name = "label1";
-            label1.Size = new Size(462, 48);
+            label1.Size = new Size(390, 41);
             label1.TabIndex = 0;
             label1.Text = "APLIKASI PERPUSTAKAAN";
             label1.Click += label1_Click;
@@ -68,10 +67,9 @@ namespace Project_VISPROG_KEL_3
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(4, 4);
-            pictureBox1.Margin = new Padding(4);
+            pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(71, 67);
+            pictureBox1.Size = new Size(57, 54);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
@@ -83,10 +81,9 @@ namespace Project_VISPROG_KEL_3
             label3.FlatStyle = FlatStyle.System;
             label3.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(118, 17);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(94, 14);
             label3.Name = "label3";
-            label3.Size = new Size(103, 45);
+            label3.Size = new Size(89, 37);
             label3.TabIndex = 2;
             label3.Text = "LibRa";
             label3.Click += label3_Click;
@@ -96,10 +93,9 @@ namespace Project_VISPROG_KEL_3
             panel2.BackColor = SystemColors.Highlight;
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 518);
-            panel2.Margin = new Padding(4);
+            panel2.Location = new Point(0, 414);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1032, 50);
+            panel2.Size = new Size(826, 40);
             panel2.TabIndex = 2;
             // 
             // label2
@@ -109,10 +105,9 @@ namespace Project_VISPROG_KEL_3
             label2.FlatStyle = FlatStyle.System;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(453, 13);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(362, 10);
             label2.Name = "label2";
-            label2.Size = new Size(125, 28);
+            label2.Size = new Size(107, 23);
             label2.TabIndex = 4;
             label2.Text = "Kelompok 3";
             // 
@@ -125,8 +120,9 @@ namespace Project_VISPROG_KEL_3
             panel3.Controls.Add(pictureBox1);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
+            panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1032, 116);
+            panel3.Size = new Size(826, 93);
             panel3.TabIndex = 3;
             panel3.Paint += panel3_Paint;
             // 
@@ -134,9 +130,10 @@ namespace Project_VISPROG_KEL_3
             // 
             panel1.Controls.Add(menuStrip2);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 78);
+            panel1.Location = new Point(0, 63);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1032, 38);
+            panel1.Size = new Size(826, 30);
             panel1.TabIndex = 4;
             // 
             // menuStrip2
@@ -146,7 +143,8 @@ namespace Project_VISPROG_KEL_3
             menuStrip2.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
-            menuStrip2.Size = new Size(1032, 38);
+            menuStrip2.Padding = new Padding(5, 2, 0, 2);
+            menuStrip2.Size = new Size(826, 30);
             menuStrip2.TabIndex = 0;
             menuStrip2.Text = "menuStrip2";
             // 
@@ -154,28 +152,28 @@ namespace Project_VISPROG_KEL_3
             // 
             menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { peminjamanBukuToolStripMenuItem, kelolaBukuToolStripMenuItem, kelolaAnggotaToolStripMenuItem });
             menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            menuToolStripMenuItem.Size = new Size(73, 34);
+            menuToolStripMenuItem.Size = new Size(60, 26);
             menuToolStripMenuItem.Text = "Menu";
             menuToolStripMenuItem.Click += menuToolStripMenuItem1_Click;
             // 
             // peminjamanBukuToolStripMenuItem
             // 
             peminjamanBukuToolStripMenuItem.Name = "peminjamanBukuToolStripMenuItem";
-            peminjamanBukuToolStripMenuItem.Size = new Size(254, 34);
+            peminjamanBukuToolStripMenuItem.Size = new Size(209, 26);
             peminjamanBukuToolStripMenuItem.Text = "Peminjaman Buku";
             peminjamanBukuToolStripMenuItem.Click += peminjamanBukuToolStripMenuItem_Click;
             // 
             // kelolaBukuToolStripMenuItem
             // 
             kelolaBukuToolStripMenuItem.Name = "kelolaBukuToolStripMenuItem";
-            kelolaBukuToolStripMenuItem.Size = new Size(254, 34);
+            kelolaBukuToolStripMenuItem.Size = new Size(209, 26);
             kelolaBukuToolStripMenuItem.Text = "Kelola Buku";
             kelolaBukuToolStripMenuItem.Click += kelolaBukuToolStripMenuItem_Click;
             // 
             // kelolaAnggotaToolStripMenuItem
             // 
             kelolaAnggotaToolStripMenuItem.Name = "kelolaAnggotaToolStripMenuItem";
-            kelolaAnggotaToolStripMenuItem.Size = new Size(254, 34);
+            kelolaAnggotaToolStripMenuItem.Size = new Size(209, 26);
             kelolaAnggotaToolStripMenuItem.Text = "Kelola Anggota";
             kelolaAnggotaToolStripMenuItem.Click += kelolaAnggotaToolStripMenuItem_Click;
             // 
@@ -184,9 +182,10 @@ namespace Project_VISPROG_KEL_3
             panel4.Controls.Add(homeText);
             panel4.Controls.Add(panel2);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 116);
+            panel4.Location = new Point(0, 93);
+            panel4.Margin = new Padding(2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1032, 568);
+            panel4.Size = new Size(826, 454);
             panel4.TabIndex = 4;
             panel4.Paint += panel4_Paint;
             // 
@@ -194,20 +193,20 @@ namespace Project_VISPROG_KEL_3
             // 
             homeText.AutoSize = true;
             homeText.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            homeText.Location = new Point(348, 148);
+            homeText.Location = new Point(263, 74);
+            homeText.Margin = new Padding(2, 0, 2, 0);
             homeText.Name = "homeText";
-            homeText.Size = new Size(362, 65);
+            homeText.Size = new Size(303, 54);
             homeText.TabIndex = 3;
             homeText.Text = "Selamat Datang";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1032, 684);
+            ClientSize = new Size(826, 547);
             Controls.Add(panel4);
             Controls.Add(panel3);
-            Margin = new Padding(4);
             Name = "Form1";
             Text = "Aplikasi Perpustakaan";
             Load += Form1_Load;

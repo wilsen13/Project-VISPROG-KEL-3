@@ -34,11 +34,11 @@
             panel3 = new Panel();
             panel1 = new Panel();
             button1 = new Button();
+            label2 = new Label();
             textBox2 = new TextBox();
             label4 = new Label();
             label3 = new Label();
             textBox1 = new TextBox();
-            label2 = new Label();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -106,6 +106,15 @@
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = false;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(59, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(288, 20);
+            label2.TabIndex = 7;
+            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
+            // 
             // textBox2
             // 
             textBox2.BorderStyle = BorderStyle.FixedSingle;
@@ -142,15 +151,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(182, 30);
             textBox1.TabIndex = 8;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(59, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(288, 20);
-            label2.TabIndex = 7;
-            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
             // 
             // label1
             // 

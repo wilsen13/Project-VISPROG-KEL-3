@@ -150,5 +150,10 @@ namespace Project_VISPROG_KEL_3
             bukuSaya.ReadOnly = true;
             bukuSaya.AllowUserToAddRows = false;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
