@@ -1,4 +1,4 @@
-﻿namespace Project_VISPROG_KEL_3
+namespace Project_VISPROG_KEL_3
 {
     partial class Form1
     {

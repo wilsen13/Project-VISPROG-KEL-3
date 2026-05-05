@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            textBox1 = new TextBox();
             button1 = new Button();
+            textBox1 = new TextBox();
+            label1 = new Label();
             dataGridView1 = new DataGridView();
             button2 = new Button();
             label2 = new Label();
@@ -51,22 +51,6 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Pengembalian";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(20, 57);
-            label1.Name = "label1";
-            label1.Size = new Size(116, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Cari ID Anggota";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(159, 54);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 1;
-            // 
             // button1
             // 
             button1.Location = new Point(20, 122);
@@ -75,6 +59,22 @@
             button1.TabIndex = 2;
             button1.Text = "Cari";
             button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(159, 54);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(20, 57);
+            label1.Name = "label1";
+            label1.Size = new Size(116, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Cari ID Anggota";
             // 
             // dataGridView1
             // 
@@ -89,7 +89,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(178, 374);
+            button2.Location = new Point(188, 374);
             button2.Name = "button2";
             button2.Size = new Size(388, 64);
             button2.TabIndex = 3;
