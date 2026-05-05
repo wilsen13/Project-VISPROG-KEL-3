@@ -14,18 +14,25 @@ namespace Project_VISPROG_KEL_3
         public FormListBuku()
         {
             InitializeComponent();
-            //pengaturan visual untuk data grid view agar lebih menarik dan mudah digunakan
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//agar kolom menyesuaikan ukuran tabel
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;// agar saat di klik yang ter select adalah 1 baris penuh bukan hanya 1 cell
+            try
+            {
+                //pengaturan visual untuk data grid view agar lebih menarik dan mudah digunakan
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//agar kolom menyesuaikan ukuran tabel
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;// agar saat di klik yang ter select adalah 1 baris penuh bukan hanya 1 cell
 
-            //mencegah user mengedit di tabel dan menghilangkan baris kosong di bawah
-            dataGridView1.ReadOnly = true;
-            dataGridView1.AllowUserToAddRows = false;
+                //mencegah user mengedit di tabel dan menghilangkan baris kosong di bawah
+                dataGridView1.ReadOnly = true;
+                dataGridView1.AllowUserToAddRows = false;
 
-            //data grid view di berikan header style agar lebih menarik
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.EnableHeadersVisualStyles = false;
+                //data grid view di berikan header style agar lebih menarik
+                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+                dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dataGridView1.EnableHeadersVisualStyles = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error in FormListBuku constructor: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         List<Book> daftarBuku = new List<Book>();
         private void label1_Click(object sender, EventArgs e)

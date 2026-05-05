@@ -15,14 +15,21 @@ namespace Project_VISPROG_KEL_3
         {
             InitializeComponent();
 
-            RefreshBukuSaya();
-            RefreshKatalog();
+            try
+            {
+                RefreshBukuSaya();
+                RefreshKatalog();
 
-            //agar tampilan data grid menjadi lebih rapih 
-            KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            KatalogBuku.ReadOnly = true;
-            KatalogBuku.AllowUserToAddRows = false;
+                //agar tampilan data grid menjadi lebih rapih 
+                KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                KatalogBuku.ReadOnly = true;
+                KatalogBuku.AllowUserToAddRows = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error in FormPeminjaman constructor: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void FormPeminjaman_Load(object sender, EventArgs e)
