@@ -43,40 +43,38 @@ namespace Project_VISPROG_KEL_3
                 {
                     conn.Open();
                     // Query untuk cek kecocokan Username (Email) dan Password
-                    string query = "SELECT UserID, Role FROM [User] WHERE (Email = @loginInput OR Nama = @loginInput) AND Password = @password";
+                    string query = "SELECT UserID, Nama, Role FROM [User] WHERE (Email = @loginInput OR Nama = @loginInput) AND Password = @password";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Mengambil teks dari TextBox kamu (sesuaikan nama TextBox-nya jika berbeda)
+                        // mengambil data dari textbox (username & password)
                         cmd.Parameters.AddWithValue("@loginInput", textBox1.Text);  
                         cmd.Parameters.AddWithValue("@password", textBox2.Text);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (reader.Read()) // Jika akun ditemukan
+                            if (reader.Read()) // jika akun ditemukan dan cocok
                             {
-                                // 1. Simpan data ke Class Session
+                                // menyimpan data ke dalam class session
                                 Session.UserID = reader["UserID"].ToString();
+                                Session.Nama = reader["Nama"].ToString();
                                 Session.Role = reader["Role"].ToString();
 
                                 if (Session.Role == "Pustakawan")
                                 {
-                                    // Jika Admin, buka halaman Admin (misal: FormUtama atau Form dashboard admin kamu)
-                                    Form1 adminPage = new Form1();
+                                    // jika role == "admin" maka masuk ke halaman admin
+                                    FormAdmin adminPage = new FormAdmin();
                                     adminPage.Show();
                                 }
                                 else if (Session.Role == "Member")
                                 {
-                                    // Jika Member, langsung buka Form Peminjaman yang udah kita desain rapi tadi
-                                    FormPeminjaman memberPage = new FormPeminjaman();
+                                    // jika role == "member" makan muncul ke menu member
+                                    FormMember memberPage = new FormMember();
                                     memberPage.Show();
                                 }
 
-                                // 2. Buka Halaman MDI Utama
-                                Form1 mainForm = new Form1();
-                                mainForm.Show();
 
-                                // 3. Sembunyikan Form Login ini
+                                // menutup form login ini
                                 this.Hide();
                             }
                             else

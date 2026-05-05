@@ -1,8 +1,8 @@
 namespace Project_VISPROG_KEL_3
 {
-    public partial class Form1 : Form
+    public partial class FormAdmin : Form
     {
-        public Form1()
+        public FormAdmin()
         {
             InitializeComponent();
 

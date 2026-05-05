@@ -1,6 +1,6 @@
 namespace Project_VISPROG_KEL_3
 {
-    partial class Form1
+    partial class FormAdmin
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@ namespace Project_VISPROG_KEL_3
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdmin));
             label1 = new Label();
             pictureBox1 = new PictureBox();
             label3 = new Label();
@@ -38,12 +38,11 @@ namespace Project_VISPROG_KEL_3
             panel1 = new Panel();
             menuStrip2 = new MenuStrip();
             menuToolStripMenuItem = new ToolStripMenuItem();
-            peminjamanBukuToolStripMenuItem = new ToolStripMenuItem();
             kelolaBukuToolStripMenuItem = new ToolStripMenuItem();
             kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
-            homeText = new Label();
             button1 = new Button();
+            homeText = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -151,30 +150,23 @@ namespace Project_VISPROG_KEL_3
             // 
             // menuToolStripMenuItem
             // 
-            menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { peminjamanBukuToolStripMenuItem, kelolaBukuToolStripMenuItem, kelolaAnggotaToolStripMenuItem });
+            menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem, kelolaAnggotaToolStripMenuItem });
             menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             menuToolStripMenuItem.Size = new Size(60, 26);
             menuToolStripMenuItem.Text = "Menu";
             menuToolStripMenuItem.Click += menuToolStripMenuItem1_Click;
             // 
-            // peminjamanBukuToolStripMenuItem
-            // 
-            peminjamanBukuToolStripMenuItem.Name = "peminjamanBukuToolStripMenuItem";
-            peminjamanBukuToolStripMenuItem.Size = new Size(209, 26);
-            peminjamanBukuToolStripMenuItem.Text = "Peminjaman Buku";
-            peminjamanBukuToolStripMenuItem.Click += peminjamanBukuToolStripMenuItem_Click;
-            // 
             // kelolaBukuToolStripMenuItem
             // 
             kelolaBukuToolStripMenuItem.Name = "kelolaBukuToolStripMenuItem";
-            kelolaBukuToolStripMenuItem.Size = new Size(209, 26);
+            kelolaBukuToolStripMenuItem.Size = new Size(224, 26);
             kelolaBukuToolStripMenuItem.Text = "Kelola Buku";
             kelolaBukuToolStripMenuItem.Click += kelolaBukuToolStripMenuItem_Click;
             // 
             // kelolaAnggotaToolStripMenuItem
             // 
             kelolaAnggotaToolStripMenuItem.Name = "kelolaAnggotaToolStripMenuItem";
-            kelolaAnggotaToolStripMenuItem.Size = new Size(209, 26);
+            kelolaAnggotaToolStripMenuItem.Size = new Size(224, 26);
             kelolaAnggotaToolStripMenuItem.Text = "Kelola Anggota";
             kelolaAnggotaToolStripMenuItem.Click += kelolaAnggotaToolStripMenuItem_Click;
             // 
@@ -191,17 +183,6 @@ namespace Project_VISPROG_KEL_3
             panel4.TabIndex = 4;
             panel4.Paint += panel4_Paint;
             // 
-            // homeText
-            // 
-            homeText.AutoSize = true;
-            homeText.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            homeText.Location = new Point(263, 74);
-            homeText.Margin = new Padding(2, 0, 2, 0);
-            homeText.Name = "homeText";
-            homeText.Size = new Size(303, 54);
-            homeText.TabIndex = 3;
-            homeText.Text = "Selamat Datang";
-            // 
             // button1
             // 
             button1.BackColor = SystemColors.Highlight;
@@ -209,7 +190,7 @@ namespace Project_VISPROG_KEL_3
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(3, 351);
+            button1.Location = new Point(12, 369);
             button1.Name = "button1";
             button1.Size = new Size(227, 39);
             button1.TabIndex = 13;
@@ -217,14 +198,25 @@ namespace Project_VISPROG_KEL_3
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click_1;
             // 
-            // Form1
+            // homeText
+            // 
+            homeText.AutoSize = true;
+            homeText.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            homeText.Location = new Point(246, 37);
+            homeText.Margin = new Padding(2, 0, 2, 0);
+            homeText.Name = "homeText";
+            homeText.Size = new Size(303, 54);
+            homeText.TabIndex = 3;
+            homeText.Text = "Selamat Datang";
+            // 
+            // FormAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(826, 547);
             Controls.Add(panel4);
             Controls.Add(panel3);
-            Name = "Form1";
+            Name = "FormAdmin";
             Text = "Aplikasi Perpustakaan";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -252,7 +244,6 @@ namespace Project_VISPROG_KEL_3
         private Panel panel1;
         private MenuStrip menuStrip2;
         private ToolStripMenuItem menuToolStripMenuItem;
-        private ToolStripMenuItem peminjamanBukuToolStripMenuItem;
         private ToolStripMenuItem kelolaBukuToolStripMenuItem;
         private ToolStripMenuItem kelolaAnggotaToolStripMenuItem;
         private Label homeText;

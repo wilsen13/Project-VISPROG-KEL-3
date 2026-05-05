@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,7 @@ namespace Project_VISPROG_KEL_3
 {
     public partial class FormListBuku : Form
     {
+        string connString = @"Data Source=.\SQLEXPRESS05;Initial Catalog=LibRaDB;Integrated Security=True;TrustServerCertificate=True;";
         public FormListBuku()
         {
             InitializeComponent();
@@ -34,7 +36,33 @@ namespace Project_VISPROG_KEL_3
                 MessageBox.Show($"Error in FormListBuku constructor: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
         List<Book> daftarBuku = new List<Book>();
+
+        private void TampilDataBuku()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    // Query untuk mengambil data dari tabel Book
+                    string query = "SELECT BookID, JudulBuku, Penulis, TahunTerbit, TipeBuku, Stok, Status FROM Book";
+                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    //memasukkan data ke dalam data grid view
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat data: " + ex.Message);
+            }
+        }
+
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -47,54 +75,9 @@ namespace Project_VISPROG_KEL_3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!radioButton1.Checked && !radioButton2.Checked)//untuk mengecek apakah radio button 1 dan 2 di centang, jika tidak tidak bisa lanjut
-                {
-                    MessageBox.Show("Pilih tipe buku Terlebih Dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                //membuat objek buku baru
-                Book buku = new Book();
-                buku.JudulBuku = textBox1.Text;
-                buku.Penulis = textBox2.Text;
-                buku.TahunTerbit = textBox3.Text;
-
-                // pemilihan tipe buku (fiksi & nonfiksi)
-                if (radioButton1.Checked)
-                {
-                    buku.TipeBuku = radioButton1.Text;
-                }
-                else
-                {
-                    buku.TipeBuku = radioButton2.Text;
-                }
-
-                // memasukkan buku ke dalam list (dilakukan oleh librarian) 
-                Librarian admin = new Librarian();
-                admin.AddBook(buku, daftarBuku);
-
-                // menggunakan data grid view untuk menampilkan list
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = daftarBuku;//menyambungkan list daftar buku dengan data grid view
-
-                MessageBox.Show("Data Buku berhasil masuk ke tabel!", "Sukses");
-
-                //Membersihkan text box setelah berhasil inpput
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
-                radioButton1.Checked = false;
-                radioButton2.Checked = false;
-                textBox1.Focus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
         }
-        
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -108,30 +91,174 @@ namespace Project_VISPROG_KEL_3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow != null)
+            // Cek apakah ada baris yang dipilih di DataGridView
+            if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Index >= 0)
             {
-                Book bukuTerpilih = (Book)dataGridView1.CurrentRow.DataBoundItem;//mengambil data buku dari baris yang d select
+                // Mengambil BookID dan Judul dari baris yang diklik
+                string idBukuTerpilih = dataGridView1.CurrentRow.Cells["BookID"].Value.ToString();
+                string judulBuku = dataGridView1.CurrentRow.Cells["JudulBuku"].Value.ToString();
 
-                //pop up konfirmasi jika ingin menghapus buku
-                DialogResult dialogResult = MessageBox.Show($"Yakin ingin menghapus buku '{bukuTerpilih.JudulBuku}'?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show($"Yakin ingin menghapus buku '{judulBuku}' dari database?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    //librarian menghapus data buku
-                    Librarian admin = new Librarian();
-                    admin.RemoveBook(bukuTerpilih, daftarBuku);
+                    try
+                    {
+                        using (SqlConnection conn = new SqlConnection(connString))
+                        {
+                            conn.Open();
+                            string query = "DELETE FROM Book WHERE BookID = @id";
+                            using (SqlCommand cmd = new SqlCommand(query, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@id", idBukuTerpilih);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
 
-                    //memperbarui tampilan tabel 
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = daftarBuku;
+                        MessageBox.Show("Buku berhasil dihapus permanen!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    MessageBox.Show("Buku berhasil dihapus!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Refresh tabel
+                        TampilDataBuku();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Gagal menghapus. Buku ini mungkin sedang dipinjam.\n\nDetail: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
             }
             else
             {
                 MessageBox.Show("Silakan klik dulu buku mana yang mau dihapus di tabel.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+
+                textBox1.Text = row.Cells["JudulBuku"].Value.ToString();
+                textBox2.Text = row.Cells["Penulis"].Value.ToString();
+                textBox3.Text = row.Cells["TahunTerbit"].Value.ToString();
+
+                if (row.Cells["TipeBuku"].Value.ToString() == "Fiksi")
+                    radioButton1.Checked = true;
+                else
+                    radioButton2.Checked = true;
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+
+                textBox1.Text = row.Cells["JudulBuku"].Value.ToString();
+                textBox2.Text = row.Cells["Penulis"].Value.ToString();
+                textBox3.Text = row.Cells["TahunTerbit"].Value.ToString();
+
+                if (row.Cells["TipeBuku"].Value.ToString() == "Fiksi")
+                    radioButton1.Checked = true;
+                else
+                    radioButton2.Checked = true;
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Index >= 0)
+            {
+                try
+                {
+                    string idBukuTerpilih = dataGridView1.CurrentRow.Cells["BookID"].Value.ToString();
+                    string tipeBuku = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
+
+                    using (SqlConnection conn = new SqlConnection(connString))
+                    {
+                        conn.Open();
+                        string query = "UPDATE Book SET JudulBuku = @judul, Penulis = @penulis, TahunTerbit = @tahun, TipeBuku = @tipe WHERE BookID = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", idBukuTerpilih);
+                            cmd.Parameters.AddWithValue("@judul", textBox1.Text);
+                            cmd.Parameters.AddWithValue("@penulis", textBox2.Text);
+                            cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text));
+                            cmd.Parameters.AddWithValue("@tipe", tipeBuku);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    MessageBox.Show("Data Buku berhasil di-update!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    TampilDataBuku(); // Refresh tabel
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal mengupdate data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pilih buku di tabel lalu isi textbox sebelum menekan Edit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validasi RadioButton
+                if (!radioButton1.Checked && !radioButton2.Checked)
+                {
+                    MessageBox.Show("Pilih tipe buku Terlebih Dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Menentukan tipe buku
+                string tipeBuku = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
+
+                // Generate ID Buku otomatis pakai format waktu biar unik
+                string newBookID = "BK-" + DateTime.Now.ToString("yyMMddHHmmss");
+
+                // Proses Insert ke Database
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    string query = "INSERT INTO Book (BookID, JudulBuku, Penulis, TahunTerbit, TipeBuku, Stok, Status) " +
+                                   "VALUES (@id, @judul, @penulis, @tahun, @tipe, 1, 'Tersedia')";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", newBookID);
+                        cmd.Parameters.AddWithValue("@judul", textBox1.Text); // Judul
+                        cmd.Parameters.AddWithValue("@penulis", textBox2.Text); // Penulis
+                        cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text)); // Tahun (dikonversi ke angka)
+                        cmd.Parameters.AddWithValue("@tipe", tipeBuku); // Tipe (Fiksi/NonFiksi)
+
+                        cmd.ExecuteNonQuery(); // Eksekusi query
+                    }
+                }
+
+                MessageBox.Show("Data Buku berhasil masuk ke Database!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Refresh tabel dan bersihkan TextBox
+                TampilDataBuku();
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                radioButton1.Checked = false;
+                radioButton2.Checked = false;
+                textBox1.Focus();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Tahun Terbit harus berupa angka!", "Error Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

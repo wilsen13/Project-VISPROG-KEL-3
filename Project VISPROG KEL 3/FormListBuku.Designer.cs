@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label5 = new Label();
             button1 = new Button();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
@@ -39,7 +40,6 @@
             label2 = new Label();
             label1 = new Label();
             textBox1 = new TextBox();
-            label5 = new Label();
             label6 = new Label();
             dataGridView1 = new DataGridView();
             button2 = new Button();
@@ -68,6 +68,16 @@
             panel1.Size = new Size(331, 386);
             panel1.TabIndex = 12;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            label5.Location = new Point(52, 18);
+            label5.Name = "label5";
+            label5.Size = new Size(209, 32);
+            label5.TabIndex = 20;
+            label5.Text = "Tambahkan Buku";
+            // 
             // button1
             // 
             button1.BackColor = SystemColors.Highlight;
@@ -81,6 +91,7 @@
             button1.TabIndex = 19;
             button1.Text = "Tambahkan";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
             // 
             // radioButton2
             // 
@@ -161,16 +172,6 @@
             textBox1.Size = new Size(179, 27);
             textBox1.TabIndex = 10;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label5.Location = new Point(52, 18);
-            label5.Name = "label5";
-            label5.Size = new Size(209, 32);
-            label5.TabIndex = 20;
-            label5.Text = "Tambahkan Buku";
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -233,6 +234,7 @@
             button3.TabIndex = 12;
             button3.Text = "Edit";
             button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
             // 
             // FormListBuku
             // 
