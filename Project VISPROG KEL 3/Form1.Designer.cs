@@ -43,6 +43,7 @@ namespace Project_VISPROG_KEL_3
             kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
             homeText = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -179,6 +180,7 @@ namespace Project_VISPROG_KEL_3
             // 
             // panel4
             // 
+            panel4.Controls.Add(button1);
             panel4.Controls.Add(homeText);
             panel4.Controls.Add(panel2);
             panel4.Dock = DockStyle.Fill;
@@ -199,6 +201,21 @@ namespace Project_VISPROG_KEL_3
             homeText.Size = new Size(303, 54);
             homeText.TabIndex = 3;
             homeText.Text = "Selamat Datang";
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.Highlight;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(3, 351);
+            button1.Name = "button1";
+            button1.Size = new Size(227, 39);
+            button1.TabIndex = 13;
+            button1.Text = "Logout";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
             // 
             // Form1
             // 
@@ -239,5 +256,6 @@ namespace Project_VISPROG_KEL_3
         private ToolStripMenuItem kelolaBukuToolStripMenuItem;
         private ToolStripMenuItem kelolaAnggotaToolStripMenuItem;
         private Label homeText;
+        private Button button1;
     }
 }

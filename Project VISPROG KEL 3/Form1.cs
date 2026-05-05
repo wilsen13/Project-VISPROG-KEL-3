@@ -118,5 +118,23 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Apakah Anda yakin ingin Log Out?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                // clear sesi
+                Session.Clear();
+
+                // menampilkan form login yang sebelumnya di sembunyikan setelah berhasil melakukan login
+                Login loginForm = new Login();
+                loginForm.Show();
+
+                //menutup halaman 
+                this.Close();
+            }
+        }
     }
 }
