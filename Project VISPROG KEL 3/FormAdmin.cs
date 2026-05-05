@@ -52,33 +52,15 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
-        private void peminjamanBukuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormPeminjaman halamanPeminjaman = new FormPeminjaman();// object dari form list buku 
-                halamanPeminjaman.ShowDialog();// menggunakan fungsi show dialog
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error opening Peminjaman: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //private void peminjamanBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
 
-        private void kelolaBukuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormListBuku halamanBuku = new FormListBuku();// object dari form list buku 
+        //}
 
-                // menggunakan fungsi show dialog, agar halaman utama terkunci saat form list buku dibuka
-                halamanBuku.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error opening Kelola Buku: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //private void kelolaBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+
+        //}
 
         private void kelolaAnggotaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -119,7 +101,37 @@ namespace Project_VISPROG_KEL_3
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+
+        private void kelolaBukuToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormListBuku halamanBuku = new FormListBuku();// object dari form list buku 
+
+                // menggunakan fungsi show dialog, agar halaman utama terkunci saat form list buku dibuka
+                halamanBuku.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Kelola Buku: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void kelolaAnggotaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                KelolaAnggota halamanAnggota = new KelolaAnggota();// object dari form list buku 
+
+                halamanAnggota.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Kelola Anggota: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Apakah Anda yakin ingin Log Out?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 

@@ -43,11 +43,9 @@
             label6 = new Label();
             dataGridView1 = new DataGridView();
             button2 = new Button();
-            groupBox2 = new GroupBox();
             button3 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -63,16 +61,16 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBox1);
-            panel1.Location = new Point(25, 36);
+            panel1.Location = new Point(25, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(331, 386);
+            panel1.Size = new Size(331, 410);
             panel1.TabIndex = 12;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label5.Location = new Point(52, 18);
+            label5.Location = new Point(53, 10);
             label5.Name = "label5";
             label5.Size = new Size(209, 32);
             label5.TabIndex = 20;
@@ -176,7 +174,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label6.Location = new Point(528, 19);
+            label6.Location = new Point(528, 9);
             label6.Name = "label6";
             label6.Size = new Size(118, 32);
             label6.TabIndex = 21;
@@ -187,12 +185,13 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 26);
+            dataGridView1.Location = new Point(376, 40);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(372, 250);
+            dataGridView1.Size = new Size(412, 296);
             dataGridView1.TabIndex = 11;
+            dataGridView1.CellClick += dataGridView1_CellClick_1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button2
@@ -202,24 +201,13 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(16, 302);
+            button2.Location = new Point(376, 342);
             button2.Name = "button2";
-            button2.Size = new Size(169, 29);
+            button2.Size = new Size(190, 29);
             button2.TabIndex = 10;
             button2.Text = "Hapus";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(button3);
-            groupBox2.Controls.Add(button2);
-            groupBox2.Controls.Add(dataGridView1);
-            groupBox2.Location = new Point(387, 54);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(401, 368);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
             // 
             // button3
             // 
@@ -228,9 +216,9 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(206, 302);
+            button3.Location = new Point(585, 342);
             button3.Name = "button3";
-            button3.Size = new Size(163, 29);
+            button3.Size = new Size(203, 29);
             button3.TabIndex = 12;
             button3.Text = "Edit";
             button3.UseVisualStyleBackColor = false;
@@ -242,16 +230,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(800, 450);
+            Controls.Add(dataGridView1);
+            Controls.Add(button3);
             Controls.Add(label6);
+            Controls.Add(button2);
             Controls.Add(panel1);
-            Controls.Add(groupBox2);
             Name = "FormListBuku";
             Text = "FormListBuku";
             Load += FormListBuku_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,7 +261,6 @@
         private Label label6;
         private DataGridView dataGridView1;
         private Button button2;
-        private GroupBox groupBox2;
         private Button button3;
     }
 }

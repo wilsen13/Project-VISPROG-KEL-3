@@ -19,7 +19,7 @@ namespace Project_VISPROG_KEL_3
             try
             {
                 //pengaturan visual untuk data grid view agar lebih menarik dan mudah digunakan
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//agar kolom menyesuaikan ukuran tabel
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells; ;//agar kolom menyesuaikan ukuran tabel
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;// agar saat di klik yang ter select adalah 1 baris penuh bukan hanya 1 cell
 
                 //mencegah user mengedit di tabel dan menghilangkan baris kosong di bawah
@@ -75,7 +75,7 @@ namespace Project_VISPROG_KEL_3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -117,7 +117,7 @@ namespace Project_VISPROG_KEL_3
 
                         MessageBox.Show("Buku berhasil dihapus permanen!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Refresh tabel
+                        // refresh tabel
                         TampilDataBuku();
                     }
                     catch (Exception ex)
@@ -149,59 +149,54 @@ namespace Project_VISPROG_KEL_3
             }
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-
-                textBox1.Text = row.Cells["JudulBuku"].Value.ToString();
-                textBox2.Text = row.Cells["Penulis"].Value.ToString();
-                textBox3.Text = row.Cells["TahunTerbit"].Value.ToString();
-
-                if (row.Cells["TipeBuku"].Value.ToString() == "Fiksi")
-                    radioButton1.Checked = true;
-                else
-                    radioButton2.Checked = true;
-            }
-        }
+        //private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        
         private void button3_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Index >= 0)
+            // Kode untuk cek apakah masih ada textbox yang kosong
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "")
             {
-                try
-                {
-                    string idBukuTerpilih = dataGridView1.CurrentRow.Cells["BookID"].Value.ToString();
-                    string tipeBuku = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
-
-                    using (SqlConnection conn = new SqlConnection(connString))
-                    {
-                        conn.Open();
-                        string query = "UPDATE Book SET JudulBuku = @judul, Penulis = @penulis, TahunTerbit = @tahun, TipeBuku = @tipe WHERE BookID = @id";
-
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
-                        {
-                            cmd.Parameters.AddWithValue("@id", idBukuTerpilih);
-                            cmd.Parameters.AddWithValue("@judul", textBox1.Text);
-                            cmd.Parameters.AddWithValue("@penulis", textBox2.Text);
-                            cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text));
-                            cmd.Parameters.AddWithValue("@tipe", tipeBuku);
-
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-
-                    MessageBox.Show("Data Buku berhasil di-update!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    TampilDataBuku(); // Refresh tabel
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal mengupdate data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Mohon Plih Buku Terlebih Dahulu, pastikan semua kotak terisi sebelum klik Edit!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // stop program sampai disini (tidak melanjutkan kebawah)
             }
-            else
+
+            //logika jika yang di input di textboxt tahun terbit bukan lah sebuah angka, akan memunculkan pesan peringatan
+            if (!int.TryParse(textBox3.Text, out int tahunAngka))
             {
-                MessageBox.Show("Pilih buku di tabel lalu isi textbox sebelum menekan Edit.", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Tahun Terbit harus berupa angka!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // stop program sampai disini (tidak melanjutkan kebawah)
+            }
+
+            try
+            {
+                // mengambil id buku dari tabel yang sedang di klik
+                string idBukuTerpilih = dataGridView1.CurrentRow.Cells["BookID"].Value.ToString();
+                string tipeBuku = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
+
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    // query untuk melakukan update data di database
+                    string query = "UPDATE Book SET JudulBuku = @judul, Penulis = @penulis, TahunTerbit = @tahun, TipeBuku = @tipe WHERE BookID = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idBukuTerpilih);
+                        cmd.Parameters.AddWithValue("@judul", textBox1.Text);
+                        cmd.Parameters.AddWithValue("@penulis", textBox2.Text);
+                        cmd.Parameters.AddWithValue("@tahun", tahunAngka);
+                        cmd.Parameters.AddWithValue("@tipe", tipeBuku);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Data buku berhasil di update!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TampilDataBuku(); // untuk refresh tabel nya 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Data buku gagal di update." + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -209,20 +204,20 @@ namespace Project_VISPROG_KEL_3
         {
             try
             {
-                // Validasi RadioButton
+                // untuk memvalidasi radio button
                 if (!radioButton1.Checked && !radioButton2.Checked)
                 {
                     MessageBox.Show("Pilih tipe buku Terlebih Dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Menentukan tipe buku
+                // kode untuk menentukan tipe buku mana yang akan di pilih
                 string tipeBuku = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
 
-                // Generate ID Buku otomatis pakai format waktu biar unik
+                // generate id buku otomatis
                 string newBookID = "BK-" + DateTime.Now.ToString("yyMMddHHmmss");
 
-                // Proses Insert ke Database
+                // proses untuk melakukan input ke database
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
@@ -237,13 +232,13 @@ namespace Project_VISPROG_KEL_3
                         cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text)); // Tahun (dikonversi ke angka)
                         cmd.Parameters.AddWithValue("@tipe", tipeBuku); // Tipe (Fiksi/NonFiksi)
 
-                        cmd.ExecuteNonQuery(); // Eksekusi query
+                        cmd.ExecuteNonQuery(); //mengeksekusi query
                     }
                 }
 
                 MessageBox.Show("Data Buku berhasil masuk ke Database!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Refresh tabel dan bersihkan TextBox
+                // refresh tabel dan mengosongkan text box
                 TampilDataBuku();
                 textBox1.Clear();
                 textBox2.Clear();
@@ -259,6 +254,23 @@ namespace Project_VISPROG_KEL_3
             catch (Exception ex)
             {
                 MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+
+                textBox1.Text = row.Cells["JudulBuku"].Value.ToString();
+                textBox2.Text = row.Cells["Penulis"].Value.ToString();
+                textBox3.Text = row.Cells["TahunTerbit"].Value.ToString();
+
+                if (row.Cells["TipeBuku"].Value.ToString() == "Fiksi")
+                    radioButton1.Checked = true;
+                else
+                    radioButton2.Checked = true;
             }
         }
     }

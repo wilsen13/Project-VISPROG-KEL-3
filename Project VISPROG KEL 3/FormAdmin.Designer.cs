@@ -39,9 +39,19 @@ namespace Project_VISPROG_KEL_3
             menuStrip2 = new MenuStrip();
             menuToolStripMenuItem = new ToolStripMenuItem();
             kelolaBukuToolStripMenuItem = new ToolStripMenuItem();
-            kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
+            masterDataToolStripMenuItem = new ToolStripMenuItem();
+            kelolaBukuToolStripMenuItem1 = new ToolStripMenuItem();
+            kelolaAnggotaToolStripMenuItem1 = new ToolStripMenuItem();
+            kategoriBukuToolStripMenuItem = new ToolStripMenuItem();
+            dataTransaksiToolStripMenuItem = new ToolStripMenuItem();
+            peminjamanPengembalianToolStripMenuItem = new ToolStripMenuItem();
+            riwayatDendaToolStripMenuItem = new ToolStripMenuItem();
+            laporanToolStripMenuItem = new ToolStripMenuItem();
+            laporanPeminjamanToolStripMenuItem = new ToolStripMenuItem();
+            akunToolStripMenuItem = new ToolStripMenuItem();
+            gantiPasswordToolStripMenuItem = new ToolStripMenuItem();
+            logOutToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
-            button1 = new Button();
             homeText = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -140,7 +150,7 @@ namespace Project_VISPROG_KEL_3
             // 
             menuStrip2.Dock = DockStyle.Fill;
             menuStrip2.ImageScalingSize = new Size(24, 24);
-            menuStrip2.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem });
+            menuStrip2.Items.AddRange(new ToolStripItem[] { menuToolStripMenuItem, masterDataToolStripMenuItem, dataTransaksiToolStripMenuItem, laporanToolStripMenuItem, akunToolStripMenuItem });
             menuStrip2.Location = new Point(0, 0);
             menuStrip2.Name = "menuStrip2";
             menuStrip2.Padding = new Padding(5, 2, 0, 2);
@@ -150,29 +160,98 @@ namespace Project_VISPROG_KEL_3
             // 
             // menuToolStripMenuItem
             // 
-            menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem, kelolaAnggotaToolStripMenuItem });
+            menuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem });
             menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            menuToolStripMenuItem.Size = new Size(60, 26);
-            menuToolStripMenuItem.Text = "Menu";
+            menuToolStripMenuItem.Size = new Size(96, 26);
+            menuToolStripMenuItem.Text = "Dashboard";
             menuToolStripMenuItem.Click += menuToolStripMenuItem1_Click;
             // 
             // kelolaBukuToolStripMenuItem
             // 
             kelolaBukuToolStripMenuItem.Name = "kelolaBukuToolStripMenuItem";
-            kelolaBukuToolStripMenuItem.Size = new Size(224, 26);
-            kelolaBukuToolStripMenuItem.Text = "Kelola Buku";
-            kelolaBukuToolStripMenuItem.Click += kelolaBukuToolStripMenuItem_Click;
+            kelolaBukuToolStripMenuItem.Size = new Size(83, 26);
             // 
-            // kelolaAnggotaToolStripMenuItem
+            // masterDataToolStripMenuItem
             // 
-            kelolaAnggotaToolStripMenuItem.Name = "kelolaAnggotaToolStripMenuItem";
-            kelolaAnggotaToolStripMenuItem.Size = new Size(224, 26);
-            kelolaAnggotaToolStripMenuItem.Text = "Kelola Anggota";
-            kelolaAnggotaToolStripMenuItem.Click += kelolaAnggotaToolStripMenuItem_Click;
+            masterDataToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem1, kelolaAnggotaToolStripMenuItem1, kategoriBukuToolStripMenuItem });
+            masterDataToolStripMenuItem.Name = "masterDataToolStripMenuItem";
+            masterDataToolStripMenuItem.Size = new Size(104, 26);
+            masterDataToolStripMenuItem.Text = "Master Data";
+            // 
+            // kelolaBukuToolStripMenuItem1
+            // 
+            kelolaBukuToolStripMenuItem1.Name = "kelolaBukuToolStripMenuItem1";
+            kelolaBukuToolStripMenuItem1.Size = new Size(196, 26);
+            kelolaBukuToolStripMenuItem1.Text = "Kelola Buku";
+            kelolaBukuToolStripMenuItem1.Click += kelolaBukuToolStripMenuItem1_Click;
+            // 
+            // kelolaAnggotaToolStripMenuItem1
+            // 
+            kelolaAnggotaToolStripMenuItem1.Name = "kelolaAnggotaToolStripMenuItem1";
+            kelolaAnggotaToolStripMenuItem1.Size = new Size(196, 26);
+            kelolaAnggotaToolStripMenuItem1.Text = "Kelola Anggota";
+            kelolaAnggotaToolStripMenuItem1.Click += kelolaAnggotaToolStripMenuItem1_Click;
+            // 
+            // kategoriBukuToolStripMenuItem
+            // 
+            kategoriBukuToolStripMenuItem.Name = "kategoriBukuToolStripMenuItem";
+            kategoriBukuToolStripMenuItem.Size = new Size(196, 26);
+            kategoriBukuToolStripMenuItem.Text = "Kategori Buku";
+            // 
+            // dataTransaksiToolStripMenuItem
+            // 
+            dataTransaksiToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { peminjamanPengembalianToolStripMenuItem, riwayatDendaToolStripMenuItem });
+            dataTransaksiToolStripMenuItem.Name = "dataTransaksiToolStripMenuItem";
+            dataTransaksiToolStripMenuItem.Size = new Size(118, 26);
+            dataTransaksiToolStripMenuItem.Text = "Data Transaksi";
+            // 
+            // peminjamanPengembalianToolStripMenuItem
+            // 
+            peminjamanPengembalianToolStripMenuItem.Name = "peminjamanPengembalianToolStripMenuItem";
+            peminjamanPengembalianToolStripMenuItem.Size = new Size(275, 26);
+            peminjamanPengembalianToolStripMenuItem.Text = "Peminjaman & Pengembalian";
+            // 
+            // riwayatDendaToolStripMenuItem
+            // 
+            riwayatDendaToolStripMenuItem.Name = "riwayatDendaToolStripMenuItem";
+            riwayatDendaToolStripMenuItem.Size = new Size(275, 26);
+            riwayatDendaToolStripMenuItem.Text = "Riwayat Denda";
+            // 
+            // laporanToolStripMenuItem
+            // 
+            laporanToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { laporanPeminjamanToolStripMenuItem });
+            laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
+            laporanToolStripMenuItem.Size = new Size(77, 26);
+            laporanToolStripMenuItem.Text = "Laporan";
+            // 
+            // laporanPeminjamanToolStripMenuItem
+            // 
+            laporanPeminjamanToolStripMenuItem.Name = "laporanPeminjamanToolStripMenuItem";
+            laporanPeminjamanToolStripMenuItem.Size = new Size(231, 26);
+            laporanPeminjamanToolStripMenuItem.Text = "Laporan Peminjaman";
+            // 
+            // akunToolStripMenuItem
+            // 
+            akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gantiPasswordToolStripMenuItem, logOutToolStripMenuItem });
+            akunToolStripMenuItem.Name = "akunToolStripMenuItem";
+            akunToolStripMenuItem.Size = new Size(56, 26);
+            akunToolStripMenuItem.Text = "Akun";
+            // 
+            // gantiPasswordToolStripMenuItem
+            // 
+            gantiPasswordToolStripMenuItem.Name = "gantiPasswordToolStripMenuItem";
+            gantiPasswordToolStripMenuItem.Size = new Size(224, 26);
+            gantiPasswordToolStripMenuItem.Text = "Ganti Password";
+            // 
+            // logOutToolStripMenuItem
+            // 
+            logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
+            logOutToolStripMenuItem.Size = new Size(224, 26);
+            logOutToolStripMenuItem.Text = "Log Out";
+            logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
             // panel4
             // 
-            panel4.Controls.Add(button1);
             panel4.Controls.Add(homeText);
             panel4.Controls.Add(panel2);
             panel4.Dock = DockStyle.Fill;
@@ -183,26 +262,11 @@ namespace Project_VISPROG_KEL_3
             panel4.TabIndex = 4;
             panel4.Paint += panel4_Paint;
             // 
-            // button1
-            // 
-            button1.BackColor = SystemColors.Highlight;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(12, 369);
-            button1.Name = "button1";
-            button1.Size = new Size(227, 39);
-            button1.TabIndex = 13;
-            button1.Text = "Logout";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click_1;
-            // 
             // homeText
             // 
             homeText.AutoSize = true;
             homeText.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            homeText.Location = new Point(246, 37);
+            homeText.Location = new Point(243, 20);
             homeText.Margin = new Padding(2, 0, 2, 0);
             homeText.Name = "homeText";
             homeText.Size = new Size(303, 54);
@@ -245,8 +309,18 @@ namespace Project_VISPROG_KEL_3
         private MenuStrip menuStrip2;
         private ToolStripMenuItem menuToolStripMenuItem;
         private ToolStripMenuItem kelolaBukuToolStripMenuItem;
-        private ToolStripMenuItem kelolaAnggotaToolStripMenuItem;
         private Label homeText;
-        private Button button1;
+        private ToolStripMenuItem masterDataToolStripMenuItem;
+        private ToolStripMenuItem kelolaBukuToolStripMenuItem1;
+        private ToolStripMenuItem kelolaAnggotaToolStripMenuItem1;
+        private ToolStripMenuItem kategoriBukuToolStripMenuItem;
+        private ToolStripMenuItem dataTransaksiToolStripMenuItem;
+        private ToolStripMenuItem peminjamanPengembalianToolStripMenuItem;
+        private ToolStripMenuItem riwayatDendaToolStripMenuItem;
+        private ToolStripMenuItem laporanToolStripMenuItem;
+        private ToolStripMenuItem laporanPeminjamanToolStripMenuItem;
+        private ToolStripMenuItem akunToolStripMenuItem;
+        private ToolStripMenuItem gantiPasswordToolStripMenuItem;
+        private ToolStripMenuItem logOutToolStripMenuItem;
     }
 }
