@@ -19,5 +19,24 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
+
+        private void FormMember_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pinjamKembalikanBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FormPeminjaman halamanPeminjaman = new FormPeminjaman();// object dari form peminjaman
+
+                halamanPeminjaman.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Halaman Peminjaman: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

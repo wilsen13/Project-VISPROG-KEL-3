@@ -34,8 +34,21 @@
             label3 = new Label();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            label9 = new Label();
             label2 = new Label();
             panel3 = new Panel();
+            panel6 = new Panel();
+            panel7 = new Panel();
+            menuStrip1 = new MenuStrip();
+            toolStripMenuItem1 = new ToolStripMenuItem();
+            label5 = new Label();
+            label6 = new Label();
+            pictureBox2 = new PictureBox();
+            panel8 = new Panel();
+            button2 = new Button();
+            label4 = new Label();
+            panel5 = new Panel();
+            label7 = new Label();
             panel1 = new Panel();
             menuStrip2 = new MenuStrip();
             menuToolStripMenuItem = new ToolStripMenuItem();
@@ -43,35 +56,27 @@
             kelolaBukuToolStripMenuItem = new ToolStripMenuItem();
             kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
-            button1 = new Button();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            pictureBox2 = new PictureBox();
-            panel5 = new Panel();
-            label7 = new Label();
-            panel6 = new Panel();
-            panel7 = new Panel();
-            menuStrip1 = new MenuStrip();
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
-            toolStripMenuItem3 = new ToolStripMenuItem();
-            panel8 = new Panel();
-            button2 = new Button();
             label8 = new Label();
-            label9 = new Label();
+            katalogBukuToolStripMenuItem = new ToolStripMenuItem();
+            transaksiSayaToolStripMenuItem = new ToolStripMenuItem();
+            pinjamKembalikanBukuToolStripMenuItem = new ToolStripMenuItem();
+            riwayatPeminjamanToolStripMenuItem = new ToolStripMenuItem();
+            akunToolStripMenuItem = new ToolStripMenuItem();
+            profilSayaToolStripMenuItem = new ToolStripMenuItem();
+            logIutToolStripMenuItem = new ToolStripMenuItem();
+            cariBukuToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            panel1.SuspendLayout();
-            menuStrip2.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panel5.SuspendLayout();
             panel6.SuspendLayout();
             panel7.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel8.SuspendLayout();
+            panel5.SuspendLayout();
+            panel1.SuspendLayout();
+            menuStrip2.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // homeText
@@ -130,6 +135,19 @@
             panel2.Size = new Size(800, 40);
             panel2.TabIndex = 2;
             // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Bottom;
+            label9.AutoSize = true;
+            label9.FlatStyle = FlatStyle.System;
+            label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label9.ForeColor = SystemColors.ButtonHighlight;
+            label9.Location = new Point(350, 8);
+            label9.Name = "label9";
+            label9.Size = new Size(107, 23);
+            label9.TabIndex = 15;
+            label9.Text = "Kelompok 3";
+            // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Bottom;
@@ -158,6 +176,142 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(800, 93);
             panel3.TabIndex = 5;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.CornflowerBlue;
+            panel6.Controls.Add(panel7);
+            panel6.Controls.Add(label5);
+            panel6.Controls.Add(label6);
+            panel6.Controls.Add(pictureBox2);
+            panel6.Dock = DockStyle.Top;
+            panel6.Location = new Point(0, 0);
+            panel6.Margin = new Padding(2);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(800, 93);
+            panel6.TabIndex = 5;
+            // 
+            // panel7
+            // 
+            panel7.Controls.Add(menuStrip1);
+            panel7.Dock = DockStyle.Bottom;
+            panel7.Location = new Point(0, 63);
+            panel7.Margin = new Padding(2);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(800, 30);
+            panel7.TabIndex = 4;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Dock = DockStyle.Fill;
+            menuStrip1.ImageScalingSize = new Size(24, 24);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, katalogBukuToolStripMenuItem, transaksiSayaToolStripMenuItem, akunToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(800, 30);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip2";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(96, 26);
+            toolStripMenuItem1.Text = "Dashborad";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.FlatStyle = FlatStyle.System;
+            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label5.ForeColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(230, 11);
+            label5.Name = "label5";
+            label5.Size = new Size(390, 41);
+            label5.TabIndex = 0;
+            label5.Text = "APLIKASI PERPUSTAKAAN";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.FlatStyle = FlatStyle.System;
+            label6.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label6.ForeColor = SystemColors.ButtonHighlight;
+            label6.Location = new Point(94, 14);
+            label6.Name = "label6";
+            label6.Size = new Size(89, 37);
+            label6.TabIndex = 2;
+            label6.Text = "LibRa";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(3, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(57, 54);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 3;
+            pictureBox2.TabStop = false;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(button2);
+            panel8.Controls.Add(label4);
+            panel8.Controls.Add(panel5);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(0, 0);
+            panel8.Margin = new Padding(2);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(800, 63);
+            panel8.TabIndex = 6;
+            // 
+            // button2
+            // 
+            button2.BackColor = SystemColors.Highlight;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(3, 351);
+            button2.Name = "button2";
+            button2.Size = new Size(227, 39);
+            button2.TabIndex = 13;
+            button2.Text = "Logout";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(246, 37);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(303, 54);
+            label4.TabIndex = 3;
+            label4.Text = "Selamat Datang";
+            // 
+            // panel5
+            // 
+            panel5.BackColor = SystemColors.Highlight;
+            panel5.Controls.Add(label7);
+            panel5.Dock = DockStyle.Bottom;
+            panel5.Location = new Point(0, 23);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(800, 40);
+            panel5.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Bottom;
+            label7.AutoSize = true;
+            label7.FlatStyle = FlatStyle.System;
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label7.ForeColor = SystemColors.ButtonHighlight;
+            label7.Location = new Point(662, -50);
+            label7.Name = "label7";
+            label7.Size = new Size(107, 23);
+            label7.TabIndex = 4;
+            label7.Text = "Kelompok 3";
             // 
             // panel1
             // 
@@ -209,7 +363,6 @@
             // panel4
             // 
             panel4.Controls.Add(label8);
-            panel4.Controls.Add(button1);
             panel4.Controls.Add(homeText);
             panel4.Controls.Add(panel2);
             panel4.Dock = DockStyle.Fill;
@@ -219,193 +372,68 @@
             panel4.Size = new Size(800, 450);
             panel4.TabIndex = 6;
             // 
-            // button1
-            // 
-            button1.BackColor = SystemColors.Highlight;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(12, 365);
-            button1.Name = "button1";
-            button1.Size = new Size(227, 39);
-            button1.TabIndex = 13;
-            button1.Text = "Logout";
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(246, 37);
-            label4.Margin = new Padding(2, 0, 2, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(303, 54);
-            label4.TabIndex = 3;
-            label4.Text = "Selamat Datang";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.FlatStyle = FlatStyle.System;
-            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(230, 11);
-            label5.Name = "label5";
-            label5.Size = new Size(390, 41);
-            label5.TabIndex = 0;
-            label5.Text = "APLIKASI PERPUSTAKAAN";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.FlatStyle = FlatStyle.System;
-            label6.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label6.ForeColor = SystemColors.ButtonHighlight;
-            label6.Location = new Point(94, 14);
-            label6.Name = "label6";
-            label6.Size = new Size(89, 37);
-            label6.TabIndex = 2;
-            label6.Text = "LibRa";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(3, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(57, 54);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
-            // panel5
-            // 
-            panel5.BackColor = SystemColors.Highlight;
-            panel5.Controls.Add(label7);
-            panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(0, 23);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(800, 40);
-            panel5.TabIndex = 2;
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Bottom;
-            label7.AutoSize = true;
-            label7.FlatStyle = FlatStyle.System;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(662, -50);
-            label7.Name = "label7";
-            label7.Size = new Size(107, 23);
-            label7.TabIndex = 4;
-            label7.Text = "Kelompok 3";
-            // 
-            // panel6
-            // 
-            panel6.BackColor = Color.CornflowerBlue;
-            panel6.Controls.Add(panel7);
-            panel6.Controls.Add(label5);
-            panel6.Controls.Add(label6);
-            panel6.Controls.Add(pictureBox2);
-            panel6.Dock = DockStyle.Top;
-            panel6.Location = new Point(0, 0);
-            panel6.Margin = new Padding(2);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(800, 93);
-            panel6.TabIndex = 5;
-            // 
-            // panel7
-            // 
-            panel7.Controls.Add(menuStrip1);
-            panel7.Dock = DockStyle.Bottom;
-            panel7.Location = new Point(0, 63);
-            panel7.Margin = new Padding(2);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(800, 30);
-            panel7.TabIndex = 4;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.Dock = DockStyle.Fill;
-            menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1 });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(800, 30);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip2";
-            // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, toolStripMenuItem3 });
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(60, 26);
-            toolStripMenuItem1.Text = "Menu";
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(209, 26);
-            toolStripMenuItem2.Text = "Peminjaman Buku";
-            // 
-            // toolStripMenuItem3
-            // 
-            toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(209, 26);
-            toolStripMenuItem3.Text = "Cari Buku";
-            toolStripMenuItem3.Click += toolStripMenuItem3_Click;
-            // 
-            // panel8
-            // 
-            panel8.Controls.Add(button2);
-            panel8.Controls.Add(label4);
-            panel8.Controls.Add(panel5);
-            panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(0, 0);
-            panel8.Margin = new Padding(2);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(800, 63);
-            panel8.TabIndex = 6;
-            // 
-            // button2
-            // 
-            button2.BackColor = SystemColors.Highlight;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(3, 351);
-            button2.Name = "button2";
-            button2.Size = new Size(227, 39);
-            button2.TabIndex = 13;
-            button2.Text = "Logout";
-            button2.UseVisualStyleBackColor = false;
-            // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(246, 95);
+            label8.Location = new Point(246, 105);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(303, 54);
             label8.TabIndex = 14;
             label8.Text = "Selamat Datang";
             // 
-            // label9
+            // katalogBukuToolStripMenuItem
             // 
-            label9.Anchor = AnchorStyles.Bottom;
-            label9.AutoSize = true;
-            label9.FlatStyle = FlatStyle.System;
-            label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label9.ForeColor = SystemColors.ButtonHighlight;
-            label9.Location = new Point(350, 8);
-            label9.Name = "label9";
-            label9.Size = new Size(107, 23);
-            label9.TabIndex = 15;
-            label9.Text = "Kelompok 3";
+            katalogBukuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cariBukuToolStripMenuItem });
+            katalogBukuToolStripMenuItem.Name = "katalogBukuToolStripMenuItem";
+            katalogBukuToolStripMenuItem.Size = new Size(111, 26);
+            katalogBukuToolStripMenuItem.Text = "Katalog Buku";
+            // 
+            // transaksiSayaToolStripMenuItem
+            // 
+            transaksiSayaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pinjamKembalikanBukuToolStripMenuItem, riwayatPeminjamanToolStripMenuItem });
+            transaksiSayaToolStripMenuItem.Name = "transaksiSayaToolStripMenuItem";
+            transaksiSayaToolStripMenuItem.Size = new Size(117, 26);
+            transaksiSayaToolStripMenuItem.Text = "Transaksi Saya";
+            // 
+            // pinjamKembalikanBukuToolStripMenuItem
+            // 
+            pinjamKembalikanBukuToolStripMenuItem.Name = "pinjamKembalikanBukuToolStripMenuItem";
+            pinjamKembalikanBukuToolStripMenuItem.Size = new Size(284, 26);
+            pinjamKembalikanBukuToolStripMenuItem.Text = "Pinjam dan Kembalikan Buku";
+            pinjamKembalikanBukuToolStripMenuItem.Click += pinjamKembalikanBukuToolStripMenuItem_Click;
+            // 
+            // riwayatPeminjamanToolStripMenuItem
+            // 
+            riwayatPeminjamanToolStripMenuItem.Name = "riwayatPeminjamanToolStripMenuItem";
+            riwayatPeminjamanToolStripMenuItem.Size = new Size(259, 26);
+            riwayatPeminjamanToolStripMenuItem.Text = "Riwayat Peminjaman";
+            // 
+            // akunToolStripMenuItem
+            // 
+            akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { profilSayaToolStripMenuItem, logIutToolStripMenuItem });
+            akunToolStripMenuItem.Name = "akunToolStripMenuItem";
+            akunToolStripMenuItem.Size = new Size(56, 26);
+            akunToolStripMenuItem.Text = "Akun";
+            // 
+            // profilSayaToolStripMenuItem
+            // 
+            profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
+            profilSayaToolStripMenuItem.Size = new Size(224, 26);
+            profilSayaToolStripMenuItem.Text = "Profil Saya";
+            // 
+            // logIutToolStripMenuItem
+            // 
+            logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
+            logIutToolStripMenuItem.Size = new Size(224, 26);
+            logIutToolStripMenuItem.Text = "Log out";
+            // 
+            // cariBukuToolStripMenuItem
+            // 
+            cariBukuToolStripMenuItem.Name = "cariBukuToolStripMenuItem";
+            cariBukuToolStripMenuItem.Size = new Size(224, 26);
+            cariBukuToolStripMenuItem.Text = "Cari Buku";
             // 
             // FormMember
             // 
@@ -416,28 +444,29 @@
             Controls.Add(panel4);
             Name = "FormMember";
             Text = "FormMember";
+            Load += FormMember_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            menuStrip2.ResumeLayout(false);
-            menuStrip2.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -457,13 +486,10 @@
         private ToolStripMenuItem kelolaBukuToolStripMenuItem;
         private ToolStripMenuItem kelolaAnggotaToolStripMenuItem;
         private Panel panel4;
-        private Button button1;
         private Panel panel6;
         private Panel panel7;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private ToolStripMenuItem toolStripMenuItem3;
         private Label label5;
         private Label label6;
         private PictureBox pictureBox2;
@@ -474,5 +500,13 @@
         private Label label7;
         private Label label8;
         private Label label9;
+        private ToolStripMenuItem katalogBukuToolStripMenuItem;
+        private ToolStripMenuItem transaksiSayaToolStripMenuItem;
+        private ToolStripMenuItem pinjamKembalikanBukuToolStripMenuItem;
+        private ToolStripMenuItem riwayatPeminjamanToolStripMenuItem;
+        private ToolStripMenuItem akunToolStripMenuItem;
+        private ToolStripMenuItem profilSayaToolStripMenuItem;
+        private ToolStripMenuItem logIutToolStripMenuItem;
+        private ToolStripMenuItem cariBukuToolStripMenuItem;
     }
 }
