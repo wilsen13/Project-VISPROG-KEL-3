@@ -43,12 +43,12 @@ namespace Project_VISPROG_KEL_3
                 {
                     conn.Open();
                     // Query untuk cek kecocokan Username (Email) dan Password
-                    string query = "SELECT UserID, Nama, Role FROM [User] WHERE (Email = @loginInput OR Nama = @loginInput) AND Password = @password";
+                    string query = "SELECT UserID, Nama, Role FROM [User] WHERE (Email = @loginInput OR Username = @loginInput) AND Password = @password";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         // mengambil data dari textbox (username & password)
-                        cmd.Parameters.AddWithValue("@loginInput", textBox1.Text);  
+                        cmd.Parameters.AddWithValue("@loginInput", textBox1.Text);
                         cmd.Parameters.AddWithValue("@password", textBox2.Text);
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -91,6 +91,13 @@ namespace Project_VISPROG_KEL_3
 
 
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register regForm = new Register();
+            regForm.Show();
+            this.Hide(); //sembunyikan form login saat sedang membuka form register
         }
     }
 }

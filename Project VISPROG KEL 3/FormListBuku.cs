@@ -86,7 +86,9 @@ namespace Project_VISPROG_KEL_3
 
         private void FormListBuku_Load(object sender, EventArgs e)
         {
-
+            TampilDataBuku();
+            button2.Visible = false; // sembunyikan tombol hapus saat form pertama kali dimuat
+            button3.Visible = false; // sama halnya dengan tombol hapus, tombol edit juga di sembunyikan saat form pertama kali dimuat
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -119,6 +121,13 @@ namespace Project_VISPROG_KEL_3
 
                         // refresh tabel
                         TampilDataBuku();
+                        //reset text box agar kosong kembali setelah proses hapus
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        textBox3.Clear();
+                        button1.Visible = true;  // Munculkan kembali tombol Tambahkan
+                        button2.Visible = false; // Sembunyikan tombol Hapus
+                        button3.Visible = false; // Sembunyikan tombol Edit
                     }
                     catch (Exception ex)
                     {
@@ -193,6 +202,13 @@ namespace Project_VISPROG_KEL_3
 
                 MessageBox.Show("Data buku berhasil di update!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TampilDataBuku(); // untuk refresh tabel nya 
+                //reset text box agar kosong kembali setelah proses edit
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                button1.Visible = true;  // Munculkan kembali tombol Tambahkan
+                button2.Visible = false; // Sembunyikan tombol Hapus
+                button3.Visible = false; // Sembunyikan tombol Edit
             }
             catch (Exception ex)
             {
@@ -246,6 +262,10 @@ namespace Project_VISPROG_KEL_3
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 textBox1.Focus();
+
+                button1.Visible = true;  // Munculkan kembali tombol Tambahkan
+                button2.Visible = false; // Sembunyikan tombol Hapus
+                button3.Visible = false; // Sembunyikan tombol Edit
             }
             catch (FormatException)
             {
@@ -271,6 +291,12 @@ namespace Project_VISPROG_KEL_3
                     radioButton1.Checked = true;
                 else
                     radioButton2.Checked = true;
+
+                // memunculkan tombol Hapus dan Edit karena sudah ada buku yang dipilih
+                button2.Visible = true;
+                button3.Visible = true;
+                // menyembunyikan tombol Tambah saat mode Edit agar tidak ada duplikasi data
+                button1.Visible = false;
             }
         }
     }

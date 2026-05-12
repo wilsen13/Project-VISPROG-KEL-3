@@ -33,12 +33,14 @@
             panel2 = new Panel();
             panel3 = new Panel();
             panel1 = new Panel();
+            linkLabel1 = new LinkLabel();
+            label5 = new Label();
             button1 = new Button();
-            label2 = new Label();
             textBox2 = new TextBox();
             label4 = new Label();
             label3 = new Label();
             textBox1 = new TextBox();
+            label2 = new Label();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -71,6 +73,7 @@
             // 
             panel3.BackColor = Color.White;
             panel3.Controls.Add(panel1);
+            panel3.Controls.Add(label2);
             panel3.Controls.Add(label1);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(356, 0);
@@ -81,16 +84,39 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(linkLabel1);
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(button1);
-            panel1.Controls.Add(label2);
             panel1.Controls.Add(textBox2);
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(textBox1);
             panel1.Location = new Point(26, 118);
             panel1.Name = "panel1";
-            panel1.Size = new Size(390, 227);
+            panel1.Size = new Size(390, 268);
             panel1.TabIndex = 8;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Font = new Font("Segoe UI", 8F);
+            linkLabel1.Location = new Point(211, 231);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(106, 19);
+            linkLabel1.TabIndex = 14;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Daftar Disini Ya!";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 8F);
+            label5.Location = new Point(86, 231);
+            label5.Name = "label5";
+            label5.Size = new Size(131, 19);
+            label5.TabIndex = 13;
+            label5.Text = "Belum Punya Akun?";
             // 
             // button1
             // 
@@ -99,22 +125,13 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(86, 162);
+            button1.Location = new Point(90, 160);
             button1.Name = "button1";
             button1.Size = new Size(227, 39);
             button1.TabIndex = 12;
             button1.Text = "Login";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(59, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(288, 20);
-            label2.TabIndex = 7;
-            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
             // 
             // textBox2
             // 
@@ -153,11 +170,20 @@
             textBox1.Size = new Size(182, 30);
             textBox1.TabIndex = 8;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(85, 95);
+            label2.Name = "label2";
+            label2.Size = new Size(288, 20);
+            label2.TabIndex = 7;
+            label2.Text = "Silahkan Melakukan Login Terlebih Dahulu";
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label1.Location = new Point(108, 68);
+            label1.Location = new Point(112, 52);
             label1.Name = "label1";
             label1.Size = new Size(231, 37);
             label1.TabIndex = 6;
@@ -194,5 +220,7 @@
         private TextBox textBox1;
         private Label label2;
         private Label label1;
+        private LinkLabel linkLabel1;
+        private Label label5;
     }
 }

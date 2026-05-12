@@ -174,7 +174,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label6.Location = new Point(528, 9);
+            label6.Location = new Point(648, 5);
             label6.Name = "label6";
             label6.Size = new Size(118, 32);
             label6.TabIndex = 21;
@@ -185,23 +185,23 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(376, 40);
+            dataGridView1.Location = new Point(382, 40);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(412, 296);
+            dataGridView1.Size = new Size(644, 296);
             dataGridView1.TabIndex = 11;
             dataGridView1.CellClick += dataGridView1_CellClick_1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // button2
             // 
-            button2.BackColor = SystemColors.Highlight;
+            button2.BackColor = Color.Red;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(376, 342);
+            button2.Location = new Point(514, 342);
             button2.Name = "button2";
             button2.Size = new Size(190, 29);
             button2.TabIndex = 10;
@@ -216,9 +216,9 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(585, 342);
+            button3.Location = new Point(729, 342);
             button3.Name = "button3";
-            button3.Size = new Size(203, 29);
+            button3.Size = new Size(204, 29);
             button3.TabIndex = 12;
             button3.Text = "Edit";
             button3.UseVisualStyleBackColor = false;
@@ -229,7 +229,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1050, 450);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
             Controls.Add(label6);

@@ -38,5 +38,23 @@ namespace Project_VISPROG_KEL_3
                 MessageBox.Show($"Error opening Halaman Peminjaman: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void logIutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Apakah Anda yakin ingin Log Out?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                // clear sesi
+                Session.Clear();
+
+                // menampilkan form login yang sebelumnya di sembunyikan setelah berhasil melakukan login
+                Login loginForm = new Login();
+                loginForm.Show();
+
+                //menutup halaman 
+                this.Close();
+            }
+        }
     }
 }

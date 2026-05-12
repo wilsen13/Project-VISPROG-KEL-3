@@ -38,11 +38,11 @@
             button4 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
-            label3 = new Label();
-            textBox1 = new TextBox();
             btnCari = new Button();
             button1 = new Button();
+            label3 = new Label();
+            textBox1 = new TextBox();
+            tabPage2 = new TabPage();
             ((System.ComponentModel.ISupportInitialize)KatalogBuku).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bukuSaya).BeginInit();
             tabControl1.SuspendLayout();
@@ -61,6 +61,7 @@
             KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             KatalogBuku.Size = new Size(697, 228);
             KatalogBuku.TabIndex = 1;
+            KatalogBuku.CellClick += KatalogBuku_CellClick;
             KatalogBuku.CellContentClick += KatalogBuku_CellContentClick;
             // 
             // label2
@@ -94,6 +95,7 @@
             bukuSaya.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             bukuSaya.Size = new Size(695, 223);
             bukuSaya.TabIndex = 6;
+            bukuSaya.CellClick += bukuSaya_CellClick;
             // 
             // button2
             // 
@@ -108,6 +110,7 @@
             button2.TabIndex = 8;
             button2.Text = "Kembalikan Buku ";
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label5
             // 
@@ -167,40 +170,6 @@
             tabPage1.Text = "Pinjam Buku";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(label5);
-            tabPage2.Controls.Add(textBox2);
-            tabPage2.Controls.Add(label4);
-            tabPage2.Controls.Add(button2);
-            tabPage2.Controls.Add(button4);
-            tabPage2.Controls.Add(bukuSaya);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(709, 404);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Buku Saya";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label3.Location = new Point(328, 15);
-            label3.Name = "label3";
-            label3.Size = new Size(80, 20);
-            label3.TabIndex = 4;
-            label3.Text = "Cari Buku:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(423, 10);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(169, 27);
-            textBox1.TabIndex = 3;
-            textBox1.TextChanged += textBox1_TextChanged;
-            // 
             // btnCari
             // 
             btnCari.BackColor = SystemColors.Highlight;
@@ -230,6 +199,40 @@
             button1.Text = "Pinjam Buku";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.Location = new Point(328, 15);
+            label3.Name = "label3";
+            label3.Size = new Size(80, 20);
+            label3.TabIndex = 4;
+            label3.Text = "Cari Buku:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(423, 10);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(169, 27);
+            textBox1.TabIndex = 3;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(label5);
+            tabPage2.Controls.Add(textBox2);
+            tabPage2.Controls.Add(label4);
+            tabPage2.Controls.Add(button2);
+            tabPage2.Controls.Add(button4);
+            tabPage2.Controls.Add(bukuSaya);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(709, 404);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Buku Saya";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormPeminjaman
             // 

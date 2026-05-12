@@ -1,30 +1,32 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace Project_VISPROG_KEL_3
 {
     public partial class FormPeminjaman : Form
     {
+        string connString = @"Data Source=.\SQLEXPRESS05;Initial Catalog=LibRaDB;Integrated Security=True;TrustServerCertificate=True;";
         public FormPeminjaman()
         {
             InitializeComponent();
 
+            KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            KatalogBuku.ReadOnly = true;
+            KatalogBuku.AllowUserToAddRows = false;
             try
             {
-                RefreshBukuSaya();
-                RefreshKatalog();
+                
 
-                //agar tampilan data grid menjadi lebih rapih 
-                KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                KatalogBuku.ReadOnly = true;
-                KatalogBuku.AllowUserToAddRows = false;
+                button1.Visible = false;
+                button2.Visible = false;
             }
             catch (Exception ex)
             {
@@ -34,65 +36,101 @@ namespace Project_VISPROG_KEL_3
 
         private void FormPeminjaman_Load(object sender, EventArgs e)
         {
-
+            LoadBukuTersedia(); // Panggil function buat tab 1 (tab katalog buku)
+            LoadBukuSaya();     // Panggil function buat tab 2 (tab buku saya)
         }
 
-        private void RefreshKatalog()
+        private void LoadBukuTersedia()
         {
-            // Menyaring Array: Hanya ambil buku yang statusnya "Tersedia"
-            var bukuTersedia = DataStore.ArrayBuku.Where(b => b.Status == "Tersedia").ToArray();
-
-            // Sambungkan data ke tabel
-            KatalogBuku.DataSource = null;
-            KatalogBuku.DataSource = bukuTersedia;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                //cek apakah ada baris yang sedang dipilih di data grid
-                if (KatalogBuku.CurrentRow == null)
+                // Hanya memunculkan buku yang statusnya 'Tersedia'
+                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Status FROM Book WHERE Status = 'Tersedia'";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                KatalogBuku.DataSource = dt;
+            }
+        }
+
+        private void LoadBukuSaya()
+        {
+            if (bukuSaya != null)
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    MessageBox.Show("Silakan klik salah satu buku di tabel terlebih dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                    // Sesuaikan nama kolom dengan tabelmu: LoanDate dan ReturnDate IS NULL
+                    string query = "SELECT L.LoanID, B.BookID, B.JudulBuku, L.LoanDate AS 'Tgl Pinjam', L.DueDate AS 'Batas Kembali' " +
+                                   "FROM Loan L " +
+                                   "INNER JOIN Book B ON L.BookID = B.BookID " +
+                                   "INNER JOIN Member M ON L.MemberID = M.MemberID " +
+                                   "WHERE M.UserID = @userID AND L.ReturnDate IS NULL";
 
-                //mengambil data buku dari row di data grid yang sedang di select
-                Book bukuDipilih = (Book)KatalogBuku.CurrentRow.DataBoundItem;
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@userID", Session.UserID);
 
-                // message box konfirmasi sebelum meminjam buku
-                DialogResult konfirmasi = MessageBox.Show($"Apakah Anda yakin ingin meminjam buku '{bukuDipilih.JudulBuku}'?", "Konfirmasi Peminjaman", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (konfirmasi == DialogResult.Yes)
-                {
-                    //mengubah status buku menjadi di pinjam
-                    bukuDipilih.Status = "Dipinjam";
-
-                    //
-                    Random rnd = new Random();
-                    Loan transaksiBaru = new Loan();
-                    transaksiBaru.LoanID = "LN" + rnd.Next(1000, 9999).ToString();
-                    transaksiBaru.BookID = bukuDipilih.BookID;
-                    transaksiBaru.MemberID = DataStore.PenggunaAktif.MemberID; // Diambil otomatis dari sesi
-                    transaksiBaru.LoanDate = DateTime.Now;
-                    transaksiBaru.DueDate = DateTime.Now.AddDays(7); // tenggat waktu seminggu
-                    transaksiBaru.ReturnDate = null;
-
-                    // memasukkan peminjaman baru ke dalam array peminjaman
-                    Array.Resize(ref DataStore.ArrayPeminjaman, DataStore.ArrayPeminjaman.Length + 1);
-                    DataStore.ArrayPeminjaman[DataStore.ArrayPeminjaman.Length - 1] = transaksiBaru;
-
-                    //message berhasil meminjam dan informasi tenggat pengembalian
-                    MessageBox.Show($"Buku berhasil dipinjam!\nTenggat Pengembalian: {transaksiBaru.DueDate.ToShortDateString()}", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // refresh tabel agar buku yang baru dipinjam langsung hilang dari daftar
-                    RefreshKatalog();
-                    RefreshBukuSaya();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    bukuSaya.DataSource = dt;
                 }
             }
-            catch (Exception ex)
+        }
+
+       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (KatalogBuku.CurrentRow != null && KatalogBuku.CurrentRow.Index >= 0)
             {
-                MessageBox.Show("Terjadi kesalahan sistem: " + ex.Message);
+                string idBuku = KatalogBuku.CurrentRow.Cells["BookID"].Value.ToString();
+                string judul = KatalogBuku.CurrentRow.Cells["JudulBuku"].Value.ToString();
+
+                DialogResult dr = MessageBox.Show($"Yakin ingin meminjam buku '{judul}'?", "Konfirmasi Pinjam", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    using (SqlConnection conn = new SqlConnection(connString))
+                    {
+                        conn.Open();
+                        SqlTransaction trans = conn.BeginTransaction(); // Mulai pengamanan transaksi
+                        try
+                        {
+                            // 1. UPDATE TABEL BOOK: Ubah status jadi Dipinjam
+                            string updateBook = "UPDATE Book SET Status = 'Dipinjam' WHERE BookID = @bookID";
+                            SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
+                            cmdBook.Parameters.AddWithValue("@bookID", idBuku);
+                            cmdBook.ExecuteNonQuery();
+
+                            // 2. INSERT TABEL LOAN: Catat transaksinya
+                            string newLoanID = "LN-" + DateTime.Now.ToString("yyMMddHHmmss");
+                            string insertLoan = "INSERT INTO Loan (LoanID, BookID, MemberID, LoanDate, DueDate, ReturnDate) " +
+                                                "VALUES (@loanID, @bookID, (SELECT MemberID FROM Member WHERE UserID = @userID), GETDATE(), DATEADD(day, 7, GETDATE()), NULL)";
+
+                            SqlCommand cmdLoan = new SqlCommand(insertLoan, conn, trans);
+                            cmdLoan.Parameters.AddWithValue("@loanID", newLoanID);
+                            cmdLoan.Parameters.AddWithValue("@bookID", idBuku);
+                            cmdLoan.Parameters.AddWithValue("@userID", Session.UserID);
+                            cmdLoan.ExecuteNonQuery();
+
+                            // Jika kedua proses di atas sukses, simpan permanen (Commit)
+                            trans.Commit();
+                            MessageBox.Show("Berhasil! Buku telah masuk ke daftar 'Buku Saya'.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Refresh kedua tabel biar datanya update secara real-time!
+                            LoadBukuTersedia();
+                            LoadBukuSaya();
+                            button1.Visible = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback(); // Batalkan semua jika ada error
+                            MessageBox.Show("Gagal meminjam buku: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pilih buku di tabel terlebih dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -117,7 +155,7 @@ namespace Project_VISPROG_KEL_3
                 MessageBox.Show("Buku dengan judul tersebut tidak ditemukan atau sedang dipinjam.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Balikin tabel ke kondisi awal (tampilkan semua buku lagi)
-                RefreshKatalog();
+
                 textBox1.Clear();
             }
         }
@@ -127,33 +165,83 @@ namespace Project_VISPROG_KEL_3
 
         }
 
-        private void RefreshBukuSaya()
-        {
-            // mencari daftar buku yang di pinjam oleh member (yang belum di kembalikan) 
-            var riwayatPinjam = DataStore.ArrayPeminjaman
-                .Where(p => p.MemberID == DataStore.PenggunaAktif.MemberID && p.ReturnDate == null)
-                .Select(p => new
-                {
-                    ID_Transaksi = p.LoanID,
-                    // Trik mencari Judul Buku dari ArrayBuku berdasarkan BookID yang ada di struk peminjaman
-                    Judul_Buku = DataStore.ArrayBuku.FirstOrDefault(b => b.BookID == p.BookID)?.JudulBuku,
-                    Tgl_Pinjam = p.LoanDate.ToShortDateString(),
-                    Batas_Kembali = p.DueDate.ToShortDateString()
-                }).ToArray();
-
-            bukuSaya.DataSource = null;
-            bukuSaya.DataSource = riwayatPinjam;
-
-            // merapikan tampilan
-            bukuSaya.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            bukuSaya.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            bukuSaya.ReadOnly = true;
-            bukuSaya.AllowUserToAddRows = false;
-        }
+        
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (bukuSaya.CurrentRow != null && bukuSaya.CurrentRow.Index >= 0)
+            {
+                string idLoan = bukuSaya.CurrentRow.Cells["LoanID"].Value.ToString();
+                string idBuku = bukuSaya.CurrentRow.Cells["BookID"].Value.ToString();
+
+                DialogResult dr = MessageBox.Show("Kembalikan buku ini sekarang?", "Konfirmasi Kembali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    using (SqlConnection conn = new SqlConnection(connString))
+                    {
+                        conn.Open();
+                        SqlTransaction trans = conn.BeginTransaction();
+                        try
+                        {
+                            // 1. UPDATE TABEL BOOK: Balikin status jadi Tersedia
+                            string updateBook = "UPDATE Book SET Status = 'Tersedia' WHERE BookID = @bookID";
+                            SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
+                            cmdBook.Parameters.AddWithValue("@bookID", idBuku);
+                            cmdBook.ExecuteNonQuery();
+
+                            // 2. UPDATE TABEL LOAN: Tandai sudah dikembalikan dan catat tanggalnya
+                            // (Nanti logika denda bisa kita sisipkan di sini)
+                            string updateLoan = "UPDATE Loan SET ReturnDate = GETDATE() WHERE LoanID = @loanID";
+                            SqlCommand cmdLoan = new SqlCommand(updateLoan, conn, trans);
+                            cmdLoan.Parameters.AddWithValue("@loanID", idLoan);
+                            cmdLoan.ExecuteNonQuery();
+
+                            trans.Commit();
+                            MessageBox.Show("Terima kasih telah mengembalikan buku tepat waktu!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Refresh kedua tabel
+                            LoadBukuTersedia();
+                            LoadBukuSaya();
+                            button2.Visible = false;
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            MessageBox.Show("Gagal mengembalikan buku: " + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void bukuSaya_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                button2.Visible = true; // Tombol pinjam terlihat ketika ada konten yang di klik di cell
+            }else if (e.RowIndex == -1)
+            {
+                button2.Visible = false; // Tombol pinjam tidak terlihat ketika header yang di klik
+            }
+        }
+
+        
+
+        private void KatalogBuku_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                button1.Visible = true; // Tombol pinjam terlihat ketika ada konten yang di klik di cell
+            }else if (e.RowIndex == -1)
+            {
+                button1.Visible = false; // Tombol pinjam tidak terlihat ketika header yang di klik
+            }  
+        }
     }
 }
+    
