@@ -136,27 +136,32 @@ namespace Project_VISPROG_KEL_3
 
         private void btnCari_Click(object sender, EventArgs e)
         {
-            // mengambil teks dari text box 
-            string kataKunci = textBox1.Text.ToLower();
-
-            // pencarian dalam array
-            var hasilPencarian = DataStore.ArrayBuku.Where(b =>
-                b.Status == "Tersedia" &&
-                b.JudulBuku.ToLower().Contains(kataKunci) // Mengecek apakah judul mengandung kata yang diketik
-            ).ToArray();
-
-            // Tampilkan hasil pencarian ke tabel
-            KatalogBuku.DataSource = null;
-            KatalogBuku.DataSource = hasilPencarian;
-
-            // notifikasi misal buku tidak ditemukan di array 
-            if (hasilPencarian.Length == 0)
+            // mengambil semua data buku yang ada
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(connString))
             {
-                MessageBox.Show("Buku dengan judul tersebut tidak ditemukan atau sedang dipinjam.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Status FROM Book WHERE Status = 'Tersedia'";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.Fill(dt);
+            }
 
-                // Balikin tabel ke kondisi awal (tampilkan semua buku lagi)
+            //linq untuk search buku
+            string kataKunci = textBox1.Text.ToLower(); 
 
-                textBox1.Clear();
+            var hasilPencarian = dt.AsEnumerable().Where(buku =>
+                buku.Field<string>("JudulBuku").ToLower().Contains(kataKunci) ||
+                buku.Field<string>("Penulis").ToLower().Contains(kataKunci)
+            );
+
+            // menampilkan hasil pencarian ke dalam katalog buku
+            if (hasilPencarian.Any()) 
+            {
+                KatalogBuku.DataSource = hasilPencarian.CopyToDataTable();
+            }
+            else
+            {
+                MessageBox.Show("Buku yang kamu cari tidak ditemukan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                KatalogBuku.DataSource = dt; //jika ada buku yang tidak ditemukan maka akan di kembalikan kembali ke daftar awal
             }
         }
 
