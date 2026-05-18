@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetLaporanPeminjaman" targetNamespace="http://tempuri.org/DataSetLaporanPeminjaman.xsd" xmlns:mstns="http://tempuri.org/DataSetLaporanPeminjaman.xsd" xmlns="http://tempuri.org/DataSetLaporanPeminjaman.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetLaporanPeminjaman" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DataSetLaporanPeminjaman" msprop:Generator_DataSetName="DataSetLaporanPeminjaman">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataPeminjaman" msprop:Generator_RowEvHandlerName="DataPeminjamanRowChangeEventHandler" msprop:Generator_RowDeletedName="DataPeminjamanRowDeleted" msprop:Generator_RowDeletingName="DataPeminjamanRowDeleting" msprop:Generator_RowEvArgName="DataPeminjamanRowChangeEvent" msprop:Generator_TablePropName="DataPeminjaman" msprop:Generator_RowChangedName="DataPeminjamanRowChanged" msprop:Generator_RowChangingName="DataPeminjamanRowChanging" msprop:Generator_TableClassName="DataPeminjamanDataTable" msprop:Generator_RowClassName="DataPeminjamanRow" msprop:Generator_TableVarName="tableDataPeminjaman" msprop:Generator_UserTableName="DataPeminjaman">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Loan_x0020_ID" msprop:Generator_ColumnPropNameInRow="Loan_ID" msprop:Generator_ColumnPropNameInTable="Loan_IDColumn" msprop:Generator_ColumnVarNameInTable="columnLoan_ID" msprop:Generator_UserColumnName="Loan ID" type="xs:string" minOccurs="0" />
+              <xs:element name="Judul_x0020_Buku" msprop:Generator_ColumnPropNameInRow="Judul_Buku" msprop:Generator_ColumnPropNameInTable="Judul_BukuColumn" msprop:Generator_ColumnVarNameInTable="columnJudul_Buku" msprop:Generator_UserColumnName="Judul Buku" type="xs:string" minOccurs="0" />
+              <xs:element name="Tgl_x0020_Pinjam" msprop:Generator_ColumnPropNameInRow="Tgl_Pinjam" msprop:Generator_ColumnPropNameInTable="Tgl_PinjamColumn" msprop:Generator_ColumnVarNameInTable="columnTgl_Pinjam" msprop:Generator_UserColumnName="Tgl Pinjam" type="xs:string" minOccurs="0" />
+              <xs:element name="Batas_x0020_Kembali" msprop:Generator_ColumnPropNameInRow="Batas_Kembali" msprop:Generator_ColumnPropNameInTable="Batas_KembaliColumn" msprop:Generator_ColumnVarNameInTable="columnBatas_Kembali" msprop:Generator_UserColumnName="Batas Kembali" type="xs:string" minOccurs="0" />
+              <xs:element name="DataColumn5" msprop:Generator_ColumnPropNameInRow="DataColumn5" msprop:Generator_ColumnPropNameInTable="DataColumn5Column" msprop:Generator_ColumnVarNameInTable="columnDataColumn5" msprop:Generator_UserColumnName="DataColumn5" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -68,7 +68,7 @@ namespace Project_VISPROG_KEL_3
             {
                 KelolaAnggota halamanAnggota = new KelolaAnggota();// object dari form list buku 
 
-                halamanAnggota.ShowDialog();
+                halamanAnggota.Show();
             }
             catch (Exception ex)
             {
@@ -108,8 +108,8 @@ namespace Project_VISPROG_KEL_3
             {
                 FormListBuku halamanBuku = new FormListBuku();// object dari form list buku 
 
-                // menggunakan fungsi show dialog, agar halaman utama terkunci saat form list buku dibuka
-                halamanBuku.ShowDialog();
+                // menggunakan fungsi show dialog, agar halaman utama terkunci saat form list buku dibuk
+                halamanBuku.Show();
             }
             catch (Exception ex)
             {
@@ -123,7 +123,7 @@ namespace Project_VISPROG_KEL_3
             {
                 KelolaAnggota halamanAnggota = new KelolaAnggota();// object dari form list buku 
 
-                halamanAnggota.ShowDialog();
+                halamanAnggota.Show();
             }
             catch (Exception ex)
             {

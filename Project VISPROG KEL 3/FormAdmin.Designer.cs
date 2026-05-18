@@ -240,13 +240,13 @@ namespace Project_VISPROG_KEL_3
             // gantiPasswordToolStripMenuItem
             // 
             gantiPasswordToolStripMenuItem.Name = "gantiPasswordToolStripMenuItem";
-            gantiPasswordToolStripMenuItem.Size = new Size(224, 26);
+            gantiPasswordToolStripMenuItem.Size = new Size(192, 26);
             gantiPasswordToolStripMenuItem.Text = "Ganti Password";
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(224, 26);
+            logOutToolStripMenuItem.Size = new Size(192, 26);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
@@ -280,6 +280,7 @@ namespace Project_VISPROG_KEL_3
             ClientSize = new Size(826, 547);
             Controls.Add(panel4);
             Controls.Add(panel3);
+            IsMdiContainer = true;
             Name = "FormAdmin";
             Text = "Aplikasi Perpustakaan";
             Load += Form1_Load;

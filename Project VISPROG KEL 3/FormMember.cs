@@ -31,7 +31,7 @@ namespace Project_VISPROG_KEL_3
             {
                 FormPeminjaman halamanPeminjaman = new FormPeminjaman();// object dari form peminjaman
 
-                halamanPeminjaman.ShowDialog();
+                halamanPeminjaman.Show();
             }
             catch (Exception ex)
             {
@@ -55,6 +55,13 @@ namespace Project_VISPROG_KEL_3
                 //menutup halaman 
                 this.Close();
             }
+        }
+
+        private void riwayatPeminjamanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRIwayatPeminjaman riwayat = new FormRIwayatPeminjaman();
+            //riwayat.MdiParent = this; // Biar rapi di dalam kotak induk
+            riwayat.Show();
         }
     }
 }

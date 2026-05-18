@@ -45,7 +45,7 @@ namespace Project_VISPROG_KEL_3
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 // Hanya memunculkan buku yang statusnya 'Tersedia'
-                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Status FROM Book WHERE Status = 'Tersedia'";
+                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Stok FROM Book WHERE Stok > 0";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -91,16 +91,16 @@ namespace Project_VISPROG_KEL_3
                     using (SqlConnection conn = new SqlConnection(connString))
                     {
                         conn.Open();
-                        SqlTransaction trans = conn.BeginTransaction(); // Mulai pengamanan transaksi
+                        SqlTransaction trans = conn.BeginTransaction();
                         try
                         {
-                            // 1. UPDATE TABEL BOOK: Ubah status jadi Dipinjam
-                            string updateBook = "UPDATE Book SET Status = 'Dipinjam' WHERE BookID = @bookID";
+                            //update tabel buku
+                            string updateBook = "UPDATE Book SET Stok = Stok - 1 WHERE BookID = @bookID";
                             SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
                             cmdBook.Parameters.AddWithValue("@bookID", idBuku);
                             cmdBook.ExecuteNonQuery();
 
-                            // 2. INSERT TABEL LOAN: Catat transaksinya
+                            // catat transaksi peminjaman di tabel loan
                             string newLoanID = "LN-" + DateTime.Now.ToString("yyMMddHHmmss");
                             string insertLoan = "INSERT INTO Loan (LoanID, BookID, MemberID, LoanDate, DueDate, ReturnDate) " +
                                                 "VALUES (@loanID, @bookID, (SELECT MemberID FROM Member WHERE UserID = @userID), GETDATE(), DATEADD(day, 7, GETDATE()), NULL)";
@@ -111,11 +111,11 @@ namespace Project_VISPROG_KEL_3
                             cmdLoan.Parameters.AddWithValue("@userID", Session.UserID);
                             cmdLoan.ExecuteNonQuery();
 
-                            // Jika kedua proses di atas sukses, simpan permanen (Commit)
+                            // kalau kedua proses di atas sukses, simpan permanen 
                             trans.Commit();
                             MessageBox.Show("Berhasil! Buku telah masuk ke daftar 'Buku Saya'.", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            // Refresh kedua tabel biar datanya update secara real-time!
+                            // merefresh kedua tabel biar datanya update secara real-time
                             LoadBukuTersedia();
                             LoadBukuSaya();
                             button1.Visible = false;
@@ -169,9 +169,7 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
-
-        
-
+  
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -193,14 +191,14 @@ namespace Project_VISPROG_KEL_3
                         SqlTransaction trans = conn.BeginTransaction();
                         try
                         {
-                            // 1. UPDATE TABEL BOOK: Balikin status jadi Tersedia
-                            string updateBook = "UPDATE Book SET Status = 'Tersedia' WHERE BookID = @bookID";
+                            //update tabel buku: tambahkan stoknya kembali karena bukunya sudah dikembalikan
+                            string updateBook = "UPDATE Book SET Stok = Stok + 1 WHERE BookID = @bookID";
                             SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
                             cmdBook.Parameters.AddWithValue("@bookID", idBuku);
                             cmdBook.ExecuteNonQuery();
 
-                            // 2. UPDATE TABEL LOAN: Tandai sudah dikembalikan dan catat tanggalnya
-                            // (Nanti logika denda bisa kita sisipkan di sini)
+                            // tandai buku kalau sudah di kembalikan dengan mengisi tanggal kembali (ReturnDate) di tabel loan
+                            // ini line buat kode denda
                             string updateLoan = "UPDATE Loan SET ReturnDate = GETDATE() WHERE LoanID = @loanID";
                             SqlCommand cmdLoan = new SqlCommand(updateLoan, conn, trans);
                             cmdLoan.Parameters.AddWithValue("@loanID", idLoan);

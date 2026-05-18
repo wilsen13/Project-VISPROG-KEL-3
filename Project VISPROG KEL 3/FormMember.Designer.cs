@@ -251,6 +251,7 @@
             riwayatPeminjamanToolStripMenuItem.Name = "riwayatPeminjamanToolStripMenuItem";
             riwayatPeminjamanToolStripMenuItem.Size = new Size(284, 26);
             riwayatPeminjamanToolStripMenuItem.Text = "Riwayat Peminjaman";
+            riwayatPeminjamanToolStripMenuItem.Click += riwayatPeminjamanToolStripMenuItem_Click;
             // 
             // akunToolStripMenuItem
             // 
@@ -262,13 +263,13 @@
             // profilSayaToolStripMenuItem
             // 
             profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
-            profilSayaToolStripMenuItem.Size = new Size(224, 26);
+            profilSayaToolStripMenuItem.Size = new Size(162, 26);
             profilSayaToolStripMenuItem.Text = "Profil Saya";
             // 
             // logIutToolStripMenuItem
             // 
             logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
-            logIutToolStripMenuItem.Size = new Size(224, 26);
+            logIutToolStripMenuItem.Size = new Size(162, 26);
             logIutToolStripMenuItem.Text = "Log out";
             logIutToolStripMenuItem.Click += logIutToolStripMenuItem_Click;
             // 
@@ -443,6 +444,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(panel3);
             Controls.Add(panel4);
+            IsMdiContainer = true;
             Name = "FormMember";
             Text = "FormMember";
             Load += FormMember_Load;
