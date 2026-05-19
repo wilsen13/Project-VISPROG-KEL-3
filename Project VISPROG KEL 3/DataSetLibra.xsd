@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetLibra" targetNamespace="http://tempuri.org/DataSetLibra.xsd" xmlns:mstns="http://tempuri.org/DataSetLibra.xsd" xmlns="http://tempuri.org/DataSetLibra.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetLibra" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DataSetLibra" msprop:Generator_DataSetName="DataSetLibra">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TabelPinjam" msprop:Generator_RowEvHandlerName="TabelPinjamRowChangeEventHandler" msprop:Generator_RowDeletedName="TabelPinjamRowDeleted" msprop:Generator_RowDeletingName="TabelPinjamRowDeleting" msprop:Generator_RowEvArgName="TabelPinjamRowChangeEvent" msprop:Generator_TablePropName="TabelPinjam" msprop:Generator_RowChangedName="TabelPinjamRowChanged" msprop:Generator_RowChangingName="TabelPinjamRowChanging" msprop:Generator_TableClassName="TabelPinjamDataTable" msprop:Generator_RowClassName="TabelPinjamRow" msprop:Generator_TableVarName="tableTabelPinjam" msprop:Generator_UserTableName="TabelPinjam">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LoanID" msprop:Generator_ColumnPropNameInRow="LoanID" msprop:Generator_ColumnPropNameInTable="LoanIDColumn" msprop:Generator_ColumnVarNameInTable="columnLoanID" msprop:Generator_UserColumnName="LoanID" type="xs:string" minOccurs="0" />
+              <xs:element name="Nama" msprop:Generator_ColumnPropNameInRow="Nama" msprop:Generator_ColumnPropNameInTable="NamaColumn" msprop:Generator_ColumnVarNameInTable="columnNama" msprop:Generator_UserColumnName="Nama" type="xs:string" minOccurs="0" />
+              <xs:element name="JudulBuku" msprop:Generator_ColumnPropNameInRow="JudulBuku" msprop:Generator_ColumnPropNameInTable="JudulBukuColumn" msprop:Generator_ColumnVarNameInTable="columnJudulBuku" msprop:Generator_UserColumnName="JudulBuku" type="xs:string" minOccurs="0" />
+              <xs:element name="LoanDate" msprop:Generator_ColumnPropNameInRow="LoanDate" msprop:Generator_ColumnPropNameInTable="LoanDateColumn" msprop:Generator_ColumnVarNameInTable="columnLoanDate" msprop:Generator_UserColumnName="LoanDate" type="xs:string" minOccurs="0" />
+              <xs:element name="DueDate" msprop:Generator_ColumnPropNameInRow="DueDate" msprop:Generator_ColumnPropNameInTable="DueDateColumn" msprop:Generator_ColumnVarNameInTable="columnDueDate" msprop:Generator_UserColumnName="DueDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TabelBuku" msprop:Generator_RowEvHandlerName="TabelBukuRowChangeEventHandler" msprop:Generator_RowDeletedName="TabelBukuRowDeleted" msprop:Generator_RowDeletingName="TabelBukuRowDeleting" msprop:Generator_RowEvArgName="TabelBukuRowChangeEvent" msprop:Generator_TablePropName="TabelBuku" msprop:Generator_RowChangedName="TabelBukuRowChanged" msprop:Generator_RowChangingName="TabelBukuRowChanging" msprop:Generator_TableClassName="TabelBukuDataTable" msprop:Generator_RowClassName="TabelBukuRow" msprop:Generator_TableVarName="tableTabelBuku" msprop:Generator_UserTableName="TabelBuku">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BookID" msprop:Generator_ColumnPropNameInRow="BookID" msprop:Generator_ColumnPropNameInTable="BookIDColumn" msprop:Generator_ColumnVarNameInTable="columnBookID" msprop:Generator_UserColumnName="BookID" type="xs:string" minOccurs="0" />
+              <xs:element name="JudulBuku" msprop:Generator_ColumnPropNameInRow="JudulBuku" msprop:Generator_ColumnPropNameInTable="JudulBukuColumn" msprop:Generator_ColumnVarNameInTable="columnJudulBuku" msprop:Generator_UserColumnName="JudulBuku" type="xs:string" minOccurs="0" />
+              <xs:element name="Penulis" msprop:Generator_ColumnPropNameInRow="Penulis" msprop:Generator_ColumnPropNameInTable="PenulisColumn" msprop:Generator_ColumnVarNameInTable="columnPenulis" msprop:Generator_UserColumnName="Penulis" type="xs:string" minOccurs="0" />
+              <xs:element name="TahunTerbit" msprop:Generator_ColumnPropNameInRow="TahunTerbit" msprop:Generator_ColumnPropNameInTable="TahunTerbitColumn" msprop:Generator_ColumnVarNameInTable="columnTahunTerbit" msprop:Generator_UserColumnName="TahunTerbit" type="xs:string" minOccurs="0" />
+              <xs:element name="TipeBuku" msprop:Generator_ColumnPropNameInRow="TipeBuku" msprop:Generator_ColumnPropNameInTable="TipeBukuColumn" msprop:Generator_ColumnVarNameInTable="columnTipeBuku" msprop:Generator_UserColumnName="TipeBuku" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

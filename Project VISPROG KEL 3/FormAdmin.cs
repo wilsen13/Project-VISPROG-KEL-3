@@ -148,5 +148,17 @@ namespace Project_VISPROG_KEL_3
                 this.Close();
             }
         }
+
+        private void laporanPeminjamanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormViewLaporanPeminjaman lapPinjam = new FormViewLaporanPeminjaman("Pinjam");
+            lapPinjam.Show();
+        }
+
+        private void laporanInventarisBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormViewLaporanPeminjaman lapPinjam = new FormViewLaporanPeminjaman("Buku");
+            lapPinjam.Show();
+        }
     }
 }
