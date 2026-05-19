@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             SuspendLayout();
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
             // 
             // FormViewLaporanPeminjaman
             // 
@@ -42,5 +48,7 @@
         }
 
         #endregion
+
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }

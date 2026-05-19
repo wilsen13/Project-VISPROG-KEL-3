@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
             label5 = new Label();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
@@ -43,6 +42,7 @@
             button3 = new Button();
             button4 = new Button();
             button2 = new Button();
+            panel1 = new System.Windows.Forms.Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
