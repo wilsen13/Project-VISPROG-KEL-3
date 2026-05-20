@@ -29,7 +29,9 @@ namespace CrystalReportViewHelper
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {RN
+        {
+            //DataSetLibra ds = new DataSetLibra();
+            //ds.WriteXmlSchema(Application.StartupPath + @"\SkemaData.xml");
 
             if (string.IsNullOrEmpty(jenisLaporan))
             {
