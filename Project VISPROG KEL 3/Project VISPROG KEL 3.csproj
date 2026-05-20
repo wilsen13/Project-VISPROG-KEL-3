@@ -8,44 +8,12 @@
 	   <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win64_x64\dotnet\</ReferencePath>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
-    <COMReference Include="CrystalReportsReportDefModelLib">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>bf40b97d-06ea-4ab1-91de-18cb29a2b25a</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="{c0aa5023-c763-4a4b-afed-adcf78d6c08b}">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>13</VersionMajor>
-      <Guid>c0aa5023-c763-4a4b-afed-adcf78d6c08b</Guid>
-    </COMReference>
-    <COMReference Include="CrystalReportsCommonObjectModelLib">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>fdb9b69e-ba79-4b13-9e96-8373af162aea</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CrystalDecisions.CrystalReports.Engine" Version="1.0.0" />
-    <PackageReference Include="CrystalDecisions.Shared" Version="1.0.0" />
-    <PackageReference Include="CrystalDecisions.Windows.Forms" Version="1.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3967.48" />
   </ItemGroup>
 
   <ItemGroup>

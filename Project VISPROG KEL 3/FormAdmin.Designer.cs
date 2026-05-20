@@ -48,12 +48,12 @@ namespace Project_VISPROG_KEL_3
             riwayatDendaToolStripMenuItem = new ToolStripMenuItem();
             laporanToolStripMenuItem = new ToolStripMenuItem();
             laporanPeminjamanToolStripMenuItem = new ToolStripMenuItem();
+            laporanInventarisBukuToolStripMenuItem = new ToolStripMenuItem();
             akunToolStripMenuItem = new ToolStripMenuItem();
             gantiPasswordToolStripMenuItem = new ToolStripMenuItem();
             logOutToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
             homeText = new Label();
-            laporanInventarisBukuToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -232,6 +232,13 @@ namespace Project_VISPROG_KEL_3
             laporanPeminjamanToolStripMenuItem.Text = "Laporan Peminjaman";
             laporanPeminjamanToolStripMenuItem.Click += laporanPeminjamanToolStripMenuItem_Click;
             // 
+            // laporanInventarisBukuToolStripMenuItem
+            // 
+            laporanInventarisBukuToolStripMenuItem.Name = "laporanInventarisBukuToolStripMenuItem";
+            laporanInventarisBukuToolStripMenuItem.Size = new Size(249, 26);
+            laporanInventarisBukuToolStripMenuItem.Text = "Laporan Inventaris Buku";
+            laporanInventarisBukuToolStripMenuItem.Click += laporanInventarisBukuToolStripMenuItem_Click;
+            // 
             // akunToolStripMenuItem
             // 
             akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gantiPasswordToolStripMenuItem, logOutToolStripMenuItem });
@@ -274,13 +281,6 @@ namespace Project_VISPROG_KEL_3
             homeText.Size = new Size(303, 54);
             homeText.TabIndex = 3;
             homeText.Text = "Selamat Datang";
-            // 
-            // laporanInventarisBukuToolStripMenuItem
-            // 
-            laporanInventarisBukuToolStripMenuItem.Name = "laporanInventarisBukuToolStripMenuItem";
-            laporanInventarisBukuToolStripMenuItem.Size = new Size(249, 26);
-            laporanInventarisBukuToolStripMenuItem.Text = "Laporan Inventaris Buku";
-            laporanInventarisBukuToolStripMenuItem.Click += laporanInventarisBukuToolStripMenuItem_Click;
             // 
             // FormAdmin
             // 

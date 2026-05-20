@@ -201,7 +201,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(514, 342);
+            button2.Location = new Point(500, 342);
             button2.Name = "button2";
             button2.Size = new Size(190, 29);
             button2.TabIndex = 10;
@@ -216,7 +216,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(729, 342);
+            button3.Location = new Point(724, 342);
             button3.Name = "button3";
             button3.Size = new Size(204, 29);
             button3.TabIndex = 12;
