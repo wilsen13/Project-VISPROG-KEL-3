@@ -52,15 +52,6 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
-        //private void peminjamanBukuToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void kelolaBukuToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-
-        //}
 
         private void kelolaAnggotaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -159,6 +150,18 @@ namespace Project_VISPROG_KEL_3
         {
             FormViewLaporanPeminjaman lapPinjam = new FormViewLaporanPeminjaman("Buku");
             lapPinjam.Show();
+        }
+
+        private void peminjamanPengembalianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRiwayatPinjamKembali halPinjamKembali = new FormRiwayatPinjamKembali();
+            halPinjamKembali.Show();
+        }
+
+        private void riwayatDendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRiwayatDenda halDenda = new FormRiwayatDenda();
+            halDenda.Show();
         }
     }
 }

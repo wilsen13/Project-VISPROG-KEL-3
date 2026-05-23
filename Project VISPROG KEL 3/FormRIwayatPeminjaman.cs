@@ -22,6 +22,7 @@ namespace Project_VISPROG_KEL_3
         private void FormRIwayatPeminjaman_Load(object sender, EventArgs e)
         {
             TampilRiwayat();
+            ThemeHelper.FormatTabel(dataGridView1);
         }
 
         private void TampilRiwayat()

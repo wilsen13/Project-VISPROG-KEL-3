@@ -38,6 +38,8 @@ namespace Project_VISPROG_KEL_3
         {
             LoadBukuTersedia(); // Panggil function buat tab 1 (tab katalog buku)
             LoadBukuSaya();     // Panggil function buat tab 2 (tab buku saya)
+            ThemeHelper.FormatTabel(bukuSaya);
+            ThemeHelper.FormatTabel(KatalogBuku);
         }
 
         private void LoadBukuTersedia()
@@ -177,47 +179,35 @@ namespace Project_VISPROG_KEL_3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (bukuSaya.CurrentRow != null && bukuSaya.CurrentRow.Index >= 0)
+       
+            if (bukuSaya.CurrentRow == null || bukuSaya.CurrentRow.Index < 0)
             {
-                string idLoan = bukuSaya.CurrentRow.Cells["LoanID"].Value.ToString();
-                string idBuku = bukuSaya.CurrentRow.Cells["BookID"].Value.ToString();
+                MessageBox.Show("Pilih dulu buku di tabel yang mau dikembalikan bro!");
+                return;
+            }
 
-                DialogResult dr = MessageBox.Show("Kembalikan buku ini sekarang?", "Konfirmasi Kembali", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+       
+            string idPinjam = bukuSaya.CurrentRow.Cells["LoanID"].Value.ToString();
+
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                
+                string query = "UPDATE Loan SET StatusPeminjaman = 'Menunggu Verifikasi' WHERE LoanID = @LoanID AND ReturnDate IS NULL";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@LoanID", idPinjam);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
                 {
-                    using (SqlConnection conn = new SqlConnection(connString))
-                    {
-                        conn.Open();
-                        SqlTransaction trans = conn.BeginTransaction();
-                        try
-                        {
-                            //update tabel buku: tambahkan stoknya kembali karena bukunya sudah dikembalikan
-                            string updateBook = "UPDATE Book SET Stok = Stok + 1 WHERE BookID = @bookID";
-                            SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
-                            cmdBook.Parameters.AddWithValue("@bookID", idBuku);
-                            cmdBook.ExecuteNonQuery();
-
-                            // tandai buku kalau sudah di kembalikan dengan mengisi tanggal kembali (ReturnDate) di tabel loan
-                            // ini line buat kode denda
-                            string updateLoan = "UPDATE Loan SET ReturnDate = GETDATE() WHERE LoanID = @loanID";
-                            SqlCommand cmdLoan = new SqlCommand(updateLoan, conn, trans);
-                            cmdLoan.Parameters.AddWithValue("@loanID", idLoan);
-                            cmdLoan.ExecuteNonQuery();
-
-                            trans.Commit();
-                            MessageBox.Show("Terima kasih telah mengembalikan buku tepat waktu!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            // Refresh kedua tabel
-                            LoadBukuTersedia();
-                            LoadBukuSaya();
-                            button2.Visible = false;
-                        }
-                        catch (Exception ex)
-                        {
-                            trans.Rollback();
-                            MessageBox.Show("Gagal mengembalikan buku: " + ex.Message);
-                        }
-                    }
+                    MessageBox.Show("Pengajuan berhasil! Silahkan bawa buku fisik ke meja Admin untuk verifikasi.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   
+                }
+                else
+                {
+                    MessageBox.Show("Buku ini sudah diajukan atau sudah dikembalikan!");
                 }
             }
         }

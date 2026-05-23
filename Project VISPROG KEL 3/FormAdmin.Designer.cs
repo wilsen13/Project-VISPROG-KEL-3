@@ -42,7 +42,6 @@ namespace Project_VISPROG_KEL_3
             masterDataToolStripMenuItem = new ToolStripMenuItem();
             kelolaBukuToolStripMenuItem1 = new ToolStripMenuItem();
             kelolaAnggotaToolStripMenuItem1 = new ToolStripMenuItem();
-            kategoriBukuToolStripMenuItem = new ToolStripMenuItem();
             dataTransaksiToolStripMenuItem = new ToolStripMenuItem();
             peminjamanPengembalianToolStripMenuItem = new ToolStripMenuItem();
             riwayatDendaToolStripMenuItem = new ToolStripMenuItem();
@@ -174,7 +173,7 @@ namespace Project_VISPROG_KEL_3
             // 
             // masterDataToolStripMenuItem
             // 
-            masterDataToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem1, kelolaAnggotaToolStripMenuItem1, kategoriBukuToolStripMenuItem });
+            masterDataToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kelolaBukuToolStripMenuItem1, kelolaAnggotaToolStripMenuItem1 });
             masterDataToolStripMenuItem.Name = "masterDataToolStripMenuItem";
             masterDataToolStripMenuItem.Size = new Size(104, 26);
             masterDataToolStripMenuItem.Text = "Master Data";
@@ -182,22 +181,16 @@ namespace Project_VISPROG_KEL_3
             // kelolaBukuToolStripMenuItem1
             // 
             kelolaBukuToolStripMenuItem1.Name = "kelolaBukuToolStripMenuItem1";
-            kelolaBukuToolStripMenuItem1.Size = new Size(196, 26);
+            kelolaBukuToolStripMenuItem1.Size = new Size(224, 26);
             kelolaBukuToolStripMenuItem1.Text = "Kelola Buku";
             kelolaBukuToolStripMenuItem1.Click += kelolaBukuToolStripMenuItem1_Click;
             // 
             // kelolaAnggotaToolStripMenuItem1
             // 
             kelolaAnggotaToolStripMenuItem1.Name = "kelolaAnggotaToolStripMenuItem1";
-            kelolaAnggotaToolStripMenuItem1.Size = new Size(196, 26);
+            kelolaAnggotaToolStripMenuItem1.Size = new Size(224, 26);
             kelolaAnggotaToolStripMenuItem1.Text = "Kelola Anggota";
             kelolaAnggotaToolStripMenuItem1.Click += kelolaAnggotaToolStripMenuItem1_Click;
-            // 
-            // kategoriBukuToolStripMenuItem
-            // 
-            kategoriBukuToolStripMenuItem.Name = "kategoriBukuToolStripMenuItem";
-            kategoriBukuToolStripMenuItem.Size = new Size(196, 26);
-            kategoriBukuToolStripMenuItem.Text = "Kategori Buku";
             // 
             // dataTransaksiToolStripMenuItem
             // 
@@ -211,12 +204,14 @@ namespace Project_VISPROG_KEL_3
             peminjamanPengembalianToolStripMenuItem.Name = "peminjamanPengembalianToolStripMenuItem";
             peminjamanPengembalianToolStripMenuItem.Size = new Size(275, 26);
             peminjamanPengembalianToolStripMenuItem.Text = "Peminjaman & Pengembalian";
+            peminjamanPengembalianToolStripMenuItem.Click += peminjamanPengembalianToolStripMenuItem_Click;
             // 
             // riwayatDendaToolStripMenuItem
             // 
             riwayatDendaToolStripMenuItem.Name = "riwayatDendaToolStripMenuItem";
             riwayatDendaToolStripMenuItem.Size = new Size(275, 26);
             riwayatDendaToolStripMenuItem.Text = "Riwayat Denda";
+            riwayatDendaToolStripMenuItem.Click += riwayatDendaToolStripMenuItem_Click;
             // 
             // laporanToolStripMenuItem
             // 
@@ -323,7 +318,6 @@ namespace Project_VISPROG_KEL_3
         private ToolStripMenuItem masterDataToolStripMenuItem;
         private ToolStripMenuItem kelolaBukuToolStripMenuItem1;
         private ToolStripMenuItem kelolaAnggotaToolStripMenuItem1;
-        private ToolStripMenuItem kategoriBukuToolStripMenuItem;
         private ToolStripMenuItem dataTransaksiToolStripMenuItem;
         private ToolStripMenuItem peminjamanPengembalianToolStripMenuItem;
         private ToolStripMenuItem riwayatDendaToolStripMenuItem;
