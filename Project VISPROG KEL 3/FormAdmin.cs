@@ -10,7 +10,7 @@ namespace Project_VISPROG_KEL_3
         List<Book> daftarBuku = new List<Book>();
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            label1.Text = "Selamat Datang, " + Session.Nama + "!";
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -84,7 +84,8 @@ namespace Project_VISPROG_KEL_3
 
         private void menuToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            menuToolStripMenuItem.Visible = true;
+            menuToolStripMenuItem.BringToFront();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -162,6 +163,12 @@ namespace Project_VISPROG_KEL_3
         {
             FormRiwayatDenda halDenda = new FormRiwayatDenda();
             halDenda.Show();
+        }
+
+        private void gantiPasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGantiPassword formGantiAdmin = new FormGantiPassword();
+            formGantiAdmin.Show();
         }
     }
 }

@@ -181,14 +181,14 @@ namespace Project_VISPROG_KEL_3
             // kelolaBukuToolStripMenuItem1
             // 
             kelolaBukuToolStripMenuItem1.Name = "kelolaBukuToolStripMenuItem1";
-            kelolaBukuToolStripMenuItem1.Size = new Size(224, 26);
+            kelolaBukuToolStripMenuItem1.Size = new Size(196, 26);
             kelolaBukuToolStripMenuItem1.Text = "Kelola Buku";
             kelolaBukuToolStripMenuItem1.Click += kelolaBukuToolStripMenuItem1_Click;
             // 
             // kelolaAnggotaToolStripMenuItem1
             // 
             kelolaAnggotaToolStripMenuItem1.Name = "kelolaAnggotaToolStripMenuItem1";
-            kelolaAnggotaToolStripMenuItem1.Size = new Size(224, 26);
+            kelolaAnggotaToolStripMenuItem1.Size = new Size(196, 26);
             kelolaAnggotaToolStripMenuItem1.Text = "Kelola Anggota";
             kelolaAnggotaToolStripMenuItem1.Click += kelolaAnggotaToolStripMenuItem1_Click;
             // 
@@ -244,13 +244,14 @@ namespace Project_VISPROG_KEL_3
             // gantiPasswordToolStripMenuItem
             // 
             gantiPasswordToolStripMenuItem.Name = "gantiPasswordToolStripMenuItem";
-            gantiPasswordToolStripMenuItem.Size = new Size(192, 26);
+            gantiPasswordToolStripMenuItem.Size = new Size(224, 26);
             gantiPasswordToolStripMenuItem.Text = "Ganti Password";
+            gantiPasswordToolStripMenuItem.Click += gantiPasswordToolStripMenuItem_Click;
             // 
             // logOutToolStripMenuItem
             // 
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(192, 26);
+            logOutToolStripMenuItem.Size = new Size(224, 26);
             logOutToolStripMenuItem.Text = "Log Out";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 

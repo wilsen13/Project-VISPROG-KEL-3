@@ -229,7 +229,7 @@
             // cariBukuToolStripMenuItem
             // 
             cariBukuToolStripMenuItem.Name = "cariBukuToolStripMenuItem";
-            cariBukuToolStripMenuItem.Size = new Size(224, 26);
+            cariBukuToolStripMenuItem.Size = new Size(154, 26);
             cariBukuToolStripMenuItem.Text = "Cari Buku";
             cariBukuToolStripMenuItem.Click += cariBukuToolStripMenuItem_Click;
             // 
@@ -264,13 +264,14 @@
             // profilSayaToolStripMenuItem
             // 
             profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
-            profilSayaToolStripMenuItem.Size = new Size(162, 26);
-            profilSayaToolStripMenuItem.Text = "Profil Saya";
+            profilSayaToolStripMenuItem.Size = new Size(224, 26);
+            profilSayaToolStripMenuItem.Text = "Ganti Password";
+            profilSayaToolStripMenuItem.Click += profilSayaToolStripMenuItem_Click;
             // 
             // logIutToolStripMenuItem
             // 
             logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
-            logIutToolStripMenuItem.Size = new Size(162, 26);
+            logIutToolStripMenuItem.Size = new Size(224, 26);
             logIutToolStripMenuItem.Text = "Log out";
             logIutToolStripMenuItem.Click += logIutToolStripMenuItem_Click;
             // 

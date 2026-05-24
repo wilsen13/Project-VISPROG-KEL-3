@@ -69,5 +69,11 @@ namespace Project_VISPROG_KEL_3
             FormCariBuku cariBuku = new FormCariBuku();
             cariBuku.Show();
         }
+
+        private void profilSayaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGantiPassword formGanti = new FormGantiPassword();
+            formGanti.Show();
+        }
     }
 }

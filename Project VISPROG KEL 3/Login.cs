@@ -13,6 +13,7 @@ namespace Project_VISPROG_KEL_3
 {
     public partial class Login : Form
     {
+        public static string idUserAktif = "";
         public Login()
         {
             InitializeComponent();
