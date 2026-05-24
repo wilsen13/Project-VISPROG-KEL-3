@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            button4 = new Button();
+            textBox4 = new TextBox();
+            label7 = new Label();
             label5 = new Label();
             button1 = new Button();
             radioButton2 = new RadioButton();
@@ -45,11 +49,16 @@
             button2 = new Button();
             button3 = new Button();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(button4);
+            panel1.Controls.Add(textBox4);
+            panel1.Controls.Add(label7);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(radioButton2);
@@ -63,8 +72,49 @@
             panel1.Controls.Add(textBox1);
             panel1.Location = new Point(25, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(331, 410);
+            panel1.Size = new Size(331, 537);
             panel1.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(22, 299);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(287, 132);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 22;
+            pictureBox1.TabStop = false;
+            // 
+            // button4
+            // 
+            button4.BackColor = SystemColors.Highlight;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button4.ForeColor = Color.White;
+            button4.Location = new Point(22, 491);
+            button4.Name = "button4";
+            button4.Size = new Size(287, 36);
+            button4.TabIndex = 23;
+            button4.Text = "+ Tambahkan Gambar";
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(130, 192);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(179, 27);
+            textBox4.TabIndex = 22;
+            textBox4.TextChanged += textBox4_TextChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(22, 199);
+            label7.Name = "label7";
+            label7.Size = new Size(38, 20);
+            label7.TabIndex = 21;
+            label7.Text = "Stok";
             // 
             // label5
             // 
@@ -83,7 +133,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(22, 313);
+            button1.Location = new Point(22, 449);
             button1.Name = "button1";
             button1.Size = new Size(287, 36);
             button1.TabIndex = 19;
@@ -94,7 +144,7 @@
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(130, 254);
+            radioButton2.Location = new Point(130, 269);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(84, 24);
             radioButton2.TabIndex = 18;
@@ -105,7 +155,7 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(130, 224);
+            radioButton1.Location = new Point(130, 239);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(58, 24);
             radioButton1.TabIndex = 17;
@@ -116,7 +166,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(22, 224);
+            label4.Location = new Point(22, 239);
             label4.Name = "label4";
             label4.Size = new Size(76, 20);
             label4.TabIndex = 16;
@@ -124,7 +174,7 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(130, 170);
+            textBox3.Location = new Point(130, 144);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(179, 27);
             textBox3.TabIndex = 15;
@@ -132,7 +182,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(22, 177);
+            label3.Location = new Point(22, 151);
             label3.Name = "label3";
             label3.Size = new Size(47, 20);
             label3.TabIndex = 14;
@@ -140,7 +190,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(130, 123);
+            textBox2.Location = new Point(130, 97);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(179, 27);
             textBox2.TabIndex = 13;
@@ -148,7 +198,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 123);
+            label2.Location = new Point(22, 97);
             label2.Name = "label2";
             label2.Size = new Size(54, 20);
             label2.TabIndex = 12;
@@ -157,7 +207,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(22, 79);
+            label1.Location = new Point(22, 53);
             label1.Name = "label1";
             label1.Size = new Size(43, 20);
             label1.TabIndex = 11;
@@ -165,7 +215,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(130, 76);
+            textBox1.Location = new Point(130, 50);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(179, 27);
             textBox1.TabIndex = 10;
@@ -174,7 +224,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label6.Location = new Point(648, 5);
+            label6.Location = new Point(659, 22);
             label6.Name = "label6";
             label6.Size = new Size(118, 32);
             label6.TabIndex = 21;
@@ -185,11 +235,11 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(382, 40);
+            dataGridView1.Location = new Point(376, 62);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(644, 296);
+            dataGridView1.Size = new Size(662, 359);
             dataGridView1.TabIndex = 11;
             dataGridView1.CellClick += dataGridView1_CellClick_1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -201,7 +251,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(500, 342);
+            button2.Location = new Point(499, 439);
             button2.Name = "button2";
             button2.Size = new Size(190, 29);
             button2.TabIndex = 10;
@@ -216,7 +266,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(724, 342);
+            button3.Location = new Point(723, 439);
             button3.Name = "button3";
             button3.Size = new Size(204, 29);
             button3.TabIndex = 12;
@@ -229,7 +279,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1050, 450);
+            ClientSize = new Size(1050, 561);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
             Controls.Add(label6);
@@ -240,6 +290,7 @@
             Load += FormListBuku_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -262,5 +313,9 @@
         private DataGridView dataGridView1;
         private Button button2;
         private Button button3;
+        private TextBox textBox4;
+        private Label label7;
+        private Button button4;
+        private PictureBox pictureBox1;
     }
 }

@@ -13,28 +13,11 @@ namespace Project_VISPROG_KEL_3
     public partial class FormListBuku : Form
     {
         string connString = @"Data Source=.\SQLEXPRESS05;Initial Catalog=LibRaDB;Integrated Security=True;TrustServerCertificate=True;";
+        string pathGambarDipilih = "";
         public FormListBuku()
         {
             InitializeComponent();
-            try
-            {
-                //pengaturan visual untuk data grid view agar lebih menarik dan mudah digunakan
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells; ;//agar kolom menyesuaikan ukuran tabel
-                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;// agar saat di klik yang ter select adalah 1 baris penuh bukan hanya 1 cell
 
-                //mencegah user mengedit di tabel dan menghilangkan baris kosong di bawah
-                dataGridView1.ReadOnly = true;
-                dataGridView1.AllowUserToAddRows = false;
-
-                //data grid view di berikan header style agar lebih menarik
-                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-                dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-                dataGridView1.EnableHeadersVisualStyles = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error in FormListBuku constructor: {ex.Message}\n\nStack Trace: {ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
 
@@ -52,7 +35,7 @@ namespace Project_VISPROG_KEL_3
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    //memasukkan data ke dalam data grid view
+                    //memasukkan data ke dalam data grid view 
                     dataGridView1.DataSource = dt;
                 }
             }
@@ -87,6 +70,7 @@ namespace Project_VISPROG_KEL_3
         private void FormListBuku_Load(object sender, EventArgs e)
         {
             TampilDataBuku();
+            ThemeHelper.FormatTabel(dataGridView1);
             button2.Visible = false; // sembunyikan tombol hapus saat form pertama kali dimuat
             button3.Visible = false; // sama halnya dengan tombol hapus, tombol edit juga di sembunyikan saat form pertama kali dimuat
         }
@@ -125,6 +109,7 @@ namespace Project_VISPROG_KEL_3
                         textBox1.Clear();
                         textBox2.Clear();
                         textBox3.Clear();
+                        textBox4.Clear();
                         button1.Visible = true;  // Munculkan kembali tombol Tambahkan
                         button2.Visible = false; // Sembunyikan tombol Hapus
                         button3.Visible = false; // Sembunyikan tombol Edit
@@ -159,7 +144,7 @@ namespace Project_VISPROG_KEL_3
         }
 
         //private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        
+
         private void button3_Click(object sender, EventArgs e)
         {
             // Kode untuk cek apakah masih ada textbox yang kosong
@@ -176,6 +161,12 @@ namespace Project_VISPROG_KEL_3
                 return; // stop program sampai disini (tidak melanjutkan kebawah)
             }
 
+            if (!int.TryParse(textBox4.Text, out int stokAngka))
+            {
+                MessageBox.Show("Stok Buku harus berupa angka!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // stop program sampai disini
+            }
+
             try
             {
                 // mengambil id buku dari tabel yang sedang di klik
@@ -186,7 +177,7 @@ namespace Project_VISPROG_KEL_3
                 {
                     conn.Open();
                     // query untuk melakukan update data di database
-                    string query = "UPDATE Book SET JudulBuku = @judul, Penulis = @penulis, TahunTerbit = @tahun, TipeBuku = @tipe WHERE BookID = @id";
+                    string query = "UPDATE Book SET JudulBuku = @judul, Penulis = @penulis, TahunTerbit = @tahun, TipeBuku = @tipe, Stok = @stok WHERE BookID = @id";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -195,9 +186,15 @@ namespace Project_VISPROG_KEL_3
                         cmd.Parameters.AddWithValue("@penulis", textBox2.Text);
                         cmd.Parameters.AddWithValue("@tahun", tahunAngka);
                         cmd.Parameters.AddWithValue("@tipe", tipeBuku);
+                        cmd.Parameters.AddWithValue("@stok", stokAngka);
 
                         cmd.ExecuteNonQuery();
                     }
+                }
+
+                if (pathGambarDipilih != "")
+                {
+                    SimpanGambarKeFolder(idBukuTerpilih, pathGambarDipilih);
                 }
 
                 MessageBox.Show("Data buku berhasil di update!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -206,6 +203,7 @@ namespace Project_VISPROG_KEL_3
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
+                textBox4.Clear();
                 button1.Visible = true;  // Munculkan kembali tombol Tambahkan
                 button2.Visible = false; // Sembunyikan tombol Hapus
                 button3.Visible = false; // Sembunyikan tombol Edit
@@ -224,6 +222,12 @@ namespace Project_VISPROG_KEL_3
                 if (!radioButton1.Checked && !radioButton2.Checked)
                 {
                     MessageBox.Show("Pilih tipe buku Terlebih Dahulu", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (textBox4.Text == "") // Validasi Stok
+                {
+                    MessageBox.Show("Stok buku wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -248,11 +252,16 @@ namespace Project_VISPROG_KEL_3
                         cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text)); // Tahun (dikonversi ke angka)
                         cmd.Parameters.AddWithValue("@tipe", tipeBuku); // Tipe (Fiksi/NonFiksi)
 
-                        cmd.ExecuteNonQuery(); //mengeksekusi query
+                        int result = cmd.ExecuteNonQuery(); //mengeksekusi query
+
+                        if (result > 0 && pathGambarDipilih != "")
+                        {
+                            SimpanGambarKeFolder(newBookID, pathGambarDipilih);
+                        }
                     }
                 }
 
-                MessageBox.Show("Data Buku berhasil masuk ke Database!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Data Buku & Gambar berhasil masuk ke Database!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // refresh tabel dan mengosongkan text box
                 TampilDataBuku();
@@ -283,14 +292,31 @@ namespace Project_VISPROG_KEL_3
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
 
+                string idBukuTerpilih = row.Cells["BookID"].Value.ToString();
                 textBox1.Text = row.Cells["JudulBuku"].Value.ToString();
                 textBox2.Text = row.Cells["Penulis"].Value.ToString();
                 textBox3.Text = row.Cells["TahunTerbit"].Value.ToString();
+                textBox4.Text = row.Cells["Stok"].Value.ToString();
 
                 if (row.Cells["TipeBuku"].Value.ToString() == "Fiksi")
                     radioButton1.Checked = true;
                 else
                     radioButton2.Checked = true;
+
+                string imagePath = Path.Combine(Application.StartupPath, "Covers", idBukuTerpilih + ".jpg");
+                if (File.Exists(imagePath))
+                {
+                    using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                    {
+                        MemoryStream ms = new MemoryStream();
+                        fs.CopyTo(ms);
+                        pictureBox1.Image = Image.FromStream(ms);
+                    }
+                }
+                else
+                {
+                    pictureBox1.Image = null; // Kosongin kalau ga ada cover
+                }
 
                 // memunculkan tombol Hapus dan Edit karena sudah ada buku yang dipilih
                 button2.Visible = true;
@@ -299,5 +325,47 @@ namespace Project_VISPROG_KEL_3
                 button1.Visible = false;
             }
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files (*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pathGambarDipilih = ofd.FileName;
+
+                // Nampilin preview pake FileStream biar file asli ga ke-lock
+                using (FileStream fs = new FileStream(pathGambarDipilih, FileMode.Open, FileAccess.Read))
+                {
+                    MemoryStream ms = new MemoryStream();
+                    fs.CopyTo(ms);
+                    pictureBox1.Image = Image.FromStream(ms);
+                }
+            }
+        }
+        private void SimpanGambarKeFolder(string idBuku, string pathAsli)
+        {
+            string folderTujuan = Path.Combine(Application.StartupPath, "Covers");
+            if (!Directory.Exists(folderTujuan)) Directory.CreateDirectory(folderTujuan);
+
+            string ruteFileTujuan = Path.Combine(folderTujuan, idBuku + ".jpg");
+
+            // FileStream Write untuk mencopy gambar
+            using (FileStream fsRead = new FileStream(pathAsli, FileMode.Open, FileAccess.Read))
+            {
+                using (FileStream fsWrite = new FileStream(ruteFileTujuan, FileMode.Create, FileAccess.Write))
+                {
+                    fsRead.CopyTo(fsWrite);
+                }
+            }
+        }
+
+
     }
 }

@@ -42,26 +42,10 @@
             button3 = new Button();
             button4 = new Button();
             button2 = new Button();
-            panel1 = new System.Windows.Forms.Panel();
-            panel1.SuspendLayout();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(textBox4);
-            panel1.Controls.Add(textBox3);
-            panel1.Controls.Add(textBox2);
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(12, 21);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(357, 403);
-            panel1.TabIndex = 2;
             // 
             // label5
             // 
@@ -207,6 +191,22 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(textBox4);
+            panel1.Controls.Add(textBox3);
+            panel1.Controls.Add(textBox2);
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(12, 21);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(357, 403);
+            panel1.TabIndex = 2;
+            // 
             // KelolaAnggota
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -222,9 +222,9 @@
             Name = "KelolaAnggota";
             Text = "KelolaAnggota";
             Load += KelolaAnggota_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

@@ -60,6 +60,7 @@ namespace Project_VISPROG_KEL_3
         {
             TampilDataAnggota();
             BersihkanForm();
+            ThemeHelper.FormatTabel(dataGridView1);
         }
 
         private void KelolaAnggota_Click(object sender, EventArgs e)

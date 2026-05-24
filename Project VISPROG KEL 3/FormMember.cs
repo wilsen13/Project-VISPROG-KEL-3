@@ -63,5 +63,11 @@ namespace Project_VISPROG_KEL_3
             //riwayat.MdiParent = this; // Biar rapi di dalam kotak induk
             riwayat.Show();
         }
+
+        private void cariBukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCariBuku cariBuku = new FormCariBuku();
+            cariBuku.Show();
+        }
     }
 }

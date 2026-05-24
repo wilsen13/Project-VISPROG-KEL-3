@@ -23,8 +23,7 @@ namespace Project_VISPROG_KEL_3
             KatalogBuku.AllowUserToAddRows = false;
             try
             {
-                
-
+         
                 button1.Visible = false;
                 button2.Visible = false;
             }

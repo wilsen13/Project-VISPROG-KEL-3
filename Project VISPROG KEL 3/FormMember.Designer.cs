@@ -39,6 +39,16 @@
             panel3 = new Panel();
             panel6 = new Panel();
             panel7 = new Panel();
+            menuStrip1 = new MenuStrip();
+            toolStripMenuItem1 = new ToolStripMenuItem();
+            katalogBukuToolStripMenuItem = new ToolStripMenuItem();
+            cariBukuToolStripMenuItem = new ToolStripMenuItem();
+            transaksiSayaToolStripMenuItem = new ToolStripMenuItem();
+            pinjamKembalikanBukuToolStripMenuItem = new ToolStripMenuItem();
+            riwayatPeminjamanToolStripMenuItem = new ToolStripMenuItem();
+            akunToolStripMenuItem = new ToolStripMenuItem();
+            profilSayaToolStripMenuItem = new ToolStripMenuItem();
+            logIutToolStripMenuItem = new ToolStripMenuItem();
             label5 = new Label();
             label6 = new Label();
             pictureBox2 = new PictureBox();
@@ -55,28 +65,18 @@
             kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
             label8 = new Label();
-            toolStripMenuItem1 = new ToolStripMenuItem();
-            katalogBukuToolStripMenuItem = new ToolStripMenuItem();
-            cariBukuToolStripMenuItem = new ToolStripMenuItem();
-            transaksiSayaToolStripMenuItem = new ToolStripMenuItem();
-            pinjamKembalikanBukuToolStripMenuItem = new ToolStripMenuItem();
-            riwayatPeminjamanToolStripMenuItem = new ToolStripMenuItem();
-            akunToolStripMenuItem = new ToolStripMenuItem();
-            profilSayaToolStripMenuItem = new ToolStripMenuItem();
-            logIutToolStripMenuItem = new ToolStripMenuItem();
-            menuStrip1 = new MenuStrip();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel6.SuspendLayout();
             panel7.SuspendLayout();
+            menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel8.SuspendLayout();
             panel5.SuspendLayout();
             panel1.SuspendLayout();
             menuStrip2.SuspendLayout();
             panel4.SuspendLayout();
-            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // homeText
@@ -200,6 +200,79 @@
             panel7.Name = "panel7";
             panel7.Size = new Size(800, 30);
             panel7.TabIndex = 4;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Dock = DockStyle.Fill;
+            menuStrip1.ImageScalingSize = new Size(24, 24);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, katalogBukuToolStripMenuItem, transaksiSayaToolStripMenuItem, akunToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(800, 30);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip2";
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(96, 26);
+            toolStripMenuItem1.Text = "Dashborad";
+            // 
+            // katalogBukuToolStripMenuItem
+            // 
+            katalogBukuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cariBukuToolStripMenuItem });
+            katalogBukuToolStripMenuItem.Name = "katalogBukuToolStripMenuItem";
+            katalogBukuToolStripMenuItem.Size = new Size(111, 26);
+            katalogBukuToolStripMenuItem.Text = "Katalog Buku";
+            // 
+            // cariBukuToolStripMenuItem
+            // 
+            cariBukuToolStripMenuItem.Name = "cariBukuToolStripMenuItem";
+            cariBukuToolStripMenuItem.Size = new Size(224, 26);
+            cariBukuToolStripMenuItem.Text = "Cari Buku";
+            cariBukuToolStripMenuItem.Click += cariBukuToolStripMenuItem_Click;
+            // 
+            // transaksiSayaToolStripMenuItem
+            // 
+            transaksiSayaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pinjamKembalikanBukuToolStripMenuItem, riwayatPeminjamanToolStripMenuItem });
+            transaksiSayaToolStripMenuItem.Name = "transaksiSayaToolStripMenuItem";
+            transaksiSayaToolStripMenuItem.Size = new Size(117, 26);
+            transaksiSayaToolStripMenuItem.Text = "Transaksi Saya";
+            // 
+            // pinjamKembalikanBukuToolStripMenuItem
+            // 
+            pinjamKembalikanBukuToolStripMenuItem.Name = "pinjamKembalikanBukuToolStripMenuItem";
+            pinjamKembalikanBukuToolStripMenuItem.Size = new Size(284, 26);
+            pinjamKembalikanBukuToolStripMenuItem.Text = "Pinjam dan Kembalikan Buku";
+            pinjamKembalikanBukuToolStripMenuItem.Click += pinjamKembalikanBukuToolStripMenuItem_Click;
+            // 
+            // riwayatPeminjamanToolStripMenuItem
+            // 
+            riwayatPeminjamanToolStripMenuItem.Name = "riwayatPeminjamanToolStripMenuItem";
+            riwayatPeminjamanToolStripMenuItem.Size = new Size(284, 26);
+            riwayatPeminjamanToolStripMenuItem.Text = "Riwayat Peminjaman";
+            riwayatPeminjamanToolStripMenuItem.Click += riwayatPeminjamanToolStripMenuItem_Click;
+            // 
+            // akunToolStripMenuItem
+            // 
+            akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { profilSayaToolStripMenuItem, logIutToolStripMenuItem });
+            akunToolStripMenuItem.Name = "akunToolStripMenuItem";
+            akunToolStripMenuItem.Size = new Size(56, 26);
+            akunToolStripMenuItem.Text = "Akun";
+            // 
+            // profilSayaToolStripMenuItem
+            // 
+            profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
+            profilSayaToolStripMenuItem.Size = new Size(162, 26);
+            profilSayaToolStripMenuItem.Text = "Profil Saya";
+            // 
+            // logIutToolStripMenuItem
+            // 
+            logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
+            logIutToolStripMenuItem.Size = new Size(162, 26);
+            logIutToolStripMenuItem.Text = "Log out";
+            logIutToolStripMenuItem.Click += logIutToolStripMenuItem_Click;
             // 
             // label5
             // 
@@ -365,78 +438,6 @@
             label8.TabIndex = 14;
             label8.Text = "Selamat Datang";
             // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(96, 26);
-            toolStripMenuItem1.Text = "Dashborad";
-            // 
-            // katalogBukuToolStripMenuItem
-            // 
-            katalogBukuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cariBukuToolStripMenuItem });
-            katalogBukuToolStripMenuItem.Name = "katalogBukuToolStripMenuItem";
-            katalogBukuToolStripMenuItem.Size = new Size(111, 26);
-            katalogBukuToolStripMenuItem.Text = "Katalog Buku";
-            // 
-            // cariBukuToolStripMenuItem
-            // 
-            cariBukuToolStripMenuItem.Name = "cariBukuToolStripMenuItem";
-            cariBukuToolStripMenuItem.Size = new Size(154, 26);
-            cariBukuToolStripMenuItem.Text = "Cari Buku";
-            // 
-            // transaksiSayaToolStripMenuItem
-            // 
-            transaksiSayaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pinjamKembalikanBukuToolStripMenuItem, riwayatPeminjamanToolStripMenuItem });
-            transaksiSayaToolStripMenuItem.Name = "transaksiSayaToolStripMenuItem";
-            transaksiSayaToolStripMenuItem.Size = new Size(117, 26);
-            transaksiSayaToolStripMenuItem.Text = "Transaksi Saya";
-            // 
-            // pinjamKembalikanBukuToolStripMenuItem
-            // 
-            pinjamKembalikanBukuToolStripMenuItem.Name = "pinjamKembalikanBukuToolStripMenuItem";
-            pinjamKembalikanBukuToolStripMenuItem.Size = new Size(284, 26);
-            pinjamKembalikanBukuToolStripMenuItem.Text = "Pinjam dan Kembalikan Buku";
-            pinjamKembalikanBukuToolStripMenuItem.Click += pinjamKembalikanBukuToolStripMenuItem_Click;
-            // 
-            // riwayatPeminjamanToolStripMenuItem
-            // 
-            riwayatPeminjamanToolStripMenuItem.Name = "riwayatPeminjamanToolStripMenuItem";
-            riwayatPeminjamanToolStripMenuItem.Size = new Size(284, 26);
-            riwayatPeminjamanToolStripMenuItem.Text = "Riwayat Peminjaman";
-            riwayatPeminjamanToolStripMenuItem.Click += riwayatPeminjamanToolStripMenuItem_Click;
-            // 
-            // akunToolStripMenuItem
-            // 
-            akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { profilSayaToolStripMenuItem, logIutToolStripMenuItem });
-            akunToolStripMenuItem.Name = "akunToolStripMenuItem";
-            akunToolStripMenuItem.Size = new Size(56, 26);
-            akunToolStripMenuItem.Text = "Akun";
-            // 
-            // profilSayaToolStripMenuItem
-            // 
-            profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
-            profilSayaToolStripMenuItem.Size = new Size(162, 26);
-            profilSayaToolStripMenuItem.Text = "Profil Saya";
-            // 
-            // logIutToolStripMenuItem
-            // 
-            logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
-            logIutToolStripMenuItem.Size = new Size(162, 26);
-            logIutToolStripMenuItem.Text = "Log out";
-            logIutToolStripMenuItem.Click += logIutToolStripMenuItem_Click;
-            // 
-            // menuStrip1
-            // 
-            menuStrip1.Dock = DockStyle.Fill;
-            menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, katalogBukuToolStripMenuItem, transaksiSayaToolStripMenuItem, akunToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(800, 30);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip2";
-            // 
             // FormMember
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -457,6 +458,8 @@
             panel6.PerformLayout();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
@@ -468,8 +471,6 @@
             menuStrip2.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ResumeLayout(false);
         }
 

@@ -26,6 +26,7 @@ namespace Project_VISPROG_KEL_3
         private void FormRiwayatPinjamKembali_Load(object sender, EventArgs e)
         {
             TampilData("");
+            ThemeHelper.FormatTabel(dataGridView1);
         }
 
         private void TampilData(string kataKunci)

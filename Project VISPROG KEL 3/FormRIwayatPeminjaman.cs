@@ -31,8 +31,7 @@ namespace Project_VISPROG_KEL_3
             {
                 try
                 {
-                    // Ambil semua riwayat transaksi si user yang lagi login
-                    // Diurutkan dari transaksi yang paling baru (ORDER BY DESC)
+                  
                     string query = "SELECT L.LoanID, B.JudulBuku, L.LoanDate AS 'Tgl Pinjam', L.DueDate AS 'Batas Kembali', L.ReturnDate AS 'Tgl Dikembalikan', " +
                                     "CASE WHEN L.ReturnDate IS NULL THEN 'Dipinjam' ELSE 'Dikembalikan' END AS 'Status' " +
                                     "FROM Loan L " +
@@ -48,13 +47,11 @@ namespace Project_VISPROG_KEL_3
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    // Ubah tampilan NULL menjadi teks biar lebih rapi di mata user
                     foreach (DataRow row in dt.Rows)
                     {
                         if (row["Tgl Dikembalikan"] == DBNull.Value)
                         {
-                            // Kalau ReturnDate kosong, biarkan aja atau biarkan bawaannya
-                            // Ini cuma jaga-jaga kalau kamu mau ngolah datanya lebih lanjut
+                            //
                         }
                     }
 
