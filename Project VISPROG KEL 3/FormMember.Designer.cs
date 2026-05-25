@@ -50,7 +50,6 @@
             profilSayaToolStripMenuItem = new ToolStripMenuItem();
             logIutToolStripMenuItem = new ToolStripMenuItem();
             label5 = new Label();
-            label6 = new Label();
             pictureBox2 = new PictureBox();
             panel8 = new Panel();
             button2 = new Button();
@@ -64,6 +63,18 @@
             kelolaBukuToolStripMenuItem = new ToolStripMenuItem();
             kelolaAnggotaToolStripMenuItem = new ToolStripMenuItem();
             panel4 = new Panel();
+            panel11 = new Panel();
+            label12 = new Label();
+            lblStatusAkun = new Label();
+            panel10 = new Panel();
+            label10 = new Label();
+            lblTotalRiwayat = new Label();
+            panel9 = new Panel();
+            label6 = new Label();
+            lblBukuDipinjam = new Label();
+            label11 = new Label();
+            dataGridView1 = new DataGridView();
+            lblTanggal = new Label();
             label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -77,6 +88,10 @@
             panel1.SuspendLayout();
             menuStrip2.SuspendLayout();
             panel4.SuspendLayout();
+            panel11.SuspendLayout();
+            panel10.SuspendLayout();
+            panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // homeText
@@ -130,7 +145,7 @@
             panel2.Controls.Add(label9);
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 410);
+            panel2.Location = new Point(0, 526);
             panel2.Name = "panel2";
             panel2.Size = new Size(800, 40);
             panel2.TabIndex = 2;
@@ -182,7 +197,6 @@
             panel6.BackColor = Color.CornflowerBlue;
             panel6.Controls.Add(panel7);
             panel6.Controls.Add(label5);
-            panel6.Controls.Add(label6);
             panel6.Controls.Add(pictureBox2);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 0);
@@ -203,6 +217,7 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = Color.CornflowerBlue;
             menuStrip1.Dock = DockStyle.Fill;
             menuStrip1.ImageScalingSize = new Size(24, 24);
             menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, katalogBukuToolStripMenuItem, transaksiSayaToolStripMenuItem, akunToolStripMenuItem });
@@ -215,64 +230,73 @@
             // 
             // toolStripMenuItem1
             // 
+            toolStripMenuItem1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            toolStripMenuItem1.ForeColor = Color.White;
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(96, 26);
-            toolStripMenuItem1.Text = "Dashborad";
+            toolStripMenuItem1.Size = new Size(125, 26);
+            toolStripMenuItem1.Text = "🏠 Dashboard";
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // katalogBukuToolStripMenuItem
             // 
             katalogBukuToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cariBukuToolStripMenuItem });
+            katalogBukuToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            katalogBukuToolStripMenuItem.ForeColor = Color.White;
             katalogBukuToolStripMenuItem.Name = "katalogBukuToolStripMenuItem";
-            katalogBukuToolStripMenuItem.Size = new Size(111, 26);
-            katalogBukuToolStripMenuItem.Text = "Katalog Buku";
+            katalogBukuToolStripMenuItem.Size = new Size(139, 26);
+            katalogBukuToolStripMenuItem.Text = "📚Katalog Buku";
             // 
             // cariBukuToolStripMenuItem
             // 
             cariBukuToolStripMenuItem.Name = "cariBukuToolStripMenuItem";
-            cariBukuToolStripMenuItem.Size = new Size(154, 26);
-            cariBukuToolStripMenuItem.Text = "Cari Buku";
+            cariBukuToolStripMenuItem.Size = new Size(185, 26);
+            cariBukuToolStripMenuItem.Text = "🔎 Cari Buku";
             cariBukuToolStripMenuItem.Click += cariBukuToolStripMenuItem_Click;
             // 
             // transaksiSayaToolStripMenuItem
             // 
             transaksiSayaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pinjamKembalikanBukuToolStripMenuItem, riwayatPeminjamanToolStripMenuItem });
+            transaksiSayaToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            transaksiSayaToolStripMenuItem.ForeColor = Color.White;
             transaksiSayaToolStripMenuItem.Name = "transaksiSayaToolStripMenuItem";
-            transaksiSayaToolStripMenuItem.Size = new Size(117, 26);
-            transaksiSayaToolStripMenuItem.Text = "Transaksi Saya";
+            transaksiSayaToolStripMenuItem.Size = new Size(146, 26);
+            transaksiSayaToolStripMenuItem.Text = "🔄Transaksi Saya";
             // 
             // pinjamKembalikanBukuToolStripMenuItem
             // 
             pinjamKembalikanBukuToolStripMenuItem.Name = "pinjamKembalikanBukuToolStripMenuItem";
-            pinjamKembalikanBukuToolStripMenuItem.Size = new Size(284, 26);
-            pinjamKembalikanBukuToolStripMenuItem.Text = "Pinjam dan Kembalikan Buku";
+            pinjamKembalikanBukuToolStripMenuItem.Size = new Size(322, 26);
+            pinjamKembalikanBukuToolStripMenuItem.Text = "📚 Pinjam dan Kembalikan Buku";
             pinjamKembalikanBukuToolStripMenuItem.Click += pinjamKembalikanBukuToolStripMenuItem_Click;
             // 
             // riwayatPeminjamanToolStripMenuItem
             // 
             riwayatPeminjamanToolStripMenuItem.Name = "riwayatPeminjamanToolStripMenuItem";
-            riwayatPeminjamanToolStripMenuItem.Size = new Size(284, 26);
-            riwayatPeminjamanToolStripMenuItem.Text = "Riwayat Peminjaman";
+            riwayatPeminjamanToolStripMenuItem.Size = new Size(322, 26);
+            riwayatPeminjamanToolStripMenuItem.Text = "\U0001fab6 Riwayat Peminjaman";
             riwayatPeminjamanToolStripMenuItem.Click += riwayatPeminjamanToolStripMenuItem_Click;
             // 
             // akunToolStripMenuItem
             // 
             akunToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { profilSayaToolStripMenuItem, logIutToolStripMenuItem });
+            akunToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            akunToolStripMenuItem.ForeColor = Color.White;
             akunToolStripMenuItem.Name = "akunToolStripMenuItem";
-            akunToolStripMenuItem.Size = new Size(56, 26);
-            akunToolStripMenuItem.Text = "Akun";
+            akunToolStripMenuItem.Size = new Size(82, 26);
+            akunToolStripMenuItem.Text = "⚙Akun";
             // 
             // profilSayaToolStripMenuItem
             // 
             profilSayaToolStripMenuItem.Name = "profilSayaToolStripMenuItem";
-            profilSayaToolStripMenuItem.Size = new Size(224, 26);
-            profilSayaToolStripMenuItem.Text = "Ganti Password";
+            profilSayaToolStripMenuItem.Size = new Size(223, 26);
+            profilSayaToolStripMenuItem.Text = "🔑Ganti Password";
             profilSayaToolStripMenuItem.Click += profilSayaToolStripMenuItem_Click;
             // 
             // logIutToolStripMenuItem
             // 
             logIutToolStripMenuItem.Name = "logIutToolStripMenuItem";
-            logIutToolStripMenuItem.Size = new Size(224, 26);
-            logIutToolStripMenuItem.Text = "Log out";
+            logIutToolStripMenuItem.Size = new Size(223, 26);
+            logIutToolStripMenuItem.Text = "➜] Log out";
             logIutToolStripMenuItem.Click += logIutToolStripMenuItem_Click;
             // 
             // label5
@@ -281,23 +305,11 @@
             label5.FlatStyle = FlatStyle.System;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(230, 11);
+            label5.Location = new Point(171, 9);
             label5.Name = "label5";
-            label5.Size = new Size(390, 41);
+            label5.Size = new Size(477, 41);
             label5.TabIndex = 0;
-            label5.Text = "APLIKASI PERPUSTAKAAN";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.FlatStyle = FlatStyle.System;
-            label6.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label6.ForeColor = SystemColors.ButtonHighlight;
-            label6.Location = new Point(94, 14);
-            label6.Name = "label6";
-            label6.Size = new Size(89, 37);
-            label6.TabIndex = 2;
-            label6.Text = "LibRa";
+            label5.Text = "APLIKASI PERPUSTAKAAN LibRa";
             // 
             // pictureBox2
             // 
@@ -418,37 +430,187 @@
             // 
             // panel4
             // 
+            panel4.Controls.Add(panel11);
+            panel4.Controls.Add(panel10);
+            panel4.Controls.Add(panel9);
+            panel4.Controls.Add(label11);
+            panel4.Controls.Add(dataGridView1);
+            panel4.Controls.Add(lblTanggal);
             panel4.Controls.Add(label8);
             panel4.Controls.Add(homeText);
             panel4.Controls.Add(panel2);
             panel4.Dock = DockStyle.Fill;
+            panel4.ForeColor = Color.White;
             panel4.Location = new Point(0, 0);
             panel4.Margin = new Padding(2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(800, 450);
+            panel4.Size = new Size(800, 566);
             panel4.TabIndex = 6;
+            panel4.Paint += panel4_Paint;
+            // 
+            // panel11
+            // 
+            panel11.BackColor = Color.White;
+            panel11.Controls.Add(label12);
+            panel11.Controls.Add(lblStatusAkun);
+            panel11.Location = new Point(547, 176);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(241, 81);
+            panel11.TabIndex = 26;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10F);
+            label12.ForeColor = Color.FromArgb(100, 116, 139);
+            label12.Location = new Point(53, 12);
+            label12.Margin = new Padding(2, 0, 2, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(132, 23);
+            label12.TabIndex = 20;
+            label12.Text = "👥 Status Akun:";
+            // 
+            // lblStatusAkun
+            // 
+            lblStatusAkun.AutoSize = true;
+            lblStatusAkun.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblStatusAkun.ForeColor = Color.FromArgb(17, 24, 39);
+            lblStatusAkun.Location = new Point(95, 35);
+            lblStatusAkun.Margin = new Padding(2, 0, 2, 0);
+            lblStatusAkun.Name = "lblStatusAkun";
+            lblStatusAkun.Size = new Size(69, 32);
+            lblStatusAkun.TabIndex = 21;
+            lblStatusAkun.Text = "Aktif";
+            lblStatusAkun.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel10
+            // 
+            panel10.BackColor = Color.White;
+            panel10.Controls.Add(label10);
+            panel10.Controls.Add(lblTotalRiwayat);
+            panel10.Location = new Point(282, 176);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(241, 81);
+            panel10.TabIndex = 25;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 10F);
+            label10.ForeColor = Color.FromArgb(100, 116, 139);
+            label10.Location = new Point(25, 12);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(201, 23);
+            label10.TabIndex = 18;
+            label10.Text = "🕮 Total Riwayat Pinjam: ";
+            // 
+            // lblTotalRiwayat
+            // 
+            lblTotalRiwayat.AutoSize = true;
+            lblTotalRiwayat.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTotalRiwayat.ForeColor = Color.FromArgb(17, 24, 39);
+            lblTotalRiwayat.Location = new Point(99, 35);
+            lblTotalRiwayat.Margin = new Padding(2, 0, 2, 0);
+            lblTotalRiwayat.Name = "lblTotalRiwayat";
+            lblTotalRiwayat.Size = new Size(28, 32);
+            lblTotalRiwayat.TabIndex = 19;
+            lblTotalRiwayat.Text = "0";
+            lblTotalRiwayat.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel9
+            // 
+            panel9.BackColor = Color.White;
+            panel9.Controls.Add(label6);
+            panel9.Controls.Add(lblBukuDipinjam);
+            panel9.Location = new Point(21, 176);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(241, 81);
+            panel9.TabIndex = 24;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10F);
+            label6.ForeColor = Color.FromArgb(100, 116, 139);
+            label6.Location = new Point(14, 12);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(216, 23);
+            label6.TabIndex = 16;
+            label6.Text = "📝 Buku Sedang Di Pinjam";
+            // 
+            // lblBukuDipinjam
+            // 
+            lblBukuDipinjam.AutoSize = true;
+            lblBukuDipinjam.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblBukuDipinjam.ForeColor = Color.FromArgb(17, 24, 39);
+            lblBukuDipinjam.Location = new Point(98, 35);
+            lblBukuDipinjam.Margin = new Padding(2, 0, 2, 0);
+            lblBukuDipinjam.Name = "lblBukuDipinjam";
+            lblBukuDipinjam.Size = new Size(28, 32);
+            lblBukuDipinjam.TabIndex = 17;
+            lblBukuDipinjam.Text = "0";
+            lblBukuDipinjam.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label11.ForeColor = Color.FromArgb(17, 24, 39);
+            label11.Location = new Point(12, 294);
+            label11.Margin = new Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(162, 23);
+            label11.TabIndex = 23;
+            label11.Text = "Sedang di pinjam: ";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 320);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(776, 200);
+            dataGridView1.TabIndex = 22;
+            // 
+            // lblTanggal
+            // 
+            lblTanggal.AutoSize = true;
+            lblTanggal.Font = new Font("Segoe UI", 8F);
+            lblTanggal.ForeColor = Color.FromArgb(100, 116, 139);
+            lblTanggal.Location = new Point(5, 141);
+            lblTanggal.Margin = new Padding(2, 0, 2, 0);
+            lblTanggal.Name = "lblTanggal";
+            lblTanggal.Size = new Size(55, 19);
+            lblTanggal.TabIndex = 15;
+            lblTanggal.Text = "Tanggal";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(246, 105);
+            label8.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label8.ForeColor = Color.FromArgb(17, 24, 39);
+            label8.Location = new Point(0, 95);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(303, 54);
+            label8.Size = new Size(222, 37);
             label8.TabIndex = 14;
             label8.Text = "Selamat Datang";
+            label8.Click += label8_Click;
             // 
             // FormMember
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.FromArgb(245, 247, 250);
+            ClientSize = new Size(800, 566);
             Controls.Add(panel3);
             Controls.Add(panel4);
             IsMdiContainer = true;
             Name = "FormMember";
             Text = "FormMember";
+            FormClosed += FormMember_FormClosed;
             Load += FormMember_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
@@ -472,6 +634,13 @@
             menuStrip2.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            panel11.ResumeLayout(false);
+            panel11.PerformLayout();
+            panel10.ResumeLayout(false);
+            panel10.PerformLayout();
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -494,7 +663,6 @@
         private Panel panel6;
         private Panel panel7;
         private Label label5;
-        private Label label6;
         private PictureBox pictureBox2;
         private Panel panel8;
         private Button button2;
@@ -513,5 +681,17 @@
         private ToolStripMenuItem akunToolStripMenuItem;
         private ToolStripMenuItem profilSayaToolStripMenuItem;
         private ToolStripMenuItem logIutToolStripMenuItem;
+        private Label lblStatusAkun;
+        private Label label12;
+        private Label lblTotalRiwayat;
+        private Label label10;
+        private Label lblBukuDipinjam;
+        private Label label6;
+        private Label lblTanggal;
+        private Label label11;
+        private DataGridView dataGridView1;
+        private Panel panel11;
+        private Panel panel10;
+        private Panel panel9;
     }
 }

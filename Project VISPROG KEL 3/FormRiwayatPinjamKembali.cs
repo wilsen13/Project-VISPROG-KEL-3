@@ -67,33 +67,72 @@ namespace Project_VISPROG_KEL_3
         {
             if (idPinjamTerpilih == "")
             {
-                MessageBox.Show("Klik dulu data peminjamannya di tabe");
+                MessageBox.Show("Klik dulu data peminjamannya di tabel", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (statusTerpilih == "Dikembalikan")
             {
-                MessageBox.Show("Buku Sudah Dikembalikan.");
+                MessageBox.Show("Buku Sudah Dikembalikan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            DialogResult dialog = MessageBox.Show("Apakah Sudah Di Kembalikan?", "Konfirmasi", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Apakah Sudah Di Kembalikan?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialog == DialogResult.Yes)
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
-
-                    string query = "UPDATE Loan SET ReturnDate = GETDATE(), StatusPeminjaman = 'Dikembalikan' WHERE LoanID = @LoanID";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@LoanID", idPinjamTerpilih);
-
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    SqlTransaction trans = conn.BeginTransaction();
+
+                    try
+                    {
+                        
+                        string queryCekDueDate = "SELECT DueDate FROM Loan WHERE LoanID = @LoanID";
+                        SqlCommand cmdCek = new SqlCommand(queryCekDueDate, conn, trans);
+                        cmdCek.Parameters.AddWithValue("@LoanID", idPinjamTerpilih);
+
+                       
+                        DateTime dueDate = Convert.ToDateTime(cmdCek.ExecuteScalar());
+                        DateTime hariIni = DateTime.Now;
+
+                        if (hariIni.Date > dueDate.Date)
+                        {
+                            TimeSpan selisihWaktu = hariIni.Date - dueDate.Date;
+                            int telatBerapaHari = (int)selisihWaktu.TotalDays;
+
+                            int tarifDendaPerHari = 2000; // Rp 2.000 per hari
+                            int totalDenda = telatBerapaHari * tarifDendaPerHari;
+
+                            MessageBox.Show($"Member terlambat mengembalikan buku selama {telatBerapaHari} hari.\nBatas waktu: {dueDate.ToString("dd MMM yyyy")}\n\nHarap tagih DENDA sebesar:\nRp {totalDenda:N0}", "Peringatan Denda!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+
+                        
+                        string queryLoan = "UPDATE Loan SET ReturnDate = GETDATE(), StatusPeminjaman = 'Dikembalikan' WHERE LoanID = @LoanID";
+                        SqlCommand cmdLoan = new SqlCommand(queryLoan, conn, trans);
+                        cmdLoan.Parameters.AddWithValue("@LoanID", idPinjamTerpilih);
+                        cmdLoan.ExecuteNonQuery();
+
+                        string queryBook = "UPDATE Book SET Stok = Stok + 1 WHERE BookID = (SELECT BookID FROM Loan WHERE LoanID = @LoanID)";
+                        SqlCommand cmdBook = new SqlCommand(queryBook, conn, trans);
+                        cmdBook.Parameters.AddWithValue("@LoanID", idPinjamTerpilih);
+                        cmdBook.ExecuteNonQuery();
+
+                        // Kalau aman semua, simpan permanen
+                        trans.Commit();
+
+                        MessageBox.Show("Buku sukses dikembalikan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        idPinjamTerpilih = "";
+                        statusTerpilih = "";
+                        TampilData(textBox1.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Kalau ada error, batalkan semua perintah!
+                        trans.Rollback();
+                        MessageBox.Show("Gagal memproses pengembalian: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                MessageBox.Show("Buku sukses dikembalikan!");
-                idPinjamTerpilih = ""; 
-                statusTerpilih = "";
-                TampilData(textBox1.Text); 
             }
         }
 

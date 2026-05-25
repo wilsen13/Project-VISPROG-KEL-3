@@ -39,6 +39,30 @@ namespace Project_VISPROG_KEL_3
             LoadBukuSaya();     // Panggil function buat tab 2 (tab buku saya)
             ThemeHelper.FormatTabel(bukuSaya);
             ThemeHelper.FormatTabel(KatalogBuku);
+            label16.Visible = false;
+            label15.Visible = false;
+            label14.Visible = false;
+            label13.Visible = false;
+
+            pictureBox1.Visible = false;
+            label12.Visible = false;
+            label11.Visible = false;
+            label10.Visible = false;
+            label9.Visible = false;
+
+            label1.Visible = false;
+            label6.Visible = false;
+            label7.Visible = false;
+            label8.Visible = false;
+
+            lblIsiJudul.Visible = false; lblIsiJudul.Visible = false;
+            lblIsiPenulis.Visible = false; lblIsiPenulis.Visible = false;
+            lblIsiTahun.Visible = false; lblIsiTahun.Visible = false;
+            lblIsiTipe.Visible = false; lblIsiTipe.Visible = false;
+
+            picCover.Visible = false;
+
+
         }
 
         private void LoadBukuTersedia()
@@ -46,7 +70,7 @@ namespace Project_VISPROG_KEL_3
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 // Hanya memunculkan buku yang statusnya 'Tersedia'
-                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Stok FROM Book WHERE Stok > 0";
+                string query = "SELECT BookID AS 'ID Buku', JudulBuku AS 'Judul Buku', Penulis, TahunTerbit AS 'Tahun', TipeBuku AS 'Kategori', Stok, Status AS 'Ketersediaan' FROM Book";
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -61,7 +85,7 @@ namespace Project_VISPROG_KEL_3
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     // Sesuaikan nama kolom dengan tabelmu: LoanDate dan ReturnDate IS NULL
-                    string query = "SELECT L.LoanID, B.BookID, B.JudulBuku, L.LoanDate AS 'Tgl Pinjam', L.DueDate AS 'Batas Kembali' " +
+                    string query = "SELECT L.LoanID, B.BookID, B.JudulBuku, L.LoanDate AS 'Tgl Pinjam', L.DueDate AS 'Batas Kembali'" +
                                    "FROM Loan L " +
                                    "INNER JOIN Book B ON L.BookID = B.BookID " +
                                    "INNER JOIN Member M ON L.MemberID = M.MemberID " +
@@ -83,8 +107,15 @@ namespace Project_VISPROG_KEL_3
         {
             if (KatalogBuku.CurrentRow != null && KatalogBuku.CurrentRow.Index >= 0)
             {
-                string idBuku = KatalogBuku.CurrentRow.Cells["BookID"].Value.ToString();
-                string judul = KatalogBuku.CurrentRow.Cells["JudulBuku"].Value.ToString();
+                string idBuku = KatalogBuku.CurrentRow.Cells["ID Buku"].Value.ToString();
+                string judul = KatalogBuku.CurrentRow.Cells["Judul Buku"].Value.ToString();
+
+                int stokBuku = Convert.ToInt32(KatalogBuku.CurrentRow.Cells["Stok"].Value);
+                if (stokBuku <= 0)
+                {
+                    MessageBox.Show("Mohon Maaf Buku Sedang Tidak Tersedia.", "Stok Kosong", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return; // Berhenti di sini, jangan lanjut ke database!
+                }
 
                 DialogResult dr = MessageBox.Show($"Yakin ingin meminjam buku '{judul}'?", "Konfirmasi Pinjam", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
@@ -96,15 +127,18 @@ namespace Project_VISPROG_KEL_3
                         try
                         {
                             //update tabel buku
-                            string updateBook = "UPDATE Book SET Stok = Stok - 1 WHERE BookID = @bookID";
+                            string updateBook = @"UPDATE Book 
+                                                SET Stok = Stok - 1, 
+                                                Status = CASE WHEN (Stok - 1) <= 0 THEN 'Tidak Tersedia' ELSE 'Tersedia' END 
+                                                WHERE BookID = @bookID AND Stok > 0"; 
                             SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
                             cmdBook.Parameters.AddWithValue("@bookID", idBuku);
                             cmdBook.ExecuteNonQuery();
 
                             // catat transaksi peminjaman di tabel loan
                             string newLoanID = "LN-" + DateTime.Now.ToString("yyMMddHHmmss");
-                            string insertLoan = "INSERT INTO Loan (LoanID, BookID, MemberID, LoanDate, DueDate, ReturnDate) " +
-                                                "VALUES (@loanID, @bookID, (SELECT MemberID FROM Member WHERE UserID = @userID), GETDATE(), DATEADD(day, 7, GETDATE()), NULL)";
+                            string insertLoan = "INSERT INTO Loan (LoanID, BookID, MemberID, LoanDate, DueDate, ReturnDate, StatusPeminjaman) " +
+                                                "VALUES (@loanID, @bookID, (SELECT MemberID FROM Member WHERE UserID = @userID), GETDATE(), DATEADD(day, 7, GETDATE()), NULL, 'Dipinjam')";
 
                             SqlCommand cmdLoan = new SqlCommand(insertLoan, conn, trans);
                             cmdLoan.Parameters.AddWithValue("@loanID", newLoanID);
@@ -213,26 +247,152 @@ namespace Project_VISPROG_KEL_3
 
         private void bukuSaya_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+        
+            if (e.RowIndex == -1)
+            {
+                button2.Visible = false;
+                label16.Visible = false;
+                label15.Visible = false;
+                label14.Visible = false;
+                label13.Visible = false;
+
+                pictureBox1.Visible = false;
+                label12.Visible = false;
+                label11.Visible = false;
+                label10.Visible = false;
+                label9.Visible = false;
+
+                if (pictureBox1 != null) pictureBox1.Image = null;
+
+                return;
+            }
+
+          
             if (e.RowIndex >= 0)
             {
-                button2.Visible = true; // Tombol pinjam terlihat ketika ada konten yang di klik di cell
-            }else if (e.RowIndex == -1)
-            {
-                button2.Visible = false; // Tombol pinjam tidak terlihat ketika header yang di klik
+                button2.Visible = true; 
+
+                DataGridViewRow row = bukuSaya.Rows[e.RowIndex];
+
+                string idBuku = row.Cells["BookID"].Value.ToString();
+                label12.Text = row.Cells["JudulBuku"].Value?.ToString() ?? "-";
+
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    string query = "SELECT Penulis, TahunTerbit, TipeBuku FROM Book WHERE BookID = @id";
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", idBuku);
+                        conn.Open();
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                label11.Text = dr["Penulis"].ToString();
+                                label10.Text = dr["TahunTerbit"].ToString();
+                                label9.Text = dr["TipeBuku"].ToString();
+                            }
+                        }
+                    }
+                }
+
+          
+                string folderGambar = Application.StartupPath + @"\Covers\";
+                string pathGambar = folderGambar + idBuku + ".jpg";
+
+                try
+                {
+                    if (System.IO.File.Exists(pathGambar))
+                    {
+                        pictureBox1.Image = Image.FromFile(pathGambar);
+                    }
+                    else
+                    {
+                        pictureBox1.Image = null;
+                    }
+                }
+                catch (Exception)
+                {
+                    pictureBox1.Image = null;
+                }
+
+                label16.Visible = true;
+                label15.Visible = true;
+                label14.Visible = true;
+                label13.Visible = true;
+                pictureBox1.Visible = true;
+                label12.Visible = true;
+                label11.Visible = true;
+                label10.Visible = true;
+                label9.Visible = true;
             }
         }
 
-        
-
         private void KatalogBuku_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+          
+            if (e.RowIndex == -1)
+            {
+                label1.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+
+
+                button1.Visible = false;
+                picCover.Visible = false;
+                lblIsiJudul.Visible = false; lblIsiJudul.Visible = false;
+                lblIsiPenulis.Visible = false; lblIsiPenulis.Visible = false;
+                lblIsiTahun.Visible = false; lblIsiTahun.Visible = false;
+                lblIsiTipe.Visible = false; lblIsiTipe.Visible = false;
+                if (picCover != null) picCover.Image = null;
+
+                return; 
+            }
+
+        
             if (e.RowIndex >= 0)
             {
-                button1.Visible = true; // Tombol pinjam terlihat ketika ada konten yang di klik di cell
-            }else if (e.RowIndex == -1)
-            {
-                button1.Visible = false; // Tombol pinjam tidak terlihat ketika header yang di klik
-            }  
+                button1.Visible = true; 
+
+                DataGridViewRow row = KatalogBuku.Rows[e.RowIndex];
+
+                picCover.Visible = true;
+                lblIsiJudul.Text = row.Cells["Judul Buku"].Value?.ToString() ?? "-";
+                lblIsiPenulis.Text = row.Cells["Penulis"].Value?.ToString() ?? "-";
+                lblIsiTahun.Text = row.Cells["Tahun"].Value?.ToString() ?? "-";
+                lblIsiTipe.Text = row.Cells["Kategori"].Value?.ToString() ?? "-";
+
+                string idBuku = row.Cells["ID Buku"].Value.ToString();
+                string folderGambar = Application.StartupPath + @"\Covers\";
+                string pathGambar = folderGambar + idBuku + ".jpg";
+
+                label1.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+                label8.Visible = true;
+                picCover.Visible = true;
+                lblIsiJudul.Visible = true; lblIsiJudul.Visible = true;
+                lblIsiPenulis.Visible = true; lblIsiPenulis.Visible = true;
+                lblIsiTahun.Visible = true; lblIsiTahun.Visible = true;
+                lblIsiTipe.Visible = true; lblIsiTipe.Visible = true;
+
+                try
+                {
+                    if (System.IO.File.Exists(pathGambar))
+                    {
+                        picCover.Image = Image.FromFile(pathGambar);
+                    }
+                    else
+                    {
+                        picCover.Image = null;
+                    }
+                }
+                catch (Exception)
+                {
+                    picCover.Image = null;
+                }
+            }
         }
     }
 }

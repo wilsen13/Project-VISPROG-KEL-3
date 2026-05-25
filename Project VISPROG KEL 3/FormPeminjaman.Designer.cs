@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            KatalogBuku = new DataGridView();
-            label2 = new Label();
             label4 = new Label();
             bukuSaya = new DataGridView();
             button2 = new Button();
@@ -38,41 +36,39 @@
             button4 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            lblIsiTipe = new Label();
+            lblIsiTahun = new Label();
+            lblIsiPenulis = new Label();
+            lblIsiJudul = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label1 = new Label();
+            picCover = new PictureBox();
             btnCari = new Button();
             button1 = new Button();
             label3 = new Label();
             textBox1 = new TextBox();
+            label2 = new Label();
+            KatalogBuku = new DataGridView();
             tabPage2 = new TabPage();
-            ((System.ComponentModel.ISupportInitialize)KatalogBuku).BeginInit();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)bukuSaya).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picCover).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)KatalogBuku).BeginInit();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
-            // 
-            // KatalogBuku
-            // 
-            KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            KatalogBuku.BackgroundColor = Color.White;
-            KatalogBuku.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            KatalogBuku.Location = new Point(6, 40);
-            KatalogBuku.Name = "KatalogBuku";
-            KatalogBuku.RowHeadersWidth = 51;
-            KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            KatalogBuku.Size = new Size(697, 228);
-            KatalogBuku.TabIndex = 1;
-            KatalogBuku.CellClick += KatalogBuku_CellClick;
-            KatalogBuku.CellContentClick += KatalogBuku_CellContentClick;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label2.Location = new Point(6, 17);
-            label2.Name = "label2";
-            label2.Size = new Size(147, 20);
-            label2.TabIndex = 2;
-            label2.Text = "Buku yang tersedia:";
             // 
             // label4
             // 
@@ -93,7 +89,7 @@
             bukuSaya.Name = "bukuSaya";
             bukuSaya.RowHeadersWidth = 51;
             bukuSaya.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            bukuSaya.Size = new Size(695, 223);
+            bukuSaya.Size = new Size(695, 197);
             bukuSaya.TabIndex = 6;
             bukuSaya.CellClick += bukuSaya_CellClick;
             // 
@@ -104,7 +100,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(498, 265);
+            button2.Location = new Point(498, 239);
             button2.Name = "button2";
             button2.Size = new Size(203, 53);
             button2.TabIndex = 8;
@@ -156,6 +152,15 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(lblIsiTipe);
+            tabPage1.Controls.Add(lblIsiTahun);
+            tabPage1.Controls.Add(lblIsiPenulis);
+            tabPage1.Controls.Add(lblIsiJudul);
+            tabPage1.Controls.Add(label8);
+            tabPage1.Controls.Add(label7);
+            tabPage1.Controls.Add(label6);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(picCover);
             tabPage1.Controls.Add(btnCari);
             tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(label3);
@@ -169,6 +174,87 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Pinjam Buku";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblIsiTipe
+            // 
+            lblIsiTipe.AutoSize = true;
+            lblIsiTipe.Location = new Point(258, 367);
+            lblIsiTipe.Name = "lblIsiTipe";
+            lblIsiTipe.Size = new Size(15, 20);
+            lblIsiTipe.TabIndex = 36;
+            lblIsiTipe.Text = "-";
+            // 
+            // lblIsiTahun
+            // 
+            lblIsiTahun.AutoSize = true;
+            lblIsiTahun.Location = new Point(258, 326);
+            lblIsiTahun.Name = "lblIsiTahun";
+            lblIsiTahun.Size = new Size(15, 20);
+            lblIsiTahun.TabIndex = 35;
+            lblIsiTahun.Text = "-";
+            // 
+            // lblIsiPenulis
+            // 
+            lblIsiPenulis.AutoSize = true;
+            lblIsiPenulis.Location = new Point(258, 283);
+            lblIsiPenulis.Name = "lblIsiPenulis";
+            lblIsiPenulis.Size = new Size(15, 20);
+            lblIsiPenulis.TabIndex = 34;
+            lblIsiPenulis.Text = "-";
+            // 
+            // lblIsiJudul
+            // 
+            lblIsiJudul.AutoSize = true;
+            lblIsiJudul.Location = new Point(258, 241);
+            lblIsiJudul.Name = "lblIsiJudul";
+            lblIsiJudul.Size = new Size(15, 20);
+            lblIsiJudul.TabIndex = 33;
+            lblIsiJudul.Text = "-";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(156, 367);
+            label8.Name = "label8";
+            label8.Size = new Size(47, 20);
+            label8.TabIndex = 32;
+            label8.Text = "Tipe: ";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(156, 326);
+            label7.Name = "label7";
+            label7.Size = new Size(105, 20);
+            label7.TabIndex = 31;
+            label7.Text = "Tahun Terbit: ";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(156, 283);
+            label6.Name = "label6";
+            label6.Size = new Size(67, 20);
+            label6.TabIndex = 30;
+            label6.Text = "Penulis: ";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(156, 241);
+            label1.Name = "label1";
+            label1.Size = new Size(55, 20);
+            label1.TabIndex = 29;
+            label1.Text = "Judul: ";
+            // 
+            // picCover
+            // 
+            picCover.Location = new Point(8, 241);
+            picCover.Name = "picCover";
+            picCover.Size = new Size(125, 157);
+            picCover.SizeMode = PictureBoxSizeMode.Zoom;
+            picCover.TabIndex = 28;
+            picCover.TabStop = false;
             // 
             // btnCari
             // 
@@ -192,7 +278,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(497, 274);
+            button1.Location = new Point(499, 232);
             button1.Name = "button1";
             button1.Size = new Size(204, 44);
             button1.TabIndex = 7;
@@ -218,8 +304,41 @@
             textBox1.TabIndex = 3;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label2.Location = new Point(6, 17);
+            label2.Name = "label2";
+            label2.Size = new Size(147, 20);
+            label2.TabIndex = 2;
+            label2.Text = "Buku yang tersedia:";
+            // 
+            // KatalogBuku
+            // 
+            KatalogBuku.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            KatalogBuku.BackgroundColor = Color.White;
+            KatalogBuku.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            KatalogBuku.Location = new Point(6, 40);
+            KatalogBuku.Name = "KatalogBuku";
+            KatalogBuku.RowHeadersWidth = 51;
+            KatalogBuku.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            KatalogBuku.Size = new Size(697, 186);
+            KatalogBuku.TabIndex = 1;
+            KatalogBuku.CellClick += KatalogBuku_CellClick;
+            KatalogBuku.CellContentClick += KatalogBuku_CellContentClick;
+            // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label9);
+            tabPage2.Controls.Add(label10);
+            tabPage2.Controls.Add(label11);
+            tabPage2.Controls.Add(label12);
+            tabPage2.Controls.Add(label13);
+            tabPage2.Controls.Add(label14);
+            tabPage2.Controls.Add(label15);
+            tabPage2.Controls.Add(label16);
+            tabPage2.Controls.Add(pictureBox1);
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(textBox2);
             tabPage2.Controls.Add(label4);
@@ -234,6 +353,87 @@
             tabPage2.Text = "Buku Saya";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(270, 367);
+            label9.Name = "label9";
+            label9.Size = new Size(15, 20);
+            label9.TabIndex = 45;
+            label9.Text = "-";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(270, 326);
+            label10.Name = "label10";
+            label10.Size = new Size(15, 20);
+            label10.TabIndex = 44;
+            label10.Text = "-";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(270, 283);
+            label11.Name = "label11";
+            label11.Size = new Size(15, 20);
+            label11.TabIndex = 43;
+            label11.Text = "-";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(270, 241);
+            label12.Name = "label12";
+            label12.Size = new Size(15, 20);
+            label12.TabIndex = 42;
+            label12.Text = "-";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(168, 367);
+            label13.Name = "label13";
+            label13.Size = new Size(47, 20);
+            label13.TabIndex = 41;
+            label13.Text = "Tipe: ";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(168, 326);
+            label14.Name = "label14";
+            label14.Size = new Size(105, 20);
+            label14.TabIndex = 40;
+            label14.Text = "Tahun Terbit: ";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(168, 283);
+            label15.Name = "label15";
+            label15.Size = new Size(67, 20);
+            label15.TabIndex = 39;
+            label15.Text = "Penulis: ";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(168, 241);
+            label16.Name = "label16";
+            label16.Size = new Size(55, 20);
+            label16.TabIndex = 38;
+            label16.Text = "Judul: ";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(20, 241);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 157);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 37;
+            pictureBox1.TabStop = false;
+            // 
             // FormPeminjaman
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -243,19 +443,19 @@
             Name = "FormPeminjaman";
             Text = "FormPeminjaman";
             Load += FormPeminjaman_Load;
-            ((System.ComponentModel.ISupportInitialize)KatalogBuku).EndInit();
             ((System.ComponentModel.ISupportInitialize)bukuSaya).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picCover).EndInit();
+            ((System.ComponentModel.ISupportInitialize)KatalogBuku).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private DataGridView KatalogBuku;
-        private Label label2;
         private Label label4;
         private DataGridView bukuSaya;
         private Button button2;
@@ -263,11 +463,31 @@
         private TextBox textBox2;
         private Button button4;
         private TabControl tabControl1;
-        private TabPage tabPage1;
         private TabPage tabPage2;
-        private Label label3;
-        private Button button1;
-        private TextBox textBox1;
+        private TabPage tabPage1;
+        private Label lblIsiTipe;
+        private Label lblIsiTahun;
+        private Label lblIsiPenulis;
+        private Label lblIsiJudul;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label1;
+        private PictureBox picCover;
         private Button btnCari;
+        private Button button1;
+        private Label label3;
+        private TextBox textBox1;
+        private Label label2;
+        private DataGridView KatalogBuku;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private PictureBox pictureBox1;
     }
 }

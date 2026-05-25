@@ -77,46 +77,65 @@ namespace Project_VISPROG_KEL_3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Cek apakah ada baris yang dipilih di DataGridView
+            
             if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Index >= 0)
             {
-                // Mengambil BookID dan Judul dari baris yang diklik
+                
                 string idBukuTerpilih = dataGridView1.CurrentRow.Cells["BookID"].Value.ToString();
                 string judulBuku = dataGridView1.CurrentRow.Cells["JudulBuku"].Value.ToString();
 
-                DialogResult dialogResult = MessageBox.Show($"Yakin ingin menghapus buku '{judulBuku}' dari database?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+               
+                DialogResult dialogResult = MessageBox.Show($"Yakin ingin menghapus buku '{judulBuku}' beserta riwayat peminjamannya dari database?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    try
+                    using (SqlConnection conn = new SqlConnection(connString))
                     {
-                        using (SqlConnection conn = new SqlConnection(connString))
+                        conn.Open();
+                       
+                        SqlTransaction trans = conn.BeginTransaction();
+
+                        try
                         {
-                            conn.Open();
-                            string query = "DELETE FROM Book WHERE BookID = @id";
-                            using (SqlCommand cmd = new SqlCommand(query, conn))
+                            // 1. HAPUS SEJARAHNYA DULU DI TABEL LOAN
+                            string querySejarah = "DELETE FROM Loan WHERE BookID = @id";
+                            using (SqlCommand cmdSejarah = new SqlCommand(querySejarah, conn, trans))
                             {
-                                cmd.Parameters.AddWithValue("@id", idBukuTerpilih);
-                                cmd.ExecuteNonQuery();
+                                cmdSejarah.Parameters.AddWithValue("@id", idBukuTerpilih);
+                                cmdSejarah.ExecuteNonQuery();
                             }
+
+                            // 2. SETELAH SEJARAH BERSIH, BARU HAPUS BUKUNYA
+                            string queryBuku = "DELETE FROM Book WHERE BookID = @id";
+                            using (SqlCommand cmdBuku = new SqlCommand(queryBuku, conn, trans))
+                            {
+                                cmdBuku.Parameters.AddWithValue("@id", idBukuTerpilih);
+                                cmdBuku.ExecuteNonQuery();
+                            }
+
+                            // Kalau dua-duanya berhasil dieksekusi, simpan permanen
+                            trans.Commit();
+
+                            MessageBox.Show("Buku dan riwayat peminjamannya berhasil dihapus permanen!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // refresh tabel
+                            TampilDataBuku();
+
+                            //reset text box agar kosong kembali setelah proses hapus
+                            textBox1.Clear();
+                            textBox2.Clear();
+                            textBox3.Clear();
+                            textBox4.Clear();
+                            button1.Visible = true;  // Munculkan kembali tombol Tambahkan
+                            button2.Visible = false; // Sembunyikan tombol Hapus
+                            button3.Visible = false; // Sembunyikan tombol Edit
                         }
-
-                        MessageBox.Show("Buku berhasil dihapus permanen!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // refresh tabel
-                        TampilDataBuku();
-                        //reset text box agar kosong kembali setelah proses hapus
-                        textBox1.Clear();
-                        textBox2.Clear();
-                        textBox3.Clear();
-                        textBox4.Clear();
-                        button1.Visible = true;  // Munculkan kembali tombol Tambahkan
-                        button2.Visible = false; // Sembunyikan tombol Hapus
-                        button3.Visible = false; // Sembunyikan tombol Edit
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Gagal menghapus. Buku ini mungkin sedang dipinjam.\n\nDetail: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        catch (Exception ex)
+                        {
+                            // Kalau ada yang error, batalkan semua proses hapus (rollback)
+                            trans.Rollback();
+                            MessageBox.Show("Gagal menghapus buku.\n\nDetail: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }

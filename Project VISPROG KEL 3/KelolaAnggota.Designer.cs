@@ -126,7 +126,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label6.Location = new Point(651, 21);
+            label6.Location = new Point(665, 56);
             label6.Name = "label6";
             label6.Size = new Size(159, 32);
             label6.TabIndex = 20;
@@ -137,7 +137,7 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(406, 56);
+            dataGridView1.Location = new Point(406, 88);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
@@ -153,7 +153,7 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button3.ForeColor = SystemColors.ControlLightLight;
-            button3.Location = new Point(406, 315);
+            button3.Location = new Point(406, 347);
             button3.Name = "button3";
             button3.Size = new Size(192, 36);
             button3.TabIndex = 11;
@@ -168,7 +168,7 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button4.ForeColor = SystemColors.ControlLightLight;
-            button4.Location = new Point(651, 315);
+            button4.Location = new Point(651, 347);
             button4.Name = "button4";
             button4.Size = new Size(192, 36);
             button4.TabIndex = 11;
@@ -183,7 +183,7 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(892, 315);
+            button2.Location = new Point(892, 347);
             button2.Name = "button2";
             button2.Size = new Size(190, 36);
             button2.TabIndex = 21;

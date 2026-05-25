@@ -1,7 +1,12 @@
+using Microsoft.Data.SqlClient;
+using System.Data;
+
 namespace Project_VISPROG_KEL_3
 {
     public partial class FormAdmin : Form
     {
+        bool isLogOut = false;
+        string connString = @"Data Source=.\SQLEXPRESS05;Initial Catalog=LibRaDB;Integrated Security=True;TrustServerCertificate=True;";
         public FormAdmin()
         {
             InitializeComponent();
@@ -10,7 +15,64 @@ namespace Project_VISPROG_KEL_3
         List<Book> daftarBuku = new List<Book>();
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "Selamat Datang, " + Session.Nama + "!";
+            ThemeHelper.FormatTabel(dataGridView1);
+            homeText.Text = "Selamat Datang, " + Session.Nama + "!";
+            lblTanggal.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy"); // Contoh: Monday, 25 May 2026
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+
+                    // 2. STATISTIK 1: Total Semua Buku
+                    string queryTotalBuku = "SELECT COUNT(*) FROM Book";
+                    using (SqlCommand cmd = new SqlCommand(queryTotalBuku, conn))
+                    {
+                        lblTotalBuku.Text = cmd.ExecuteScalar().ToString();
+                    }
+
+                    // 3. STATISTIK 2: Total Member Aktif
+                    string queryTotalMember = "SELECT COUNT(*) FROM [User] WHERE Role = 'Member'";
+                    using (SqlCommand cmd = new SqlCommand(queryTotalMember, conn))
+                    {
+                        lblTotalMember.Text = cmd.ExecuteScalar().ToString();
+                    }
+
+                    // 4. STATISTIK 3: Jumlah Buku yang Stoknya Kosong (Biar Pustakawan tau)
+                    string queryStokKosong = "SELECT COUNT(*) FROM Book WHERE Stok <= 0";
+                    using (SqlCommand cmd = new SqlCommand(queryStokKosong, conn))
+                    {
+                        lblStokKosong.Text = cmd.ExecuteScalar().ToString();
+                    }
+
+                    // 5. MENGISI TABEL BAWAH: 5 Buku Terbaru (Dilihat dari ID atau Tahun)
+                    // Menggunakan TOP 5 biar tabelnya rapi dan nampilin data paling fresh
+                    string queryTabelBawah = @"
+                SELECT TOP 5 
+                    BookID AS 'ID Buku', 
+                    JudulBuku AS 'Judul', 
+                    Penulis, 
+                    Stok 
+                FROM Book 
+                ORDER BY BookID DESC"; // Diurutkan dari yang paling baru ditambah
+
+                    SqlDataAdapter da = new SqlDataAdapter(queryTabelBawah, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    // Masukin datanya ke DataGridView yang di bawah
+                    dataGridView1.DataSource = dt;
+
+                    // Biar tabelnya auto mekar menyesuaikan lebar kolom
+                    dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dataGridView1.AllowUserToAddRows = false; // Ngilangin baris kosong di paling bawah
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memuat isi Dashboard: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -84,8 +146,7 @@ namespace Project_VISPROG_KEL_3
 
         private void menuToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            menuToolStripMenuItem.Visible = true;
-            menuToolStripMenuItem.BringToFront();
+            Form1_Load(sender, e);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -129,14 +190,16 @@ namespace Project_VISPROG_KEL_3
 
             if (dialogResult == DialogResult.Yes)
             {
-                // clear sesi
+              
+                isLogOut = true;
+
+              
                 Session.Clear();
 
-                // menampilkan form login yang sebelumnya di sembunyikan setelah berhasil melakukan login
                 Login loginForm = new Login();
                 loginForm.Show();
 
-                //menutup halaman 
+               
                 this.Close();
             }
         }
@@ -149,8 +212,8 @@ namespace Project_VISPROG_KEL_3
 
         private void laporanInventarisBukuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormViewLaporanPeminjaman lapPinjam = new FormViewLaporanPeminjaman("Buku");
-            lapPinjam.Show();
+            FormViewLaporanPeminjaman lapBuku = new FormViewLaporanPeminjaman("Buku");
+            lapBuku.Show();
         }
 
         private void peminjamanPengembalianToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,6 +232,24 @@ namespace Project_VISPROG_KEL_3
         {
             FormGantiPassword formGantiAdmin = new FormGantiPassword();
             formGantiAdmin.Show();
+        }
+
+        private void lblTanggal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormAdmin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (isLogOut == false)
+            {
+                Application.Exit();
+            }
         }
     }
 }
