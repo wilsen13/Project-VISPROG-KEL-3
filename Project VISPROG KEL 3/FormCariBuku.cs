@@ -13,6 +13,7 @@ namespace Project_VISPROG_KEL_3
 {
     public partial class FormCariBuku : Form
     {
+        // string koneksi buat nyambungin aplikasi ke database lokal kita
         string connString = @"Data Source=.\SQLEXPRESS05;Initial Catalog=LibRaDB;Integrated Security=True;TrustServerCertificate=True;";
 
         public FormCariBuku()
@@ -20,16 +21,22 @@ namespace Project_VISPROG_KEL_3
             InitializeComponent();
         }
 
+        // fungsi yang otomatis jalan pertama kali pas halaman cari buku ini dibuka
         private void FormCariBuku_Load(object sender, EventArgs e)
         {
+            // manggil fungsi buat nampilin semua buku (parameternya dikosongin biar nampil semua)
             TampilDataBuku("");
+
+            // manggil helper buat ngerapiin warna dan desain tabel biar estetik
             ThemeHelper.FormatTabel(dataGridView1);
 
+            // nyembunyiin label-label judul detail buku pas awal buka biar rapi
             label5.Visible = false;
             label6.Visible = false;
             label7.Visible = false;
             label8.Visible = false;
 
+            // nyembunyiin foto cover dan isian detail bukunya juga
             picCover.Visible = false;
             lblIsiJudul.Visible = false;
             lblIsiPenulis.Visible = false;
@@ -37,94 +44,112 @@ namespace Project_VISPROG_KEL_3
             lblIsiTipe.Visible = false;
         }
 
+        // fungsi serbaguna buat nampilin data buku, bisa buat nampil semua atau hasil search
         private void TampilDataBuku(string kataKunci)
         {
+            // buka jembatan ke database
             using (SqlConnection conn = new SqlConnection(connString))
             {
-
+                // query dasar buat narik data buku pake alias biar nama kolomnya rapi bahasa indonesia
                 string query = @"SELECT BookID AS 'ID Buku', JudulBuku AS 'Judul Buku', 
                                  Penulis AS 'Penulis', TahunTerbit AS 'Tahun', 
                                  TipeBuku AS 'Kategori', Status AS 'Ketersediaan' 
                                  FROM Book ";
 
-
+                // ngecek misal user masukin kata kunci pencarian, kita tambahin filter WHERE ke querynya
                 if (!string.IsNullOrEmpty(kataKunci))
                 {
+                    // cari buku yang judul atau penulisnya mirip sama ketikan user
                     query += "WHERE JudulBuku LIKE @Cari OR Penulis LIKE @Cari ";
                 }
 
+                // urutin data yang tampil berdasarkan judul buku dari a sampai z
                 query += "ORDER BY JudulBuku ASC";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
+
+                // kalo tadi user emang ngetik kata kunci, masukin nilainya ke parameter @Cari
                 if (!string.IsNullOrEmpty(kataKunci))
                 {
+                    // pake tanda % di kiri kanan biar bisa nyari kata di tengah-tengah kalimat
                     cmd.Parameters.AddWithValue("@Cari", "%" + kataKunci + "%");
                 }
 
+                // wadah buat nampung hasil tarikan dari database
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+
+                // masukin hasilnya ke tabel di layar
                 dataGridView1.DataSource = dt;
             }
         }
 
+        // fungsi yang jalan pas salah satu kotak di dalem tabel diklik sama user
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // kalo e.rowindex -1, berarti user ngeklik header (judul kolom yang warna biru di atas)
             if (e.RowIndex == -1)
             {
+                // sembunyiin lagi semua detail dan gambar bukunya
                 label5.Visible = false;
                 label6.Visible = false;
                 label7.Visible = false;
                 label8.Visible = false;
                 picCover.Visible = false;
-                lblIsiJudul.Visible = false; lblIsiJudul.Visible = false;
-                lblIsiPenulis.Visible = false; lblIsiPenulis.Visible = false;
-                lblIsiTahun.Visible = false; lblIsiTahun.Visible = false;
-                lblIsiTipe.Visible = false; lblIsiTipe.Visible = false;
+                lblIsiJudul.Visible = false;
+                lblIsiPenulis.Visible = false;
+                lblIsiTahun.Visible = false;
+                lblIsiTipe.Visible = false;
+
+                // bersihin memori gambar di picturebox biar ga error
                 if (picCover != null) picCover.Image = null;
 
+                // berhentiin proses kodingannya sampai sini aja
                 return;
             }
 
+            // kalo yang diklik beneran baris isi data (indexnya 0 ke atas)
             if (e.RowIndex >= 0)
             {
-
-
+                // tangkep data dari baris yang lagi diklik
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
-
+                // lempar teks dari sel tabel ke label-label detail di bawah
+                // pake tanda tanya sama ?? "-" buat jaga-jaga misal datanya kosong (null) di database
                 lblIsiJudul.Text = row.Cells["Judul Buku"].Value?.ToString() ?? "-";
                 lblIsiPenulis.Text = row.Cells["Penulis"].Value?.ToString() ?? "-";
                 lblIsiTahun.Text = row.Cells["Tahun"].Value?.ToString() ?? "-";
                 lblIsiTipe.Text = row.Cells["Kategori"].Value?.ToString() ?? "-";
 
-
+                // ambil id bukunya buat nyari file gambar covernya nanti
                 string idBuku = row.Cells["ID Buku"].Value.ToString();
 
-
+                // nentuin alamat folder tempat kita nyimpen gambar cover
                 string folderGambar = Application.StartupPath + @"\Covers\";
                 string pathGambar = folderGambar + idBuku + ".jpg";
 
                 try
                 {
-
+                    // ngecek apakah file gambarnya beneran ada di dalem folder itu
                     if (System.IO.File.Exists(pathGambar))
                     {
+                        // kalo nemu, tampilin gambarnya
                         picCover.Image = Image.FromFile(pathGambar);
                     }
                     else
                     {
-
+                        // kalo ga nemu gambarnya, pictureboxnya dikosongin aja
                         picCover.Image = null;
                     }
                 }
                 catch (Exception)
                 {
-
+                    // kalo terjadi error pas muat gambar (misal file rusak), kosongin juga
                     picCover.Image = null;
                 }
 
+                // pasang status visible ke true buat nampilin semua label dan gambar yang disembunyiin tadi
                 label5.Visible = true;
                 label6.Visible = true;
                 label7.Visible = true;
@@ -137,11 +162,13 @@ namespace Project_VISPROG_KEL_3
                 lblIsiTipe.Visible = true;
             }
         }
+
+        // fungsi khusus buat nampilin ulang semua data (dipake pas buku yang dicari ga ketemu)
         private void LoadDataBuku()
         {
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                // Pakai AS alias biar nama kolomnya rapi dan seragam
+                // nulis query pake alias bahasa indonesia biar nama kolom di layar seragam
                 string query = @"SELECT BookID AS 'ID Buku', 
                                 JudulBuku AS 'Judul Buku', 
                                 Penulis, 
@@ -150,21 +177,25 @@ namespace Project_VISPROG_KEL_3
                                 Status AS 'Ketersediaan' 
                          FROM Book";
 
+                // siapin perintahnya dan tarik datanya
                 SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // Ganti dataGridView1 dengan nama tabel di form cari buku lu
+                // tampilin ke layar
                 dataGridView1.DataSource = dt;
             }
         }
+
+        // fungsi yang dijalanin pas tombol cari diklik
         private void btnCari_Click(object sender, EventArgs e)
         {
-            string kataKunci = textBox1.Text.Trim(); // Ganti textBox1 dengan nama kotak pencarian lu
+            // narik tulisan dari textbox, pake trim buat ngilangin spasi nyasar di awal/akhir kata
+            string kataKunci = textBox1.Text.Trim();
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                // PENTING: Kita pakai query yang AS (alias) nya SAMA PERSIS kayak di fungsi LoadBukuTersedia()
+                // query ini kolom aliasnya disamain persis kayak load awal biar ga bentrok pas diklik
                 string query = @"SELECT BookID AS 'ID Buku', 
                                 JudulBuku AS 'Judul Buku', 
                                 Penulis, 
@@ -178,24 +209,27 @@ namespace Project_VISPROG_KEL_3
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    // Tanda % di kiri kanan ini gunanya biar nyari kata yang mengandung (Contains) inputan lu
+                    // pake format %kata% biar sistem nyari bagian kata yang cocok di mana aja
                     cmd.Parameters.AddWithValue("@search", "%" + kataKunci + "%");
 
+                    // masukin hasilnya ke dalem wadah datatable
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                  
+
+                    // ngecek misal hasil pencariannya ada isinya
                     if (dt.Rows.Count > 0)
                     {
-                       
+                        // tempel hasilnya ke tabel grid
                         dataGridView1.DataSource = dt;
                     }
                     else
                     {
+                        // kalo ga nemu satupun yang cocok, keluarin peringatan
                         MessageBox.Show("Buku yang kamu cari tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        
+                        // panggil ulang data lengkapnya ke layar biar ga kosong melompong
                         LoadDataBuku();
                     }
                 }
