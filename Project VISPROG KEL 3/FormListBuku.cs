@@ -223,9 +223,18 @@ namespace Project_VISPROG_KEL_3
                 textBox2.Clear();
                 textBox3.Clear();
                 textBox4.Clear();
+                radioButton1.Checked = false;
+                radioButton2.Checked = false;
+                pathGambarDipilih = "";
                 button1.Visible = true;  // Munculkan kembali tombol Tambahkan
                 button2.Visible = false; // Sembunyikan tombol Hapus
                 button3.Visible = false; // Sembunyikan tombol Edit
+
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                }
             }
             catch (Exception ex)
             {
@@ -255,13 +264,15 @@ namespace Project_VISPROG_KEL_3
 
                 // generate id buku otomatis
                 string newBookID = "BK-" + DateTime.Now.ToString("yyMMddHHmmss");
+                int stokInput = int.Parse(textBox4.Text);
+                string statusBuku = stokInput > 0 ? "Tersedia" : "Tidak Tersedia";
 
                 // proses untuk melakukan input ke database
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
                     string query = "INSERT INTO Book (BookID, JudulBuku, Penulis, TahunTerbit, TipeBuku, Stok, Status) " +
-                                   "VALUES (@id, @judul, @penulis, @tahun, @tipe, 1, 'Tersedia')";
+                                   "VALUES (@id, @judul, @penulis, @tahun, @tipe, @stok, 'Tersedia')";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -270,6 +281,8 @@ namespace Project_VISPROG_KEL_3
                         cmd.Parameters.AddWithValue("@penulis", textBox2.Text); // Penulis
                         cmd.Parameters.AddWithValue("@tahun", int.Parse(textBox3.Text)); // Tahun (dikonversi ke angka)
                         cmd.Parameters.AddWithValue("@tipe", tipeBuku); // Tipe (Fiksi/NonFiksi)
+                        cmd.Parameters.AddWithValue("@stok", stokInput);
+                        cmd.Parameters.AddWithValue("@status", statusBuku);
 
                         int result = cmd.ExecuteNonQuery(); //mengeksekusi query
 
@@ -287,13 +300,20 @@ namespace Project_VISPROG_KEL_3
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
+                textBox4.Clear();
                 radioButton1.Checked = false;
                 radioButton2.Checked = false;
                 textBox1.Focus();
 
-                button1.Visible = true;  // Munculkan kembali tombol Tambahkan
-                button2.Visible = false; // Sembunyikan tombol Hapus
-                button3.Visible = false; // Sembunyikan tombol Edit
+                button1.Visible = true;     
+                button2.Visible = false; 
+                button3.Visible = false; 
+
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose(); 
+                    pictureBox1.Image = null;   
+                }
             }
             catch (FormatException)
             {
@@ -307,6 +327,35 @@ namespace Project_VISPROG_KEL_3
 
         private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+          
+                textBox1.Clear(); 
+                textBox2.Clear(); 
+                textBox3.Clear(); 
+                textBox4.Clear();
+                radioButton1.Checked = false;
+                radioButton2.Checked = false;
+
+                
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                }
+
+              
+                pathGambarDipilih = "";
+
+                button1.Visible = true; 
+                button2.Visible = false; 
+                button3.Visible = false; 
+
+                dataGridView1.ClearSelection();
+
+                return; 
+            }
+
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];

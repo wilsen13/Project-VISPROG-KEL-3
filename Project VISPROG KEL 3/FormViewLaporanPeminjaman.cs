@@ -34,12 +34,6 @@ namespace Project_VISPROG_KEL_3
             
                 string helperPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CrystalReportViewHelper.exe");
 
-             
-                if (!File.Exists(helperPath))
-                {
-                    
-                    helperPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\CrystalReportViewHelper\bin\Debug\CrystalReportViewHelper.exe");
-                }
 
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = helperPath;

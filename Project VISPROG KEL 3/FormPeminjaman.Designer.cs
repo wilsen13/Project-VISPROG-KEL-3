@@ -138,6 +138,7 @@
             button4.TabIndex = 12;
             button4.Text = "Cari";
             button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // tabControl1
             // 

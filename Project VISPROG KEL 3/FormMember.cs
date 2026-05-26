@@ -59,9 +59,34 @@ namespace Project_VISPROG_KEL_3
                         lblTotalRiwayat.Text = cmd.ExecuteScalar().ToString();
                     }
 
-                    // 4. STATISTIK 3: Status Akun
-                    lblStatusAkun.Text = "Aktif";
-                    lblStatusAkun.ForeColor = System.Drawing.Color.Green;
+                    
+                    // 4. STATISTIK 3: Status Akun (Ditarik langsung dari database)
+                    using (SqlConnection connStatus = new SqlConnection(connString))
+                    {
+                        string queryStatus = "SELECT StatusAkun FROM [User] WHERE UserID = @userID";
+                        using (SqlCommand cmdStatus = new SqlCommand(queryStatus, connStatus))
+                        {
+                            cmdStatus.Parameters.AddWithValue("@userID", Session.UserID);
+                            connStatus.Open();
+
+                            // Ambil datanya, kalau misal kosong/error default ke "Aktif"
+                            string statusRealTime = cmdStatus.ExecuteScalar()?.ToString() ?? "Aktif";
+
+                            // Tampilkan ke label
+                            lblStatusAkun.Text = statusRealTime;
+
+                            
+                            if (statusRealTime.Equals("Aktif", StringComparison.OrdinalIgnoreCase))
+                            {
+                                lblStatusAkun.ForeColor = System.Drawing.Color.Green;
+                            }
+                            else
+                            {
+                               
+                                lblStatusAkun.ForeColor = System.Drawing.Color.Red;
+                            }
+                        }
+                    }
 
                     // 5. MENGISI TABEL BAWAH: Daftar buku yang sedang dipinjam
                     // Kita gabungin 3 Tabel sekaligus! (Loan, Book, dan Member)

@@ -102,7 +102,26 @@ namespace Project_VISPROG_KEL_3
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox1.Text)) return;
+            if (string.IsNullOrWhiteSpace(textBox2.Text) ||
+                string.IsNullOrWhiteSpace(textBox3.Text) ||
+                string.IsNullOrWhiteSpace(textBox4.Text))
+            {
+                MessageBox.Show("Harap Isi Semua Data Terlebih Dahulu!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!textBox3.Text.Contains("@") || !textBox3.Text.Contains("."))
+            {
+                MessageBox.Show("Format email tidak valid! Pastikan menggunakan '@' dan domain (contoh: wilsen@email.com).", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            if (!textBox4.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Nomor telepon wajib diisi dengan angka!", "Validasi Gagal", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -178,8 +197,21 @@ namespace Project_VISPROG_KEL_3
                     button2.Text = "Suspend";
                 }
                 button2.Visible = true;
-                button3.Visible = true; 
+                button3.Visible = true;
                 button4.Visible = true;
+            }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; 
             }
         }
     }

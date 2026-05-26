@@ -58,6 +58,7 @@
             btnCari.TabIndex = 18;
             btnCari.Text = "Cari";
             btnCari.UseVisualStyleBackColor = false;
+            btnCari.Click += btnCari_Click;
             // 
             // label3
             // 

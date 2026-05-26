@@ -23,7 +23,7 @@ namespace Project_VISPROG_KEL_3
             KatalogBuku.AllowUserToAddRows = false;
             try
             {
-         
+
                 button1.Visible = false;
                 button2.Visible = false;
             }
@@ -102,7 +102,7 @@ namespace Project_VISPROG_KEL_3
             }
         }
 
-       
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (KatalogBuku.CurrentRow != null && KatalogBuku.CurrentRow.Index >= 0)
@@ -114,7 +114,26 @@ namespace Project_VISPROG_KEL_3
                 if (stokBuku <= 0)
                 {
                     MessageBox.Show("Mohon Maaf Buku Sedang Tidak Tersedia.", "Stok Kosong", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return; // Berhenti di sini, jangan lanjut ke database!
+                    return;
+                }
+
+                using (SqlConnection connCek = new SqlConnection(connString))
+                {
+                    // Pastikan nama kolom 'StatusAkun' sesuai dengan yang ada di tabel Member database lu ya
+                    string queryCek = "SELECT StatusAkun FROM [User] WHERE UserID = @userID";
+                    SqlCommand cmdCek = new SqlCommand(queryCek, connCek);
+                    cmdCek.Parameters.AddWithValue("@userID", Session.UserID);
+
+                    connCek.Open();
+                    object result = cmdCek.ExecuteScalar();
+                    string statusMember = result != null ? result.ToString() : "Aktif";
+
+                    // Kalau statusnya Suspend, langsung tolak!
+                    if (statusMember.Equals("Suspend", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Akun Anda sedang di-SUSPEND! Anda tidak diizinkan untuk meminjam buku. Silahkan hubungi Admin.", "Akses Ditolak", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return; // Kunci biar kodingan di bawahnya nggak dieksekusi
+                    }
                 }
 
                 DialogResult dr = MessageBox.Show($"Yakin ingin meminjam buku '{judul}'?", "Konfirmasi Pinjam", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -130,7 +149,7 @@ namespace Project_VISPROG_KEL_3
                             string updateBook = @"UPDATE Book 
                                                 SET Stok = Stok - 1, 
                                                 Status = CASE WHEN (Stok - 1) <= 0 THEN 'Tidak Tersedia' ELSE 'Tersedia' END 
-                                                WHERE BookID = @bookID AND Stok > 0"; 
+                                                WHERE BookID = @bookID AND Stok > 0";
                             SqlCommand cmdBook = new SqlCommand(updateBook, conn, trans);
                             cmdBook.Parameters.AddWithValue("@bookID", idBuku);
                             cmdBook.ExecuteNonQuery();
@@ -171,32 +190,45 @@ namespace Project_VISPROG_KEL_3
 
         private void btnCari_Click(object sender, EventArgs e)
         {
-            // mengambil semua data buku yang ada
-            DataTable dt = new DataTable();
+            string kataKunci = textBox1.Text.Trim(); // Ganti textBox1 dengan nama kotak pencarian lu
+
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                string query = "SELECT BookID, JudulBuku, Penulis, TipeBuku, TahunTerbit, Status FROM Book WHERE Status = 'Tersedia'";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                da.Fill(dt);
-            }
+                // PENTING: Kita pakai query yang AS (alias) nya SAMA PERSIS kayak di fungsi LoadBukuTersedia()
+                string query = @"SELECT BookID AS 'ID Buku', 
+                                JudulBuku AS 'Judul Buku', 
+                                Penulis, 
+                                TahunTerbit AS 'Tahun', 
+                                TipeBuku AS 'Kategori', 
+                                Stok, 
+                                Status AS 'Ketersediaan' 
+                         FROM Book 
+                         WHERE Status = 'Tersedia' 
+                         AND (JudulBuku LIKE @search OR Penulis LIKE @search)";
 
-            //linq untuk search buku
-            string kataKunci = textBox1.Text.ToLower(); 
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    // Tanda % di kiri kanan ini gunanya biar nyari kata yang mengandung (Contains) inputan lu
+                    cmd.Parameters.AddWithValue("@search", "%" + kataKunci + "%");
 
-            var hasilPencarian = dt.AsEnumerable().Where(buku =>
-                buku.Field<string>("JudulBuku").ToLower().Contains(kataKunci) ||
-                buku.Field<string>("Penulis").ToLower().Contains(kataKunci)
-            );
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-            // menampilkan hasil pencarian ke dalam katalog buku
-            if (hasilPencarian.Any()) 
-            {
-                KatalogBuku.DataSource = hasilPencarian.CopyToDataTable();
-            }
-            else
-            {
-                MessageBox.Show("Buku yang kamu cari tidak ditemukan!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                KatalogBuku.DataSource = dt; //jika ada buku yang tidak ditemukan maka akan di kembalikan kembali ke daftar awal
+                    // Cek apakah hasil pencarian ada datanya
+                    if (dt.Rows.Count > 0)
+                    {
+                        // Tampilkan hasil pencarian
+                        KatalogBuku.DataSource = dt;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Buku yang kamu cari tidak ditemukan bro!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Kalau ga ketemu, refresh panggil lagi data awalnya
+                        LoadBukuTersedia();
+                    }
+                }
             }
         }
 
@@ -204,7 +236,7 @@ namespace Project_VISPROG_KEL_3
         {
 
         }
-  
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -212,20 +244,20 @@ namespace Project_VISPROG_KEL_3
 
         private void button2_Click(object sender, EventArgs e)
         {
-       
+
             if (bukuSaya.CurrentRow == null || bukuSaya.CurrentRow.Index < 0)
             {
                 MessageBox.Show("Pilih dulu buku di tabel yang mau dikembalikan bro!");
                 return;
             }
 
-       
+
             string idPinjam = bukuSaya.CurrentRow.Cells["LoanID"].Value.ToString();
 
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                
+
                 string query = "UPDATE Loan SET StatusPeminjaman = 'Menunggu Verifikasi' WHERE LoanID = @LoanID AND ReturnDate IS NULL";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@LoanID", idPinjam);
@@ -236,7 +268,7 @@ namespace Project_VISPROG_KEL_3
                 if (result > 0)
                 {
                     MessageBox.Show("Pengajuan berhasil! Silahkan bawa buku fisik ke meja Admin untuk verifikasi.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   
+
                 }
                 else
                 {
@@ -247,7 +279,7 @@ namespace Project_VISPROG_KEL_3
 
         private void bukuSaya_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-        
+
             if (e.RowIndex == -1)
             {
                 button2.Visible = false;
@@ -267,10 +299,10 @@ namespace Project_VISPROG_KEL_3
                 return;
             }
 
-          
+
             if (e.RowIndex >= 0)
             {
-                button2.Visible = true; 
+                button2.Visible = true;
 
                 DataGridViewRow row = bukuSaya.Rows[e.RowIndex];
 
@@ -296,7 +328,7 @@ namespace Project_VISPROG_KEL_3
                     }
                 }
 
-          
+
                 string folderGambar = Application.StartupPath + @"\Covers\";
                 string pathGambar = folderGambar + idBuku + ".jpg";
 
@@ -330,7 +362,7 @@ namespace Project_VISPROG_KEL_3
 
         private void KatalogBuku_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-          
+
             if (e.RowIndex == -1)
             {
                 label1.Visible = false;
@@ -347,13 +379,13 @@ namespace Project_VISPROG_KEL_3
                 lblIsiTipe.Visible = false; lblIsiTipe.Visible = false;
                 if (picCover != null) picCover.Image = null;
 
-                return; 
+                return;
             }
 
-        
+
             if (e.RowIndex >= 0)
             {
-                button1.Visible = true; 
+                button1.Visible = true;
 
                 DataGridViewRow row = KatalogBuku.Rows[e.RowIndex];
 
@@ -391,6 +423,50 @@ namespace Project_VISPROG_KEL_3
                 catch (Exception)
                 {
                     picCover.Image = null;
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string kataKunci = textBox1.Text.Trim(); 
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                
+                string query = @"SELECT BookID AS 'ID Buku', 
+                                JudulBuku AS 'Judul Buku', 
+                                Penulis, 
+                                TahunTerbit AS 'Tahun', 
+                                TipeBuku AS 'Kategori', 
+                                Stok, 
+                                Status AS 'Ketersediaan' 
+                         FROM Book 
+                         WHERE Status = 'Tersedia' 
+                         AND (JudulBuku LIKE @search OR Penulis LIKE @search)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                  
+                    cmd.Parameters.AddWithValue("@search", "%" + kataKunci + "%");
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                   
+                    if (dt.Rows.Count > 0)
+                    {
+                        
+                        KatalogBuku.DataSource = dt;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Buku yang kamu cari tidak ditemukan bro!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        
+                        LoadBukuTersedia();
+                    }
                 }
             }
         }

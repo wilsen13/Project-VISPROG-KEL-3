@@ -63,6 +63,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(198, 27);
             textBox4.TabIndex = 17;
+            textBox4.KeyPress += textBox4_KeyPress;
             // 
             // textBox3
             // 
@@ -70,6 +71,7 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(198, 27);
             textBox3.TabIndex = 16;
+            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
