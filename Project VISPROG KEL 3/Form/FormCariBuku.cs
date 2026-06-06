@@ -190,12 +190,12 @@ namespace Project_VISPROG_KEL_3
         // fungsi yang dijalanin pas tombol cari diklik
         private void btnCari_Click(object sender, EventArgs e)
         {
-            // narik tulisan dari textbox, pake trim buat ngilangin spasi nyasar di awal/akhir kata
-            string kataKunci = textBox1.Text.Trim();
+            // ngambil tulisan dari textbox pencarian, dibikin huruf kecil semua biar gampang dicocokin
+            string kataKunci = textBox1.Text.Trim().ToLower(); 
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                // query ini kolom aliasnya disamain persis kayak load awal biar ga bentrok pas diklik
+                // tarik semua buku yang tersedia dulu ke memori dataset, ga pake filter WHERE LIKE di sql lagi
                 string query = @"SELECT BookID AS 'ID Buku', 
                                 JudulBuku AS 'Judul Buku', 
                                 Penulis, 
@@ -203,37 +203,38 @@ namespace Project_VISPROG_KEL_3
                                 TipeBuku AS 'Kategori', 
                                 Stok, 
                                 Status AS 'Ketersediaan' 
-                         FROM Book 
-                         WHERE Status = 'Tersedia' 
-                         AND (JudulBuku LIKE @search OR Penulis LIKE @search)";
+                         FROM Book WHERE Status = 'Tersedia'";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    // pake format %kata% biar sistem nyari bagian kata yang cocok di mana aja
-                    cmd.Parameters.AddWithValue("@search", "%" + kataKunci + "%");
-
-                    // masukin hasilnya ke dalem wadah datatable
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
+                    // nah ini implementasi LINQ nya: nyaring dan ngurutin data langsung di memori c#
+                    var hasilPencarian = from baris in dt.AsEnumerable()
+                                         let judul = baris.Field<string>("Judul Buku").ToLower()
+                                         let penulis = baris.Field<string>("Penulis").ToLower()
+                                         where judul.Contains(kataKunci) || penulis.Contains(kataKunci)
+                                         orderby judul ascending // nerapin fitur sorting a-z
+                                         select baris;
 
-                    // ngecek misal hasil pencariannya ada isinya
-                    if (dt.Rows.Count > 0)
+                    // ngecek misal hasil linq-nya dapet data
+                    if (hasilPencarian.Any())
                     {
-                        // tempel hasilnya ke tabel grid
-                        dataGridView1.DataSource = dt;
+                        // ubah hasil linq balik ke bentuk datatable biar bisa masuk gridview
+                        dataGridView1.DataSource = hasilPencarian.CopyToDataTable();
                     }
                     else
                     {
-                        // kalo ga nemu satupun yang cocok, keluarin peringatan
                         MessageBox.Show("Buku yang kamu cari tidak ditemukan.", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // panggil ulang data lengkapnya ke layar biar ga kosong melompong
+                        
+                        // panggil ulang semua data aslinya
                         LoadDataBuku();
                     }
                 }
             }
         }
+
     }
 }

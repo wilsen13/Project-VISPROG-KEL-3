@@ -1,9 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
+using Project_VISPROG_KEL_3.CLass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,15 +58,6 @@ namespace Project_VISPROG_KEL_3
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
-                    // ini kodingan lama buat ngecek null secara manual di c#, udah diganti pake CASE di query sql atas biar lebih efisien makanya dimatiin
-                    //foreach (DataRow row in dt.Rows)
-                    //{
-                    //    if (row["Tgl Dikembalikan"] == DBNull.Value)
-                    //    {
-
-                    //    }
-                    //}
 
                     // tempel datanya ke tabel
                     dataGridView1.DataSource = dt;
@@ -179,6 +172,52 @@ namespace Project_VISPROG_KEL_3
                 lblIsiPenulis.Visible = true;
                 lblIsiTahun.Visible = true;
                 lblIsiTipe.Visible = true;
+            }
+        }
+
+        private void btnCari_Click(object sender, EventArgs e)
+        {
+            // bikin folder exportTxt di dalem folder project aplikasinya kalo misal belom ada
+            string pathFolder = Path.Combine(Application.StartupPath, "ExportTXT");
+            if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+
+            // tentuin nama filenya, ditambahin jam dan detik biar ga ketimpa file lama
+            string pathFile = Path.Combine(pathFolder, "Riwayat_" + DateTime.Now.ToString("ddMM_HHmmss") + ".txt");
+
+            try
+            {
+                // 1. FITUR WRITE FILE (Nulis ke dalem txt)
+                // memanggil class oop yang tadi udah dibikin di file terpisah
+                EksporRiwayatTxt struk = new EksporRiwayatTxt();
+                struk.JudulDokumen = "LAPORAN RIWAYAT PEMINJAMAN";
+                struk.TanggalDibuat = DateTime.Now;
+                struk.NamaPengekspor = Session.Nama; // dapet dari nama orang yang lagi login
+
+                using (StreamWriter sw = new StreamWriter(pathFile))
+                {
+                    // nulis bagian atas struk menggunakan fungsi oop
+                    sw.WriteLine(struk.BuatHeaderDokumen());
+
+                    // narik satu-satu data riwayat dari tabel yang ada di layar
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        // mastiin barisnya ada isinya, bukan baris kosong
+                        if (row.Cells["JudulBuku"].Value != null)
+                        {
+                            sw.WriteLine($"Judul: {row.Cells["JudulBuku"].Value} | Pinjam: {row.Cells["Tgl Pinjam"].Value}"); 
+                        }
+                    }
+                }
+
+                // 2. FITUR READ FILE (Baca ulang file txt yang barusan dibuat)
+                string isiFile = File.ReadAllText(pathFile);
+
+                // nampilin lokasi filenya ke user biar gampang dicari
+                MessageBox.Show("Bukti File Berhasil Dibaca (Read Stream):\n\n" + isiFile, "Sukses Ekspor & Baca", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal ekspor ke txt: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

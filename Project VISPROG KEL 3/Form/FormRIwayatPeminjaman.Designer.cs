@@ -38,6 +38,7 @@
             label6 = new Label();
             label5 = new Label();
             picCover = new PictureBox();
+            btnCari = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picCover).BeginInit();
             SuspendLayout();
@@ -133,11 +134,27 @@
             picCover.TabIndex = 28;
             picCover.TabStop = false;
             // 
+            // btnCari
+            // 
+            btnCari.BackColor = SystemColors.Highlight;
+            btnCari.FlatAppearance.BorderSize = 0;
+            btnCari.FlatStyle = FlatStyle.Flat;
+            btnCari.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnCari.ForeColor = Color.White;
+            btnCari.Location = new Point(621, 243);
+            btnCari.Name = "btnCari";
+            btnCari.Size = new Size(167, 41);
+            btnCari.TabIndex = 37;
+            btnCari.Text = "Export ke TXT";
+            btnCari.UseVisualStyleBackColor = false;
+            btnCari.Click += btnCari_Click;
+            // 
             // FormRIwayatPeminjaman
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCari);
             Controls.Add(lblIsiTipe);
             Controls.Add(lblIsiTahun);
             Controls.Add(lblIsiPenulis);
@@ -169,5 +186,6 @@
         private Label label6;
         private Label label5;
         private PictureBox picCover;
+        private Button btnCari;
     }
 }
