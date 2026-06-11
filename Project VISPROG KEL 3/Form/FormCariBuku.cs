@@ -195,7 +195,7 @@ namespace Project_VISPROG_KEL_3
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
-                // tarik semua buku yang tersedia dulu ke memori dataset, ga pake filter WHERE LIKE di sql lagi
+                // tarik semua buku yang tersedia dulu ke memori dataset
                 string query = @"SELECT BookID AS 'ID Buku', 
                                 JudulBuku AS 'Judul Buku', 
                                 Penulis, 
@@ -211,7 +211,7 @@ namespace Project_VISPROG_KEL_3
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    // nah ini implementasi LINQ nya: nyaring dan ngurutin data langsung di memori c#
+                    // implementasi linq untuk fitur search buku
                     var hasilPencarian = from baris in dt.AsEnumerable()
                                          let judul = baris.Field<string>("Judul Buku").ToLower()
                                          let penulis = baris.Field<string>("Penulis").ToLower()
